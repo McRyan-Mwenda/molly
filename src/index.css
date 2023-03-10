@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand&family=Raleway&family=Ubuntu&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Quicksand', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+*/
+
+body,
+html {
+  padding: 0 !important;
+  margin: 0 !important;
+  scroll-behavior: smooth !important;
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.page {
+  min-height: 92vh !important;
+}
