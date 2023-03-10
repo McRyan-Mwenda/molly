@@ -1,15 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
+import { useDispatch } from "react-redux";
+import { signIn } from "../reducers/auth";
 
 import PageTitle from "../title";
 
+const USER_AUTH = gql`
+  mutation ($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`;
+
 const Signin = () => {
   PageTitle("Signin");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const signInAction = (data) => {
+    dispatch(signIn(data.tokenAuth.token));
+    return navigate("/app/dashboard");
+  };
+
+  const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
+
+  if (data) {
+    signInAction(data);
+  }
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
 
   return (
     <div className="page">
       <h1 className="text-3xl text-center mt-4">Signin to your account</h1>
       <div className="mx-auto rounded-md shadow py-8 px-16 my-8 w-2/5 border bg-sky-50">
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            tokenAuth({
+              variables: {
+                username: e.target.username.value,
+                password: e.target.password.value,
+              },
+            });
+          }}
+        >
           <div className="mb-4">
             <label htmlFor="username" className="text-gray-600">
               Username

@@ -1,15 +1,66 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
 
 import PageTitle from "../title";
 
+const CREATE_USER = gql`
+  mutation (
+    $username: String!
+    $email: String!
+    $first_name: String!
+    $last_name: String!
+    $password: String!
+    $password2: String!
+  ) {
+    createUser(
+      username: $username
+      email: $email
+      first_name: $first_name
+      last_name: $last_name
+      password: $password
+      password2: $password2
+    ) {
+      public_id
+      email
+      username
+      first_name
+      last_name
+    }
+  }
+`;
+
 const Signup = () => {
   PageTitle("Signup");
+
+  const navigate = useNavigate();
+  const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+
+  if (data) {
+    return navigate("/app/signin");
+  }
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
 
   return (
     <div className="page">
       <h1 className="text-3xl text-center mt-4">Create new account</h1>
       <div className="mx-auto rounded-md shadow py-8 px-16 my-8 w-2/5 border bg-sky-50">
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            createUser({
+              variables: {
+                username: e.target.username.value,
+                email: e.target.email.value,
+                first_name: e.target.first_name.value,
+                last_name: e.target.last_name.value,
+                password: e.target.password.value,
+                password2: e.target.password2.value,
+              },
+            });
+          }}
+        >
           <div className="mb-4">
             <label htmlFor="username" className="text-gray-600">
               Username
