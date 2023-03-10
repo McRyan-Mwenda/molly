@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { signOut } from "../reducers/auth";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
   return (
     <div
       className="flex justify-between items-center p-4 bg-slate-50"
@@ -21,21 +26,31 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex">
-        <Link
-          to="/app/signin"
-          className="mr-4 text-zinc-600 hover:text-zinc-900 underline"
-        >
-          Sign in
-        </Link>
-        <Link
-          to="/app/signup"
-          className="mr-4 text-emerald-600 hover:text-emerald-900 underline"
-        >
-          Sign up
-        </Link>
-        <button className="text-rose-600 hover:text-rose-900 underline">
-          Sign out
-        </button>
+        {isLoggedIn ? (
+          <>
+            <button
+              className="text-rose-600 hover:text-rose-900 underline"
+              onClick={() => dispatch(signOut())}
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/app/signin"
+              className="mr-4 text-zinc-600 hover:text-zinc-900 underline"
+            >
+              Sign in
+            </Link>
+            <Link
+              to="/app/signup"
+              className="mr-4 text-emerald-600 hover:text-emerald-900 underline"
+            >
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
