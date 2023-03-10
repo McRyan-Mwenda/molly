@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <div
-      className="flex justify-between items-center p-4 bg-slate-50"
+      className="flex justify-between items-center p-4 bg-slate-100"
       id="navbar"
     >
       <div className="flex">
