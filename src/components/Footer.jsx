@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <div className="px-4 py-8 bg-slate-200" id="footer">
       <div className="flex justify-between items-center">
-        <p>&copy; 2023 FinanceFluid</p>
+        <p>&copy; 2023 FinanceFluid 💵</p>
         <p>
           Made with <i className="bi bi-heart-fill text-red-600"></i> by{" "}
           <a

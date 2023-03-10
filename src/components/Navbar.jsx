@@ -24,6 +24,18 @@ const Navbar = () => {
         <Link className="mx-2 text-sky-600 hover:text-sky-900" to="/contacts">
           Contacts
         </Link>
+        {isLoggedIn ? (
+          <>
+            <Link
+              className="mx-2 text-sky-600 hover:text-sky-900"
+              to="/app/dashboard"
+            >
+              Dashboard
+            </Link>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <div className="flex">
         {isLoggedIn ? (
