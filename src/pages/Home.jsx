@@ -1,7 +1,7 @@
 import PageTitle from "../title";
 
 const Home = () => {
-  PageTitle("🏠");
+  PageTitle("Home");
 
   return (
     <div className="page">

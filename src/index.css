@@ -16,9 +16,39 @@ html {
   padding: 0 !important;
   margin: 0 !important;
   scroll-behavior: smooth !important;
-  font-family: 'Raleway', sans-serif !important;
+  font-family: "Raleway", sans-serif !important;
 }
 
 .page {
   min-height: 92vh !important;
+  padding: 0 1rem !important;
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: rgb(179, 177, 177) !important;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136) !important;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 100, 100) !important;
+}
+
+html::-webkit-scrollbar-thumb:active {
+  background: rgb(68, 68, 68) !important;
+}
+
+#footer,
+#navbar {
+  font-family: "Josefin Sans", sans-serif !important;
+}
+
+#navbar {
+  font-size: larger;
 }
