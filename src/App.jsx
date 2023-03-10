@@ -7,6 +7,7 @@ import Pricing from "./pages/Pricing";
 import Contacts from "./pages/Contacts";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/app/signin" element={<Signin />} />
         <Route path="/app/signup" element={<Signup />} />
-        <Route path="/app/dashboard" element={<Contacts />} />
+        <Route path="/app/dashboard" element={<Dashboard />} />
       </Routes>
       {/* routes */}
 
