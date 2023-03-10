@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand&family=Raleway&family=Ubuntu&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
 @tailwind base;
 @tailwind components;
@@ -21,7 +22,7 @@ html {
 
 .page {
   min-height: 92vh !important;
-  padding: 0 1rem !important;
+  padding: 1rem !important;
 }
 
 html::-webkit-scrollbar {
