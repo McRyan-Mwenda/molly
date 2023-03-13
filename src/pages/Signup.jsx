@@ -1,5 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { gql, useMutation } from "@apollo/client";
+import { Link, useNavigate } from "react-router-dom";
+import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
 
@@ -33,13 +35,29 @@ const Signup = () => {
   PageTitle("Signup");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
+    dispatch(
+      setNotification({
+        message: "User created successfully.",
+        type: "success",
+      })
+    );
     return navigate("/app/signin");
   }
+
   if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
+
+  if (error) {
+    dispatch(
+      setNotification({
+        message: `${error.message}`,
+        type: "error",
+      })
+    );
+  }
 
   return (
     <div className="page">

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { signIn } from "../reducers/auth";
+import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
 
@@ -19,18 +20,22 @@ const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const signInAction = (data) => {
-    dispatch(signIn(data.tokenAuth.token));
-    return navigate("/app/dashboard");
-  };
-
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
-    signInAction(data);
+    dispatch(signIn(data.tokenAuth.token));
+    return navigate("/app/dashboard");
   }
   if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
+
+  if (error) {
+    dispatch(
+      setNotification({
+        message: `${error.message}`,
+        type: "error",
+      })
+    );
+  }
 
   return (
     <div className="page">
