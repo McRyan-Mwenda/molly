@@ -11,6 +11,7 @@ import {
 } from "evergreen-ui";
 
 import PageTitle from "../title";
+import TabController from "../components/dashboard/TabController";
 
 const Dashboard = ({ setIsLoading }) => {
   PageTitle("Dashboard");
@@ -39,42 +40,53 @@ const Dashboard = ({ setIsLoading }) => {
 
   return (
     <div className="page">
-      {/* <h1 className="text-3xl">Dashboard Page</h1> */}
       <div className="flex">
         <Tablist className="flex flex-col items-center mr-4">
-          {tabs.map((tab, index) => (
-            <Tab
-              aria-controls={`panel-${tab}`}
-              isSelected={index === selectedIndex}
-              key={tab}
-              onSelect={() => setSelectedIndex(index)}
-              className="mb-4 text-center w-full mx-2 font-semibold"
-            >
-              {tab}
-            </Tab>
-          ))}
+          {tabs.map((tab, index) => {
+            const list = (
+              <Tab
+                aria-controls={`panel-${tab}`}
+                isSelected={index === selectedIndex}
+                key={tab}
+                onSelect={() => setSelectedIndex(index)}
+                className="mb-4 text-center w-full mx-2 font-semibold"
+              >
+                {tab}
+              </Tab>
+            );
+
+            return list;
+          })}
         </Tablist>
         <div className="w-full px-4">
-          {tabs.map((tab, index) => (
-            <Pane
-              aria-labelledby={tab}
-              aria-hidden={index !== selectedIndex}
-              display={index === selectedIndex ? "block" : "none"}
-              key={tab}
-              role="tabpanel"
-            >
-              <div className="flex justify-between items-center">
-                <span className="text-xl font-semibold">My {tab}</span>
-                <span
-                  className="hover:cursor-pointer"
-                  onClick={() => setIsShown(true)}
-                >
-                  <i className="bi bi-list text-2xl font-semibold"></i>
-                </span>
-              </div>
-              <hr />
-            </Pane>
-          ))}
+          {tabs.map((tab, index) => {
+            const list = (
+              <Pane
+                aria-labelledby={tab}
+                aria-hidden={index !== selectedIndex}
+                display={index === selectedIndex ? "block" : "none"}
+                key={tab}
+                role="tabpanel"
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-xl font-semibold">My {tab}</span>
+                  <span
+                    className="hover:cursor-pointer"
+                    onClick={() => setIsShown(true)}
+                  >
+                    <i className="bi bi-list text-2xl font-semibold"></i>
+                  </span>
+                </div>
+                <hr />
+                <TabController
+                  selectedIndex={selectedIndex}
+                  setIsLoading={setIsLoading}
+                />
+              </Pane>
+            );
+
+            return list;
+          })}
         </div>
       </div>
       <SideSheet isShown={isShown} onCloseComplete={() => setIsShown(false)}>
