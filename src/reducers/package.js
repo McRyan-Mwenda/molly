@@ -3,25 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 export const packageReducer = createSlice({
   name: "package",
   initialState: {
-    accountLimit: 2,
+    accountLimit: 0,
     generatePdfReport: false,
     useAiPrediction: false,
   },
   reducers: {
-    downGradeToFree: (state, action) => {
-      state.accountLimit = action.payload;
-      state.generatePdfReport = false;
-      state.useAiPrediction = false;
+    setToFree: (state, action) => {
+      state.accountLimit = action.payload.limit;
+      state.generatePdfReport = action.payload.pdf;
+      state.useAiPrediction = action.payload.ai;
     },
-    upGradeToStandard: (state, action) => {
-      state.accountLimit = action.payload;
-      state.generatePdfReport = true;
-      state.useAiPrediction = false;
+    setToStandard: (state, action) => {
+      state.accountLimit = action.payload.limit;
+      state.generatePdfReport = action.payload.pdf;
+      state.useAiPrediction = action.payload.ai;
     },
-    upGradeToPro: (state, action) => {
-      state.accountLimit = action.payload;
-      state.generatePdfReport = true;
-      state.useAiPrediction = true;
+    setToPro: (state, action) => {
+      state.accountLimit = action.payload.limit;
+      state.generatePdfReport = action.payload.pdf;
+      state.useAiPrediction = action.payload.ai;
     },
   },
 });
