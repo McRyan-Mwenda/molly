@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { toaster } from "evergreen-ui";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Footer from "./components/Footer";

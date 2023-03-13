@@ -25,7 +25,7 @@ const Signin = ({ setIsLoading }) => {
   if (data) {
     setIsLoading(false);
     dispatch(signIn(data.tokenAuth.token));
-    return navigate("/app/dashboard");
+    navigate("/app/dashboard");
   }
   if (loading) {
     setIsLoading(true);

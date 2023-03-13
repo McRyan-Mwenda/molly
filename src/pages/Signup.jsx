@@ -47,7 +47,7 @@ const Signup = ({ setIsLoading }) => {
         type: "success",
       })
     );
-    return navigate("/app/signin");
+    navigate("/app/signin");
   }
 
   if (loading) {
