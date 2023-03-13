@@ -31,14 +31,16 @@ const CREATE_USER = gql`
   }
 `;
 
-const Signup = () => {
+const Signup = ({ setIsLoading }) => {
   PageTitle("Signup");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
+    setIsLoading(false);
     dispatch(
       setNotification({
         message: "User created successfully.",
@@ -48,9 +50,12 @@ const Signup = () => {
     return navigate("/app/signin");
   }
 
-  if (loading) return "Submitting...";
+  if (loading) {
+    setIsLoading(true);
+  }
 
   if (error) {
+    setIsLoading(false);
     dispatch(
       setNotification({
         message: `${error.message}`,

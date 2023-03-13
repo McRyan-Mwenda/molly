@@ -14,7 +14,7 @@ const USER_AUTH = gql`
   }
 `;
 
-const Signin = () => {
+const Signin = ({ setIsLoading }) => {
   PageTitle("Signin");
 
   const dispatch = useDispatch();
@@ -23,12 +23,16 @@ const Signin = () => {
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
+    setIsLoading(false);
     dispatch(signIn(data.tokenAuth.token));
     return navigate("/app/dashboard");
   }
-  if (loading) return "Submitting...";
+  if (loading) {
+    setIsLoading(true);
+  }
 
   if (error) {
+    setIsLoading(false);
     dispatch(
       setNotification({
         message: `${error.message}`,

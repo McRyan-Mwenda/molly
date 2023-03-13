@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useEffect } from "react";
 import { toaster } from "evergreen-ui";
 import { useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   const notifications = useSelector((state) => state.notification);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateNotifications = () => {
     if (notifications.message === "" && notifications.type === "") {
@@ -36,6 +38,10 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* loader */}
+      {isLoading && <span className="loader"></span>}
+      {/* loader */}
+
       {/* navbar */}
       <Navbar />
       {/* navbar */}
@@ -46,9 +52,18 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="/app/signin" element={<Signin />} />
-        <Route path="/app/signup" element={<Signup />} />
-        <Route path="/app/dashboard" element={<Dashboard />} />
+        <Route
+          path="/app/signin"
+          element={<Signin setIsLoading={setIsLoading} />}
+        />
+        <Route
+          path="/app/signup"
+          element={<Signup setIsLoading={setIsLoading} />}
+        />
+        <Route
+          path="/app/dashboard"
+          element={<Dashboard setIsLoading={setIsLoading} />}
+        />
       </Routes>
       {/* routes */}
 

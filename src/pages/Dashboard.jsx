@@ -1,13 +1,14 @@
-import PageTitle from "../title";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const Dashboard = () => {
+import PageTitle from "../title";
+
+const Dashboard = ({ setIsLoading }) => {
   PageTitle("Dashboard");
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const checkAuth = () => {
     if (isLoggedIn == false) {
