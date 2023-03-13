@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+import { toaster } from "evergreen-ui";
+import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
+
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -10,6 +14,26 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 
 const App = () => {
+  const notifications = useSelector((state) => state.notification);
+
+  const updateNotifications = () => {
+    if (notifications.message === "" && notifications.type === "") {
+      // do nothing
+    } else {
+      if (notifications.type === "notify") {
+        toaster.notify(notifications.message, { duration: 5 });
+      } else if (notifications.type === "success") {
+        toaster.success(notifications.message, { duration: 5 });
+      } else if (notifications.type === "error") {
+        toaster.danger(notifications.message, { duration: 5 });
+      }
+    }
+  };
+
+  useEffect(() => {
+    updateNotifications();
+  }, [notifications]);
+
   return (
     <div className="App">
       {/* navbar */}
