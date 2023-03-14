@@ -1,8 +1,8 @@
+import moment from "moment";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { setNotification } from "../reducers/notifications";
-import moment from "moment";
 
 const GET_PROFILE = gql`
   query {
