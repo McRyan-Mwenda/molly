@@ -29,6 +29,10 @@ html {
   min-height: 92vh !important;
 }
 
+.page-fonts {
+  font-family: "Raleway", sans-serif !important;
+}
+
 html::-webkit-scrollbar {
   width: 10px;
 }
