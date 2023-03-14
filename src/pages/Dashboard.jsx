@@ -1,5 +1,7 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TabView, TabPanel } from "primereact/tabview";
 
@@ -14,6 +16,7 @@ const Dashboard = () => {
   PageTitle("Dashboard");
 
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const checkAuth = () => {
@@ -24,11 +27,22 @@ const Dashboard = () => {
 
   useEffect(() => {
     checkAuth();
+    setVisible(true);
   }, [isLoggedIn]);
+
+  const footerContent = (
+    <div className="page-fonts">
+      <Button
+        label="Okay"
+        icon="pi pi-check"
+        onClick={() => setVisible(false)}
+        autoFocus
+      />
+    </div>
+  );
 
   return (
     <div className="page">
-      {/* <h1 className="text-3xl">Dashboard</h1> */}
       <div className="card">
         <TabView className="page-fonts">
           <TabPanel header="Profile" leftIcon="pi pi-user mr-2">
@@ -48,6 +62,25 @@ const Dashboard = () => {
           </TabPanel>
         </TabView>
       </div>
+
+      {/* info */}
+      <Dialog
+        header="Quick reminder"
+        visible={visible}
+        position="bottom-right"
+        style={{ width: "30vw" }}
+        onHide={() => setVisible(false)}
+        footer={footerContent}
+        draggable={false}
+        resizable={false}
+        className="page-fonts"
+      >
+        <p className="m-0">
+          Right click on anywhere on the page to open the context menu, which
+          has further actions.
+        </p>
+      </Dialog>
+      {/* info */}
     </div>
   );
 };
