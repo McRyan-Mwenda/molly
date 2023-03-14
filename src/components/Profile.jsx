@@ -7,7 +7,6 @@ import { setNotification } from "../reducers/notifications";
 const GET_PROFILE = gql`
   query {
     getProfile {
-      public_id
       tier
       account_limit
       pdf_gen
@@ -70,10 +69,6 @@ const Profile = () => {
             <p className="text-xl mb-2">User & profile information</p>
             <hr className="mb-2" />
             <p>
-              <span className="font-semibold">User public ID:</span>{" "}
-              {data.getProfile.user.public_id}
-            </p>
-            <p>
               <span className="font-semibold">Email:</span>{" "}
               {data.getProfile.user.email}
             </p>
@@ -90,10 +85,6 @@ const Profile = () => {
               {data.getProfile.user.last_name}
             </p>
             <br />
-            <p>
-              <span className="font-semibold">Profile public ID:</span>{" "}
-              {data.getProfile.public_id}
-            </p>
             <p>
               <span className="font-semibold">Profile package tier:</span>{" "}
               {data.getProfile.tier}

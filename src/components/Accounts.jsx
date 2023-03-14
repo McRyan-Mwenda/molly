@@ -7,7 +7,6 @@ import { setNotification } from "../reducers/notifications";
 const GET_ALL_ACCOUNTS = gql`
   query {
     getAllAccounts {
-      public_id
       account_name
       account_type
       account_balance
@@ -53,24 +52,21 @@ const Accounts = () => {
       })
     );
   }
+
   return (
     <div>
       <h1 className="text-3xl">Accounts panel</h1>
       <br />
       {data ? (
-        data.getAllAccounts.map((account) => {
+        data.getAllAccounts.map((account, index) => {
           const list = (
             <>
               <div
                 className="border rounded-md shadow-md p-4 bg-gray-50 mb-4"
-                key={account.public_id}
+                key={index}
               >
                 <p className="text-xl mb-2">{account.account_name}</p>
                 <hr className="mb-2" />
-                <p>
-                  <span className="font-semibold">Account public ID:</span>{" "}
-                  {account.public_id}
-                </p>
                 <p>
                   <span className="font-semibold">Account type:</span>{" "}
                   {account.account_type}
@@ -80,7 +76,7 @@ const Accounts = () => {
                   {account.account_balance}
                 </p>
                 <p>
-                  <span className="font-semibold">Account currency:</span>{" "}
+                  <span className="font-semibold">Currency:</span>{" "}
                   {account.currency_code}
                 </p>
                 <p>
