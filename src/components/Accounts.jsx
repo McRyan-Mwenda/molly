@@ -98,7 +98,11 @@ const Accounts = () => {
           return list;
         })
       ) : (
-        <></>
+        <>
+          <div className="text-center">
+            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          </div>
+        </>
       )}
     </div>
   );

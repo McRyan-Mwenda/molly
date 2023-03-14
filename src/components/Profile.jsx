@@ -13,7 +13,6 @@ const GET_PROFILE = gql`
       ai_predictions
       created_at
       user {
-        public_id
         email
         username
         first_name
@@ -112,7 +111,11 @@ const Profile = () => {
           </div>
         </>
       ) : (
-        <></>
+        <>
+          <div className="text-center">
+            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          </div>
+        </>
       )}
     </div>
   );

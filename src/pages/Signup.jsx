@@ -23,7 +23,6 @@ const CREATE_USER = gql`
       password: $password
       password2: $password2
     ) {
-      public_id
       email
       username
       first_name

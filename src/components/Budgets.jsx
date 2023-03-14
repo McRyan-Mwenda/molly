@@ -1,4 +1,3 @@
-import moment from "moment";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
@@ -12,7 +11,6 @@ const GET_ALL_BUDGETS = gql`
       budget_start_date
       budget_end_date
       category {
-        public_id
         category_name
       }
     }
@@ -79,15 +77,11 @@ const Budgets = () => {
                 </p>
                 <p>
                   <span className="font-semibold">Start date:</span>{" "}
-                  {moment
-                    .unix(budget.budget_start_date)
-                    .format("YYYY-MM-DD HH:mm:ss")}
+                  {budget.budget_start_date}
                 </p>
                 <p>
                   <span className="font-semibold">End date:</span>{" "}
-                  {moment
-                    .unix(budget.budget_end_date)
-                    .format("YYYY-MM-DD HH:mm:ss")}
+                  {budget.budget_end_date}
                 </p>
               </div>
             </>
@@ -96,7 +90,11 @@ const Budgets = () => {
           return list;
         })
       ) : (
-        <></>
+        <>
+          <div className="text-center">
+            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          </div>
+        </>
       )}
     </div>
   );
