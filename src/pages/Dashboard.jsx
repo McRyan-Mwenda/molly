@@ -11,6 +11,7 @@ import Accounts from "../components/Accounts";
 import Budgets from "../components/Budgets";
 import Transactions from "../components/Transactions";
 import Reports from "../components/Reports";
+import Menu from "../components/menu/Menu";
 
 const Dashboard = () => {
   PageTitle("Dashboard");
@@ -81,6 +82,10 @@ const Dashboard = () => {
         </p>
       </Dialog>
       {/* info */}
+
+      {/* context menu */}
+      <Menu />
+      {/* context menu */}
     </div>
   );
 };
