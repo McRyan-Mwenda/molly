@@ -1,4 +1,4 @@
-const Reports = ({ setIsLoading }) => {
+const Reports = () => {
   return (
     <div>
       <h1 className="text-3xl">Reports panel</h1>
