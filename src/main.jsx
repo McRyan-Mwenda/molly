@@ -14,6 +14,9 @@ import App from "./App";
 import store from "./store";
 
 import "./index.css";
+import "primeicons/primeicons.css";
+import "primereact/resources/primereact.min.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 const httpLink = createHttpLink({
   uri: "http://127.0.0.1:8000/graphql/",
