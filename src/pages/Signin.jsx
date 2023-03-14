@@ -1,7 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
-import { gql, useMutation } from "@apollo/client";
-import { useDispatch } from "react-redux";
 import { signIn } from "../reducers/auth";
+import { useDispatch } from "react-redux";
+import { gql, useMutation } from "@apollo/client";
+import { setIsLoading } from "../reducers/loading";
+import { Link, useNavigate } from "react-router-dom";
 import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
@@ -14,7 +15,7 @@ const USER_AUTH = gql`
   }
 `;
 
-const Signin = ({ setIsLoading }) => {
+const Signin = () => {
   PageTitle("Signin");
 
   const dispatch = useDispatch();
@@ -23,16 +24,28 @@ const Signin = ({ setIsLoading }) => {
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
-    setIsLoading(false);
+    dispatch(
+      setIsLoading({
+        status: false,
+      })
+    );
     dispatch(signIn(data.tokenAuth.token));
     navigate("/app/dashboard");
   }
   if (loading) {
-    setIsLoading(true);
+    dispatch(
+      setIsLoading({
+        status: true,
+      })
+    );
   }
 
   if (error) {
-    setIsLoading(false);
+    dispatch(
+      setIsLoading({
+        status: false,
+      })
+    );
     dispatch(
       setNotification({
         message: `${error.message}`,

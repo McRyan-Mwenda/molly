@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { gql, useMutation } from "@apollo/client";
+import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
 import { setNotification } from "../reducers/notifications";
 
@@ -31,7 +32,7 @@ const CREATE_USER = gql`
   }
 `;
 
-const Signup = ({ setIsLoading }) => {
+const Signup = () => {
   PageTitle("Signup");
 
   const navigate = useNavigate();
@@ -40,7 +41,11 @@ const Signup = ({ setIsLoading }) => {
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
-    setIsLoading(false);
+    dispatch(
+      setIsLoading({
+        status: false,
+      })
+    );
     dispatch(
       setNotification({
         message: "User created successfully.",
@@ -51,11 +56,19 @@ const Signup = ({ setIsLoading }) => {
   }
 
   if (loading) {
-    setIsLoading(true);
+    dispatch(
+      setIsLoading({
+        status: true,
+      })
+    );
   }
 
   if (error) {
-    setIsLoading(false);
+    dispatch(
+      setIsLoading({
+        status: false,
+      })
+    );
     dispatch(
       setNotification({
         message: `${error.message}`,

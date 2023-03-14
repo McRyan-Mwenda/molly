@@ -1,7 +1,7 @@
 import { Toast } from "primereact/toast";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ProgressBar } from "primereact/progressbar";
 
 import Footer from "./components/Footer";
@@ -16,7 +16,7 @@ import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   const notifications = useSelector((state) => state.notification);
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useSelector((state) => state.loading.isLoading);
   const toast = useRef(null);
 
   const showSuccess = () => {
@@ -83,18 +83,9 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route
-          path="/app/signin"
-          element={<Signin setIsLoading={setIsLoading} />}
-        />
-        <Route
-          path="/app/signup"
-          element={<Signup setIsLoading={setIsLoading} />}
-        />
-        <Route
-          path="/app/dashboard"
-          element={<Dashboard setIsLoading={setIsLoading} />}
-        />
+        <Route path="/app/signin" element={<Signin />} />
+        <Route path="/app/signup" element={<Signup />} />
+        <Route path="/app/dashboard" element={<Dashboard />} />
       </Routes>
       {/* routes */}
 

@@ -10,7 +10,7 @@ import Budgets from "../components/Budgets";
 import Transactions from "../components/Transactions";
 import Reports from "../components/Reports";
 
-const Dashboard = ({ setIsLoading }) => {
+const Dashboard = () => {
   PageTitle("Dashboard");
 
   const navigate = useNavigate();
@@ -32,19 +32,19 @@ const Dashboard = ({ setIsLoading }) => {
       <div className="card">
         <TabView className="page-fonts">
           <TabPanel header="Profile" leftIcon="pi pi-user mr-2">
-            <Profile setIsLoading={setIsLoading} />
+            <Profile />
           </TabPanel>
           <TabPanel header="Accounts" leftIcon="pi pi-book mr-2">
-            <Accounts setIsLoading={setIsLoading} />
+            <Accounts />
           </TabPanel>
           <TabPanel header="Budgets" leftIcon="pi pi-briefcase mr-2">
-            <Budgets setIsLoading={setIsLoading} />
+            <Budgets />
           </TabPanel>
           <TabPanel header="Transactions" leftIcon="pi pi-money-bill mr-2">
-            <Transactions setIsLoading={setIsLoading} />
+            <Transactions />
           </TabPanel>
           <TabPanel header="Reports" leftIcon="pi pi-chart-bar mr-2">
-            <Reports setIsLoading={setIsLoading} />
+            <Reports />
           </TabPanel>
         </TabView>
       </div>
