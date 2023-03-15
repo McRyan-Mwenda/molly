@@ -8,17 +8,7 @@ export const packageReducer = createSlice({
     useAiPrediction: false,
   },
   reducers: {
-    setToFree: (state, action) => {
-      state.accountLimit = action.payload.limit;
-      state.generatePdfReport = action.payload.pdf;
-      state.useAiPrediction = action.payload.ai;
-    },
-    setToStandard: (state, action) => {
-      state.accountLimit = action.payload.limit;
-      state.generatePdfReport = action.payload.pdf;
-      state.useAiPrediction = action.payload.ai;
-    },
-    setToPro: (state, action) => {
+    setPackage: (state, action) => {
       state.accountLimit = action.payload.limit;
       state.generatePdfReport = action.payload.pdf;
       state.useAiPrediction = action.payload.ai;
@@ -26,6 +16,5 @@ export const packageReducer = createSlice({
   },
 });
 
-export const { downGradeToFree, upGradeToStandard, upGradeToPro } =
-  packageReducer.actions;
+export const { setPackage } = packageReducer.actions;
 export default packageReducer.reducer;

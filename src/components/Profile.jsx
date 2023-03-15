@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { setNotification } from "../reducers/notifications";
+import { setPackage } from "../reducers/package";
 
 const GET_PROFILE = gql`
   query {
@@ -28,6 +29,13 @@ const Profile = () => {
   const { loading, error, data } = useQuery(GET_PROFILE);
 
   if (data) {
+    dispatch(
+      setPackage({
+        limit: data.getProfile.account_limit,
+        pdf: data.getProfile.pdf_gen,
+        ai: data.getProfile.ai_predictions,
+      })
+    );
     dispatch(
       setIsLoading({
         status: false,
@@ -94,7 +102,7 @@ const Profile = () => {
             </p>
             <p>
               <span className="font-semibold">Can generate pdf reports:</span>{" "}
-              {data.getProfile.pdf_get ? <>True</> : <>False</>}
+              {data.getProfile.pdf_gen ? <>True</> : <>False</>}
             </p>
             <p>
               <span className="font-semibold">Can access AI predictions:</span>{" "}
