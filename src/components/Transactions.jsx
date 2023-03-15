@@ -59,7 +59,9 @@ const Transactions = () => {
           const list = (
             <>
               <Inplace key={index} className="page-fonts mb-8">
-                <InplaceDisplay>{index +1}. {account.account_name}</InplaceDisplay>
+                <InplaceDisplay>
+                  {index + 1}. {account.account_name}
+                </InplaceDisplay>
                 <InplaceContent>
                   <Table id={account.id} />
                 </InplaceContent>

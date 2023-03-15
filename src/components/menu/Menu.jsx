@@ -75,27 +75,6 @@ const Menu = () => {
         },
       ],
     },
-    {
-      label: "Reports",
-      icon: "pi pi-fw pi-chart-bar",
-      items: [
-        {
-          label: "New",
-          icon: "pi pi-fw pi-plus",
-        },
-        {
-          label: "Edit",
-          icon: "pi pi-fw pi-pencil",
-        },
-        {
-          separator: true,
-        },
-        {
-          label: "Delete",
-          icon: "pi pi-fw pi-trash",
-        },
-      ],
-    },
   ];
 
   return <ContextMenu global model={items} breakpoint="767px" />;
