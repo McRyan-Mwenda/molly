@@ -55,8 +55,6 @@ const Budgets = () => {
 
   return (
     <div>
-      <h1 className="text-3xl">Budgets panel</h1>
-      <br />
       {data ? (
         data.getAllBudgets.map((budget, index) => {
           const list = (
@@ -91,9 +89,24 @@ const Budgets = () => {
         })
       ) : (
         <>
-          <div className="text-center">
-            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          <div className="text-center my-40">
+            <span class="loader"></span>
           </div>
+        </>
+      )}
+      {data && (
+        <>
+          {!data.getAllBudgets && (
+            <div className="text-center my-40">
+              <h1 className="text-3xl">
+                Hmm... It seems you do not have any budgets 🤔
+              </h1>
+              <p className="text-xl">
+                Right click anywhere on the screen to open the menu and add your
+                budgets.
+              </p>
+            </div>
+          )}
         </>
       )}
     </div>

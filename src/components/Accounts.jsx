@@ -55,8 +55,6 @@ const Accounts = () => {
 
   return (
     <div>
-      <h1 className="text-3xl">Accounts panel</h1>
-      <br />
       {data ? (
         data.getAllAccounts.map((account, index) => {
           const list = (
@@ -99,9 +97,24 @@ const Accounts = () => {
         })
       ) : (
         <>
-          <div className="text-center">
-            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          <div className="text-center my-40">
+            <span class="loader"></span>
           </div>
+        </>
+      )}
+      {data && (
+        <>
+          {!data.getAllAccounts && (
+            <div className="text-center my-40">
+              <h1 className="text-3xl">
+                Hmm... It seems you do not have any accounts 🤔
+              </h1>
+              <p className="text-xl">
+                Right click anywhere on the screen to open the menu and add your
+                accounts.
+              </p>
+            </div>
+          )}
         </>
       )}
     </div>

@@ -135,7 +135,26 @@ const Table = ({ id }) => {
           </table>
         </>
       ) : (
-        <></>
+        <>
+          <div className="text-center my-8">
+            <span class="loader"></span>
+          </div>
+        </>
+      )}
+      {data && (
+        <>
+          {!data.getAllTransactions && (
+            <div className="text-center my-8">
+              <h1 className="text-3xl">
+                Hmm... It seems you do not have any transactions 🤔
+              </h1>
+              <p className="text-xl">
+                Right click anywhere on the screen to open the menu and add your
+                transactions.
+              </p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

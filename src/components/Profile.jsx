@@ -60,8 +60,6 @@ const Profile = () => {
 
   return (
     <div>
-      <h1 className="text-3xl">Profile panel</h1>
-      <br />
       {data ? (
         <>
           <div className="border rounded-md shadow-md p-4 bg-gray-50">
@@ -112,9 +110,20 @@ const Profile = () => {
         </>
       ) : (
         <>
-          <div className="text-center">
-            <h1 className="text-3xl">Hmm... You shouldn't be seeing this 🤔</h1>
+          <div className="text-center my-40">
+            <span class="loader"></span>
           </div>
+        </>
+      )}
+      {data && (
+        <>
+          {!data.getProfile && (
+            <div className="text-center my-40">
+              <h1 className="text-3xl">
+                Hmm... You shouldn't be seeing this 🤔
+              </h1>
+            </div>
+          )}
         </>
       )}
     </div>
