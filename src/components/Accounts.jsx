@@ -98,7 +98,7 @@ const Accounts = () => {
       ) : (
         <>
           <div className="text-center my-40">
-            <span class="loader"></span>
+            <span className="loader"></span>
           </div>
         </>
       )}

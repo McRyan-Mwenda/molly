@@ -137,7 +137,7 @@ const Table = ({ id }) => {
       ) : (
         <>
           <div className="text-center my-8">
-            <span class="loader"></span>
+            <span className="loader"></span>
           </div>
         </>
       )}
