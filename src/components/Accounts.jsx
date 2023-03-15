@@ -28,7 +28,7 @@ const Accounts = () => {
         status: false,
       })
     );
-    console.log(data.getAllAccounts);
+    // console.log(data.getAllAccounts);
   }
 
   if (loading) {

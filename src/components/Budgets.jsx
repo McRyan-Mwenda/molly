@@ -28,7 +28,7 @@ const Budgets = () => {
         status: false,
       })
     );
-    console.log(data.getAllBudgets);
+    // console.log(data.getAllBudgets);
   }
 
   if (loading) {

@@ -42,7 +42,7 @@ const Table = ({ id }) => {
         status: false,
       })
     );
-    console.log(data.getAllTransactions);
+    // console.log(data.getAllTransactions);
   }
 
   if (loading) {

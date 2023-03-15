@@ -33,7 +33,7 @@ const Profile = () => {
         status: false,
       })
     );
-    console.log(data.getProfile);
+    // console.log(data.getProfile);
   }
 
   if (loading) {
