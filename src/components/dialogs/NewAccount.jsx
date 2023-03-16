@@ -57,7 +57,6 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
         type: "success",
       })
     );
-    naSetVisible(false);
   }
 
   if (loading) {
@@ -144,7 +143,7 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
         </div>
         <div className="mb-2">
           <label htmlFor="currency_code" id="currency_code">
-            Last name
+            Currency
           </label>
           <select
             name="currency_code"
