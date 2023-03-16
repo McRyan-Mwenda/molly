@@ -131,7 +131,7 @@ const Dashboard = () => {
       <EditTransaction etVisible={etVisible} etSetVisible={etSetVisible} />
 
       <DeleteAccount daVisible={daVisible} daSetVisible={daSetVisible} />
-      <DeleteBudget dbVisible={ebVisible} dbSetVisible={dbSetVisible} />
+      <DeleteBudget dbVisible={dbVisible} dbSetVisible={dbSetVisible} />
       <DeleteTransaction dtVisible={dtVisible} dtSetVisible={dtSetVisible} />
       {/* dialogs */}
     </div>
