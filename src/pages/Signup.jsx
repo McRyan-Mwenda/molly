@@ -40,11 +40,7 @@ const Signup = () => {
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         message: "User created successfully.",
@@ -55,19 +51,11 @@ const Signup = () => {
   }
 
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         message: `${error.message}`,

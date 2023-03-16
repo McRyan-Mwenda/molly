@@ -23,28 +23,16 @@ const Budgets = () => {
   const { loading, error, data } = useQuery(GET_ALL_BUDGETS);
 
   if (data) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     // console.log(data.getAllBudgets);
   }
 
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         type: "error",

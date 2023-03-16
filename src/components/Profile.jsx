@@ -29,6 +29,7 @@ const Profile = () => {
   const { loading, error, data } = useQuery(GET_PROFILE);
 
   if (data) {
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setPackage({
         limit: data.getProfile.account_limit,
@@ -36,28 +37,15 @@ const Profile = () => {
         ai: data.getProfile.ai_predictions,
       })
     );
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
     // console.log(data.getProfile);
   }
 
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         type: "error",

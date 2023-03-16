@@ -37,28 +37,16 @@ const Table = ({ id }) => {
   });
 
   if (data) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     // console.log(data.getAllTransactions);
   }
 
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         type: "error",

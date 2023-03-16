@@ -23,28 +23,16 @@ const Accounts = () => {
   const { loading, error, data } = useQuery(GET_ALL_ACCOUNTS);
 
   if (data) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     // console.log(data.getAllAccounts);
   }
 
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         type: "error",

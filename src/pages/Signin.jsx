@@ -24,28 +24,16 @@ const Signin = () => {
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(signIn(data.tokenAuth.token));
     navigate("/app/dashboard");
   }
   if (loading) {
-    dispatch(
-      setIsLoading({
-        status: true,
-      })
-    );
+    dispatch(setIsLoading({ status: true }));
   }
 
   if (error) {
-    dispatch(
-      setIsLoading({
-        status: false,
-      })
-    );
+    dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
         message: `${error.message}`,
