@@ -12,12 +12,34 @@ import Budgets from "../components/Budgets";
 import Transactions from "../components/Transactions";
 import Reports from "../components/Reports";
 import Menu from "../components/menu/Menu";
+import NewAccount from "../components/dialogs/NewAccount";
+import NewBudget from "../components/dialogs/NewBudget";
+import NewTransaction from "../components/dialogs/NewTransaction";
+import EditAccount from "../components/dialogs/EditAccount";
+import EditBudget from "../components/dialogs/EditBudget";
+import EditProfile from "../components/dialogs/EditProfile";
+import EditTransaction from "../components/dialogs/EditTransaction";
+import DeleteAccount from "../components/dialogs/DeleteAccount";
+import DeleteBudget from "../components/dialogs/DeleteBudget";
+import DeleteTransaction from "../components/dialogs/DeleteTransaction";
 
 const Dashboard = () => {
   PageTitle("Dashboard");
 
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
+
+  const [naVisible, naSetVisible] = useState(false);
+  const [nbVisible, nbSetVisible] = useState(false);
+  const [ntVisible, ntSetVisible] = useState(false);
+  const [eaVisible, eaSetVisible] = useState(false);
+  const [ebVisible, ebSetVisible] = useState(false);
+  const [epVisible, epSetVisible] = useState(false);
+  const [etVisible, etSetVisible] = useState(false);
+  const [daVisible, daSetVisible] = useState(false);
+  const [dbVisible, dbSetVisible] = useState(false);
+  const [dtVisible, dtSetVisible] = useState(false);
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const checkAuth = () => {
@@ -84,8 +106,34 @@ const Dashboard = () => {
       {/* info */}
 
       {/* context menu */}
-      <Menu />
+      <Menu
+        naSetVisible={naSetVisible}
+        eaSetVisible={eaSetVisible}
+        daSetVisible={daSetVisible}
+        nbSetVisible={nbSetVisible}
+        ebSetVisible={ebSetVisible}
+        dbSetVisible={dbSetVisible}
+        ntSetVisible={ntSetVisible}
+        etSetVisible={etSetVisible}
+        dtSetVisible={dtSetVisible}
+        epSetVisible={epSetVisible}
+      />
       {/* context menu */}
+
+      {/* dialogs */}
+      <NewAccount naVisible={naVisible} naSetVisible={naSetVisible} />
+      <NewBudget nbVisible={nbVisible} nbSetVisible={nbSetVisible} />
+      <NewTransaction ntVisible={ntVisible} ntSetVisible={ntSetVisible} />
+
+      <EditAccount eaVisible={eaVisible} eaSetVisible={eaSetVisible} />
+      <EditBudget ebVisible={ebVisible} ebSetVisible={ebSetVisible} />
+      <EditProfile epVisible={epVisible} epSetVisible={epSetVisible} />
+      <EditTransaction etVisible={etVisible} etSetVisible={etSetVisible} />
+
+      <DeleteAccount daVisible={daVisible} daSetVisible={daSetVisible} />
+      <DeleteBudget dbVisible={ebVisible} dbSetVisible={dbSetVisible} />
+      <DeleteTransaction dtVisible={dtVisible} dtSetVisible={dtSetVisible} />
+      {/* dialogs */}
     </div>
   );
 };

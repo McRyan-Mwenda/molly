@@ -1,6 +1,17 @@
 import { ContextMenu } from "primereact/contextmenu";
 
-const Menu = () => {
+const Menu = ({
+  naSetVisible,
+  nbSetVisible,
+  ntSetVisible,
+  eaSetVisible,
+  ebSetVisible,
+  epSetVisible,
+  etSetVisible,
+  daSetVisible,
+  dbSetVisible,
+  dtSetVisible,
+}) => {
   const items = [
     {
       label: "Profile",
@@ -9,6 +20,9 @@ const Menu = () => {
         {
           label: "Edit",
           icon: "pi pi-fw pi-pencil",
+          command: () => {
+            epSetVisible(true);
+          },
         },
       ],
     },
@@ -19,10 +33,16 @@ const Menu = () => {
         {
           label: "New",
           icon: "pi pi-fw pi-plus",
+          command: () => {
+            naSetVisible(true);
+          },
         },
         {
           label: "Edit",
           icon: "pi pi-fw pi-pencil",
+          command: () => {
+            eaSetVisible(true);
+          },
         },
         {
           separator: true,
@@ -30,6 +50,9 @@ const Menu = () => {
         {
           label: "Delete",
           icon: "pi pi-fw pi-trash",
+          command: () => {
+            daSetVisible(true);
+          },
         },
       ],
     },
@@ -40,10 +63,16 @@ const Menu = () => {
         {
           label: "New",
           icon: "pi pi-fw pi-plus",
+          command: () => {
+            nbSetVisible(true);
+          },
         },
         {
           label: "Edit",
           icon: "pi pi-fw pi-pencil",
+          command: () => {
+            ebSetVisible(true);
+          },
         },
         {
           separator: true,
@@ -51,6 +80,9 @@ const Menu = () => {
         {
           label: "Delete",
           icon: "pi pi-fw pi-trash",
+          command: () => {
+            dbSetVisible(true);
+          },
         },
       ],
     },
@@ -61,10 +93,16 @@ const Menu = () => {
         {
           label: "New",
           icon: "pi pi-fw pi-plus",
+          command: () => {
+            ntSetVisible(true);
+          },
         },
         {
           label: "Edit",
           icon: "pi pi-fw pi-pencil",
+          command: () => {
+            etSetVisible(true);
+          },
         },
         {
           separator: true,
@@ -72,6 +110,9 @@ const Menu = () => {
         {
           label: "Delete",
           icon: "pi pi-fw pi-trash",
+          command: () => {
+            dtSetVisible(true);
+          },
         },
       ],
     },
