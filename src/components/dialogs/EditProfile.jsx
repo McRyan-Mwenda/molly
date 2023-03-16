@@ -49,11 +49,7 @@ const EditProfile = ({ epVisible, epSetVisible }) => {
   const dispatch = useDispatch();
 
   const [updateUser, { data, loading, error }] = useMutation(UPDATE_USER, {
-    refetchQueries: [
-      {
-        query: GET_PROFILE,
-      },
-    ],
+    refetchQueries: [{ query: GET_PROFILE }],
   });
 
   if (data) {

@@ -48,10 +48,10 @@ const Accounts = () => {
           const list = (
             <>
               <div
-                className="border rounded-md shadow-md p-4 bg-gray-50 mb-4"
+                className="border rounded-md shadow-md p-4 bg-gray-50 mb-4 text-lg"
                 key={index}
               >
-                <p className="text-xl mb-2">{account.account_name}</p>
+                <p className="text-2xl mb-2">{account.account_name}</p>
                 <hr className="mb-2" />
                 <p>
                   <span className="font-semibold">Account type:</span>{" "}
@@ -59,7 +59,7 @@ const Accounts = () => {
                 </p>
                 <p>
                   <span className="font-semibold">Account balance:</span>{" "}
-                  {account.account_balance}
+                  {account.account_balance.toLocaleString()}
                 </p>
                 <p>
                   <span className="font-semibold">Currency:</span>{" "}

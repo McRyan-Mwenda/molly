@@ -8,6 +8,7 @@ const GET_ALL_BUDGETS = gql`
     getAllBudgets {
       budget_name
       budget_description
+      budget_amount
       budget_start_date
       budget_end_date
       category {
@@ -48,14 +49,18 @@ const Budgets = () => {
           const list = (
             <>
               <div
-                className="border rounded-md shadow-md p-4 bg-gray-50 mb-4"
+                className="border rounded-md shadow-md p-4 bg-gray-50 mb-4 text-lg"
                 key={index}
               >
-                <p className="text-xl mb-2">{budget.budget_name}</p>
+                <p className="text-2xl mb-2">{budget.budget_name}</p>
                 <hr className="mb-2" />
                 <p>
                   <span className="font-semibold">Goal:</span>{" "}
                   {budget.budget_description}
+                </p>
+                <p>
+                  <span className="font-semibold">Budget amount:</span>{" "}
+                  {budget.budget_amount.toLocaleString()}
                 </p>
                 <p>
                   <span className="font-semibold">Category:</span>{" "}

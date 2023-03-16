@@ -44,7 +44,7 @@ const Transactions = () => {
         data.getAllAccounts.map((account, index) => {
           const list = (
             <>
-              <Inplace key={index} className="page-fonts mb-8">
+              <Inplace key={index} className="page-fonts mb-8 text-lg">
                 <InplaceDisplay>
                   {index + 1}. {account.account_name}
                 </InplaceDisplay>

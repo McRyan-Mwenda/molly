@@ -58,8 +58,8 @@ const Profile = () => {
     <div>
       {data ? (
         <>
-          <div className="border rounded-md shadow-md p-4 bg-gray-50">
-            <p className="text-xl mb-2">User & profile information</p>
+          <div className="border rounded-md shadow-md p-4 bg-gray-50 text-lg">
+            <p className="text-2xl mb-2">User & profile information</p>
             <hr className="mb-2" />
             <p>
               <span className="font-semibold">Email:</span>{" "}

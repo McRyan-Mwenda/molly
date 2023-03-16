@@ -78,7 +78,7 @@ const Table = ({ id }) => {
                     <tr key={index} className="border-b">
                       <td>{index + 1}</td>
                       <td>{transaction.transaction_type}</td>
-                      <td>{transaction.transaction_amount}</td>
+                      <td>{transaction.transaction_amount.toLocaleString()}</td>
                       <td>{transaction.currency_code}</td>
                       <td>{transaction.category.category_name}</td>
                       <td>
@@ -93,7 +93,7 @@ const Table = ({ id }) => {
                         >
                           More info
                         </button>
-                        <OverlayPanel ref={op}>
+                        <OverlayPanel ref={op} className="page-fonts">
                           <p>
                             <span className="font-semibold">Description:</span>{" "}
                             {transaction.description}
@@ -109,7 +109,7 @@ const Table = ({ id }) => {
                           </p>
                           <p>
                             <span className="font-semibold">Balance:</span>{" "}
-                            {transaction.account.account_balance}
+                            {transaction.account.account_balance.toLocaleString()}
                           </p>
                         </OverlayPanel>
                       </td>

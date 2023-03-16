@@ -1,5 +1,9 @@
+import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
+import { useMutation, gql } from "@apollo/client";
+import { setIsLoading } from "../../reducers/loading";
+import { setNotification } from "../../reducers/notifications";
 
 const DeleteAccount = ({ daVisible, daSetVisible }) => {
   return (
