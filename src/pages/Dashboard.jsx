@@ -53,17 +53,6 @@ const Dashboard = () => {
     setVisible(true);
   }, [isLoggedIn]);
 
-  const footerContent = (
-    <div className="page-fonts">
-      <Button
-        label="Okay"
-        icon="pi pi-check"
-        onClick={() => setVisible(false)}
-        autoFocus
-      />
-    </div>
-  );
-
   return (
     <div className="page">
       <div className="card">
@@ -90,10 +79,9 @@ const Dashboard = () => {
       <Dialog
         header="Quick reminder"
         visible={visible}
-        position="bottom-right"
+        // position="bottom-right"
         style={{ width: "30vw" }}
         onHide={() => setVisible(false)}
-        footer={footerContent}
         draggable={false}
         resizable={false}
         className="page-fonts"
