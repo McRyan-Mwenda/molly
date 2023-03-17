@@ -53,7 +53,7 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
     dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
-        message: "New account added successfully.",
+        message: `Action successful: ${data.createAccount.account_name}`,
         type: "success",
       })
     );

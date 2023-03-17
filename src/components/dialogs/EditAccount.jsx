@@ -56,7 +56,7 @@ const EditAccount = ({ eaVisible, eaSetVisible }) => {
     dispatch(setIsLoading({ status: false }));
     dispatch(
       setNotification({
-        message: "Account updated successfully.",
+        message: `Updated successful: ${data.updateAccount.account_name}`,
         type: "success",
       })
     );
