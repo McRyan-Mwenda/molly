@@ -2,8 +2,6 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { setNotification } from "../reducers/notifications";
-import { setPackage } from "../reducers/package";
 
 const GET_PROFILE = gql`
   query {
@@ -30,13 +28,6 @@ const Profile = () => {
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setPackage({
-        limit: data.getProfile.account_limit,
-        pdf: data.getProfile.pdf_gen,
-        ai: data.getProfile.ai_predictions,
-      })
-    );
     // console.log(data.getProfile);
   }
 
@@ -46,12 +37,6 @@ const Profile = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        type: "error",
-        message: `${error.message}`,
-      })
-    );
   }
 
   return (

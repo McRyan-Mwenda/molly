@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { setNotification } from "../reducers/notifications";
 
 const GET_ALL_BUDGETS = gql`
   query {
@@ -34,12 +33,6 @@ const Budgets = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        type: "error",
-        message: `${error.message}`,
-      })
-    );
   }
 
   return (

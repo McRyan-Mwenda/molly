@@ -1,8 +1,10 @@
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
+import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
-import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
 
@@ -34,19 +36,24 @@ const CREATE_USER = gql`
 const Signup = () => {
   PageTitle("Signup");
 
+  const toast = useRef(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const showError = (error) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: `${error.message}`,
+      life: 3000,
+    });
+  };
 
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: "User created successfully.",
-        type: "success",
-      })
-    );
     navigate("/app/signin");
   }
 
@@ -56,12 +63,7 @@ const Signup = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `${error.message}`,
-        type: "error",
-      })
-    );
+    showError(error);
   }
 
   return (
@@ -151,12 +153,13 @@ const Signup = () => {
             />
           </div>
           <div className="mt-8">
-            <button
+            <Button
               type="submit"
-              className="rounded-md p-4 border w-full bg-emerald-600 text-xl text-gray-50 hover:text-white hover:bg-emerald-700 font-semibold"
-            >
-              Submit
-            </button>
+              label="Submit"
+              severity="success"
+              className="w-full"
+              loading={loading}
+            />
           </div>
         </form>
       </div>
@@ -171,6 +174,10 @@ const Signup = () => {
         .
       </p>
       <br />
+
+      {/* notification */}
+      <Toast ref={toast} />
+      {/* notification */}
     </div>
   );
 };

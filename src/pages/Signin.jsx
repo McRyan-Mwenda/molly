@@ -1,12 +1,13 @@
+import { Toast } from "primereact/toast";
+import { useState, useRef } from "react";
 import { signIn } from "../reducers/auth";
 import { useDispatch } from "react-redux";
+import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
-import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
-import { useState } from "react";
 
 const USER_AUTH = gql`
   mutation ($username: String!, $password: String!) {
@@ -19,10 +20,31 @@ const USER_AUTH = gql`
 const Signin = () => {
   PageTitle("Signin");
 
+  const toast = useRef(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [userName, setUserName] = useState("");
+
+  const showSuccess = () => {
+    toast.current.show({
+      severity: "success",
+      summary: "Success",
+      detail: "message",
+      life: 3000,
+    });
+  };
+
+  const showError = (error) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: `${error.message}`,
+      life: 3000,
+    });
+  };
+
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
@@ -41,12 +63,7 @@ const Signin = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `${error.message}`,
-        type: "error",
-      })
-    );
+    showError(error);
   }
 
   return (
@@ -90,12 +107,13 @@ const Signin = () => {
             />
           </div>
           <div className="mt-8">
-            <button
+            <Button
               type="submit"
-              className="rounded-md p-4 border w-full bg-emerald-600 text-xl text-gray-50 hover:text-white hover:bg-emerald-700 font-semibold"
-            >
-              Submit
-            </button>
+              label="Submit"
+              severity="success"
+              className="w-full"
+              loading={loading}
+            />
           </div>
         </form>
       </div>
@@ -110,6 +128,10 @@ const Signin = () => {
         .
       </p>
       <br />
+
+      {/* notification */}
+      <Toast ref={toast} />
+      {/* notification */}
     </div>
   );
 };

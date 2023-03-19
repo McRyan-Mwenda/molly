@@ -1,16 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 
-import Footer from "./components/nav/Footer";
-import Navbar from "./components/nav/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Pricing from "./pages/Pricing";
-import Contacts from "./pages/Contacts";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Pricing from "./pages/Pricing";
+import Contacts from "./pages/Contacts";
 import Dashboard from "./pages/Dashboard";
+import Navbar from "./components/nav/Navbar";
+import Footer from "./components/nav/Footer";
 
 const App = () => {
+
   return (
     <div className="App">
       {/* navbar */}

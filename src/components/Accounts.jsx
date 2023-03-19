@@ -2,7 +2,6 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { setNotification } from "../reducers/notifications";
 
 const GET_ALL_ACCOUNTS = gql`
   query {
@@ -34,12 +33,6 @@ const Accounts = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        type: "error",
-        message: `${error.message}`,
-      })
-    );
   }
 
   return (
