@@ -2,7 +2,6 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { updateAccounts } from "../reducers/account";
 import { setNotification } from "../reducers/notifications";
 
 const GET_ALL_ACCOUNTS = gql`
@@ -26,14 +25,6 @@ const Accounts = () => {
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      updateAccounts({
-        userAccounts: data.getAllAccounts.map((obj) => ({
-          id: obj.id,
-          name: obj.account_name,
-        })),
-      })
-    );
     // console.log(data.getAllAccounts);
   }
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { signOut } from "../reducers/auth";
+import { signOut } from "../../reducers/auth";
 import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {

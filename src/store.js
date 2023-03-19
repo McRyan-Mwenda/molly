@@ -1,9 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./reducers/auth";
-import packageReducer from "./reducers/package";
-import notificationReducer from "./reducers/notifications";
 import loadingReducer from "./reducers/loading";
-import accountReducer from "./reducers/account";
+import packageReducer from "./reducers/package";
+import { configureStore } from "@reduxjs/toolkit";
+import notificationReducer from "./reducers/notifications";
 
 export default configureStore({
   reducer: {
@@ -11,6 +10,5 @@ export default configureStore({
     package: packageReducer,
     notification: notificationReducer,
     loading: loadingReducer,
-    account: accountReducer,
   },
 });
