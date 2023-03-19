@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { setNotification } from "../reducers/notifications";
 
 import PageTitle from "../title";
+import { useState } from "react";
 
 const USER_AUTH = gql`
   mutation ($username: String!, $password: String!) {
@@ -21,11 +22,17 @@ const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [userName, setUserName] = useState("");
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(signIn(data.tokenAuth.token));
+    dispatch(
+      signIn({
+        username: userName,
+        token: data.tokenAuth.token,
+      })
+    );
     navigate("/app/dashboard");
   }
   if (loading) {
@@ -52,7 +59,8 @@ const Signin = () => {
 
             tokenAuth({
               variables: {
-                username: e.target.username.value,
+                // username: e.target.username.value,
+                username: userName,
                 password: e.target.password.value,
               },
             });
@@ -67,6 +75,7 @@ const Signin = () => {
               name="username"
               id="username"
               className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              onChange={(e) => setUserName(e.target.value)}
             />
           </div>
           <div className="mb-4">

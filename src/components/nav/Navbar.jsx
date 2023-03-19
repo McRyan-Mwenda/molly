@@ -1,10 +1,46 @@
+import { useRef } from "react";
+import { Menu } from "primereact/menu";
 import { Link } from "react-router-dom";
+import { Avatar } from "primereact/avatar";
 import { signOut } from "../../reducers/auth";
 import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const menu = useRef(null);
+
   const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const username = useSelector((state) => state.auth.username);
+
+  const items = [
+    {
+      label: "Profile",
+      items: [
+        {
+          label: username,
+          icon: "pi pi-user",
+          disabled: true,
+        },
+      ],
+    },
+    {
+      label: "Options",
+      items: [
+        {
+          label: "Update",
+          icon: "pi pi-refresh",
+          command: () => {},
+        },
+        {
+          label: "Log out",
+          icon: "pi pi-upload",
+          className: "bg-red-100 mb-2",
+          command: () => dispatch(signOut()),
+        },
+      ],
+    },
+  ];
 
   return (
     <div
@@ -40,12 +76,16 @@ const Navbar = () => {
       <div className="flex">
         {isLoggedIn ? (
           <>
-            <button
-              className="text-rose-600 hover:text-rose-900 underline"
-              onClick={() => dispatch(signOut())}
-            >
-              Sign out
-            </button>
+            <div className="flex justify-center flex-col items-center">
+              <Avatar
+                icon="pi pi-user"
+                className="cursor-pointer shadow border border-zinc-300"
+                shape="circle"
+                label={username.charAt(0)}
+                onClick={(e) => menu.current.toggle(e)}
+              />
+              <Menu model={items} popup ref={menu} className="page-fonts" />
+            </div>
           </>
         ) : (
           <>
