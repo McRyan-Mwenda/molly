@@ -38,7 +38,7 @@ const Accounts = () => {
           const list = (
             <>
               <Link to={`/app/dashboard/account/${account.id}`} key={index}>
-                <div className="border rounded-md shadow-md p-4 bg-gray-50 mb-4 text-lg">
+                <div className="border rounded-md hover:shadow-md p-4 bg-gray-50 mb-4 text-lg">
                   <p className="text-2xl mb-2">{account.account_name}</p>
                   <hr className="mb-2" />
                   <p>

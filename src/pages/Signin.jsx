@@ -27,15 +27,6 @@ const Signin = () => {
 
   const [userName, setUserName] = useState("");
 
-  const showSuccess = () => {
-    toast.current.show({
-      severity: "success",
-      summary: "Success",
-      detail: "message",
-      life: 3000,
-    });
-  };
-
   const showError = (error) => {
     toast.current.show({
       severity: "error",
