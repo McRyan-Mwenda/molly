@@ -61,3 +61,25 @@ html::-webkit-scrollbar-thumb:active {
 #navbar {
   font-size: larger;
 }
+
+/* dashboard loader */
+
+.loader {
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #0e7490;
+  animation: smokeOut 1s ease-in-out infinite alternate;
+  text-shadow: 0 0 1px #0e7490;
+}
+.loader:before {
+  content: "Loading...";
+}
+
+@keyframes smokeOut {
+  100% {
+    opacity: 0.08;
+    filter: blur(5px);
+    letter-spacing: 4px;
+  }
+}

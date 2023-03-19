@@ -9,9 +9,9 @@ import Contacts from "./pages/Contacts";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/nav/Navbar";
 import Footer from "./components/nav/Footer";
+import Account from "./components/Account";
 
 const App = () => {
-
   return (
     <div className="App">
       {/* navbar */}
@@ -27,6 +27,7 @@ const App = () => {
         <Route path="/app/signin" element={<Signin />} />
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/dashboard" element={<Dashboard />} />
+        <Route path="/app/dashboard/account/:id" element={<Account />} />
       </Routes>
       {/* routes */}
 

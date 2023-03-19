@@ -1,4 +1,4 @@
-import moment from "moment";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
@@ -9,10 +9,6 @@ const GET_ALL_ACCOUNTS = gql`
       id
       account_name
       account_type
-      account_balance
-      currency_code
-      created_at
-      updated_at
     }
   }
 `;
@@ -41,37 +37,16 @@ const Accounts = () => {
         data.getAllAccounts.map((account, index) => {
           const list = (
             <>
-              <div
-                className="border rounded-md shadow-md p-4 bg-gray-50 mb-4 text-lg"
-                key={index}
-              >
-                <p className="text-2xl mb-2">{account.account_name}</p>
-                <hr className="mb-2" />
-                <p>
-                  <span className="font-semibold">Account type:</span>{" "}
-                  {account.account_type}
-                </p>
-                <p>
-                  <span className="font-semibold">Account balance:</span>{" "}
-                  {account.account_balance.toLocaleString()}
-                </p>
-                <p>
-                  <span className="font-semibold">Currency:</span>{" "}
-                  {account.currency_code}
-                </p>
-                <p>
-                  <span className="font-semibold">Created on:</span>{" "}
-                  {moment
-                    .unix(account.created_at)
-                    .format("YYYY-MM-DD HH:mm:ss")}
-                </p>
-                <p>
-                  <span className="font-semibold">Updated on:</span>{" "}
-                  {moment
-                    .unix(account.created_at)
-                    .format("YYYY-MM-DD HH:mm:ss")}
-                </p>
-              </div>
+              <Link to={`/app/dashboard/account/${account.id}`} key={index}>
+                <div className="border rounded-md shadow-md p-4 bg-gray-50 mb-4 text-lg">
+                  <p className="text-2xl mb-2">{account.account_name}</p>
+                  <hr className="mb-2" />
+                  <p>
+                    <span className="font-semibold">Account type:</span>{" "}
+                    {account.account_type}
+                  </p>
+                </div>
+              </Link>
             </>
           );
 

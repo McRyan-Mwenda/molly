@@ -28,7 +28,7 @@ const Dashboard = () => {
     <div className="page">
       <div className="card">
         <TabView className="page-fonts">
-          <TabPanel header="Transactions" leftIcon="pi pi-money-bill mr-2">
+          <TabPanel header="Accounts" leftIcon="pi pi-money-bill mr-2">
             <Accounts />
           </TabPanel>
           <TabPanel header="Budgets" leftIcon="pi pi-briefcase mr-2">
