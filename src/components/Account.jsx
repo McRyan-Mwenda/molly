@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import EditAccount from "./dialogs/EditAccount";
+import DeleteAccount from "./dialogs/DeleteAccount";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -33,6 +34,7 @@ const Account = () => {
   const menu = useRef(null);
 
   const [isVisible, setIsVisible] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -71,7 +73,7 @@ const Account = () => {
     {
       label: "Delete",
       icon: "pi pi-trash",
-      command: () => {},
+      command: () => setIsDelete(true),
     },
   ];
 
@@ -148,6 +150,16 @@ const Account = () => {
         />
       )}
       {/* update account */}
+
+      {/* delete account */}
+      {data && (
+        <DeleteAccount
+          isVisible={isDelete}
+          setIsVisible={setIsDelete}
+          id={data.getAccount.id}
+        />
+      )}
+      {/* delete account */}
     </div>
   );
 };
