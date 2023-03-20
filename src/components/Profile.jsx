@@ -1,7 +1,8 @@
 import moment from "moment";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
+import { useDispatch, useSelector } from "react-redux";
 
 const GET_PROFILE = gql`
   query {
@@ -9,7 +10,6 @@ const GET_PROFILE = gql`
       tier
       account_limit
       pdf_gen
-      ai_predictions
       created_at
       user {
         email
@@ -23,6 +23,7 @@ const GET_PROFILE = gql`
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const { loading, error, data } = useQuery(GET_PROFILE);
 
@@ -38,6 +39,16 @@ const Profile = () => {
   if (error) {
     dispatch(setIsLoading({ status: false }));
   }
+
+  const checkAuth = () => {
+    if (isLoggedIn == false) {
+      navigate("/app/signin");
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, [isLoggedIn]);
 
   return (
     <div className="page">
