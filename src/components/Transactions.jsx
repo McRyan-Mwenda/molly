@@ -1,11 +1,12 @@
-import { useRef } from "react";
 import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Column } from "primereact/column";
 import { useQuery, gql } from "@apollo/client";
 import { DataTable } from "primereact/datatable";
 import { setIsLoading } from "../reducers/loading";
+import NewTransaction from "./dialogs/NewTransaction";
 
 const GET_TRANSACTION = gql`
   query ($id: ID!) {
@@ -25,10 +26,13 @@ const GET_TRANSACTION = gql`
   }
 `;
 
-const Transactions = ({ id }) => {
-
+const Transactions = ({ id, currency }) => {
   const toast = useRef(null);
   const menu = useRef(null);
+
+  const [isNew, setIsNew] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -75,17 +79,17 @@ const Transactions = ({ id }) => {
     {
       label: "Add",
       icon: "pi pi-pencil",
-      command: () => {},
+      command: () => setIsNew(true),
     },
     {
       label: "Update",
       icon: "pi pi-refresh",
-      command: () => {},
+      command: () => setIsUpdate(true),
     },
     {
       label: "Delete",
       icon: "pi pi-trash",
-      command: () => {},
+      command: () => setIsDelete(true),
     },
   ];
 
@@ -147,6 +151,21 @@ const Transactions = ({ id }) => {
           </div>
         </>
       )}
+
+      {/* new transaction */}
+      <NewTransaction
+        id={id}
+        currency={currency}
+        isNew={isNew}
+        setIsNew={setIsNew}
+      />
+      {/* new transaction */}
+
+      {/* edit transaction */}
+      {/* edit transaction */}
+
+      {/* delete transaction */}
+      {/* delete transaction */}
 
       {/* notification */}
       <Toast ref={toast} />

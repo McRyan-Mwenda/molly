@@ -2,14 +2,14 @@ import moment from "moment";
 import PageTitle from "../title";
 import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
-import { useRef, useState } from "react";
 import Transactions from "./Transactions";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
-import { setIsLoading } from "../reducers/loading";
 import EditAccount from "./dialogs/EditAccount";
+import { setIsLoading } from "../reducers/loading";
 import DeleteAccount from "./dialogs/DeleteAccount";
+import { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -17,6 +17,7 @@ const GET_ACCOUNT = gql`
       id
       account_name
       account_type
+      account_number
       account_balance
       currency_code
       created_at
@@ -37,6 +38,13 @@ const Account = () => {
   const [isDelete, setIsDelete] = useState(false);
 
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const checkAuth = () => {
+    if (isLoggedIn == false) {
+      navigate("/app/signin");
+    }
+  };
 
   const showError = (error) => {
     toast.current.show({
@@ -77,6 +85,10 @@ const Account = () => {
     },
   ];
 
+  useEffect(() => {
+    checkAuth();
+  }, [isLoggedIn]);
+
   return (
     <div className="page">
       {data ? (
@@ -114,6 +126,10 @@ const Account = () => {
               {data.getAccount.account_balance.toLocaleString()}
             </p>
             <p className="text-lg">
+              <span className="font-semibold">Account number:</span>{" "}
+              {data.getAccount.account_number}
+            </p>
+            <p className="text-lg">
               <span className="font-semibold">Currency code:</span>{" "}
               {data.getAccount.currency_code}
             </p>
@@ -127,7 +143,10 @@ const Account = () => {
             </p>
           </div>
           <hr className="my-4" />
-          <Transactions id={data.getAccount.id} />
+          <Transactions
+            id={data.getAccount.id}
+            currency={data.getAccount.currency_code}
+          />
         </>
       ) : (
         <>
