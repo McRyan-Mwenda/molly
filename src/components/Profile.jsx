@@ -40,11 +40,21 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className="page">
       {data ? (
         <>
           <div className="border rounded-md shadow-md p-4 bg-gray-50 text-lg">
-            <p className="text-2xl mb-2">User & profile information</p>
+            <div className="flex justify-between items-center mb-2">
+              <p className="text-2xl">User & profile information</p>
+              <button
+                className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                <i className="bi bi-arrow-left-short"></i> Back
+              </button>
+            </div>
             <hr className="mb-2" />
             <p>
               <span className="font-semibold">Email:</span>{" "}
@@ -83,15 +93,13 @@ const Profile = () => {
             </p>
             <p>
               <span className="font-semibold">Created on:</span>{" "}
-              {moment
-                .unix(data.getProfile.created_at)
-                .format("YYYY-MM-DD HH:mm:ss")}
+              {moment.unix(data.getProfile.created_at).format("YYYY-MM-DD")}
             </p>
           </div>
         </>
       ) : (
         <>
-          <div className="text-center my-40">
+          <div className="text-center my-56">
             <span className="loader"></span>
           </div>
         </>

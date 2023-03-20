@@ -1,10 +1,11 @@
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { signOut } from "../../reducers/auth";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
-import { setNotification } from "../../reducers/notifications";
 
 const UPDATE_USER = gql`
   mutation (
@@ -45,8 +46,19 @@ const GET_PROFILE = gql`
   }
 `;
 
-const EditProfile = ({ epVisible, epSetVisible }) => {
+const EditProfile = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
+
+  const toast = useRef(null);
+
+  const showError = (error) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: `${error.message}`,
+      life: 3000,
+    });
+  };
 
   const [updateUser, { data, loading, error }] = useMutation(UPDATE_USER, {
     refetchQueries: [{ query: GET_PROFILE }],
@@ -54,13 +66,6 @@ const EditProfile = ({ epVisible, epSetVisible }) => {
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: "User has been updated successfully.",
-        type: "success",
-      })
-    );
-    epSetVisible(false);
     dispatch(signOut());
   }
 
@@ -70,20 +75,15 @@ const EditProfile = ({ epVisible, epSetVisible }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `${error.message}`,
-        type: "error",
-      })
-    );
+    showError(error);
   }
 
   return (
     <Dialog
       header="Edit your profile"
-      visible={epVisible}
+      visible={isVisible}
       style={{ width: "50vw" }}
-      onHide={() => epSetVisible(false)}
+      onHide={() => setIsVisible(false)}
       className="page-fonts"
     >
       <form
@@ -162,6 +162,10 @@ const EditProfile = ({ epVisible, epSetVisible }) => {
           to login again.
         </p>
       </form>
+
+      {/* notification */}
+      <Toast ref={toast} />
+      {/* notification */}
     </Dialog>
   );
 };

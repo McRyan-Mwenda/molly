@@ -1,14 +1,19 @@
-import { useRef } from "react";
 import { Menu } from "primereact/menu";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
 import { Avatar } from "primereact/avatar";
 import { signOut } from "../../reducers/auth";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import EditProfile from "../dialogs/EditProfile";
 
 const Navbar = () => {
   const menu = useRef(null);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const username = useSelector((state) => state.auth.username);
@@ -28,9 +33,14 @@ const Navbar = () => {
       label: "Options",
       items: [
         {
+          label: "View profile",
+          icon: "pi pi-info-circle",
+          command: () => navigate("/app/dashboard/profile"),
+        },
+        {
           label: "Update",
           icon: "pi pi-refresh",
-          command: () => {},
+          command: () => setIsVisible(true),
         },
         {
           label: "Log out",
@@ -105,6 +115,10 @@ const Navbar = () => {
           </>
         )}
       </div>
+
+      {/* update user */}
+      <EditProfile isVisible={isVisible} setIsVisible={setIsVisible} />
+      {/* update user */}
     </div>
   );
 };

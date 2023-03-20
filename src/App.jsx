@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/nav/Navbar";
 import Footer from "./components/nav/Footer";
 import Account from "./components/Account";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/app/signin" element={<Signin />} />
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/dashboard" element={<Dashboard />} />
+        <Route path="/app/dashboard/profile" element={<Profile />} />
         <Route path="/app/dashboard/account/:id" element={<Account />} />
       </Routes>
       {/* routes */}
