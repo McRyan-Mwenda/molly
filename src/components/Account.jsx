@@ -1,12 +1,14 @@
 import moment from "moment";
-import { useRef } from "react";
+import PageTitle from "../title";
 import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
 import Transactions from "./Transactions";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
+import EditAccount from "./dialogs/EditAccount";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -15,6 +17,7 @@ const GET_ACCOUNT = gql`
       account_name
       account_type
       account_balance
+      currency_code
       created_at
       updated_at
     }
@@ -24,8 +27,12 @@ const GET_ACCOUNT = gql`
 const Account = () => {
   const { id } = useParams();
 
+  PageTitle(`Account | ID: ${id}`);
+
   const toast = useRef(null);
   const menu = useRef(null);
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,25 +64,14 @@ const Account = () => {
 
   const items = [
     {
-      label: "Add",
-      icon: "pi pi-pencil",
-      command: () => {},
-    },
-    {
       label: "Update",
       icon: "pi pi-refresh",
-      command: () => {},
+      command: () => setIsVisible(true),
     },
     {
       label: "Delete",
       icon: "pi pi-trash",
-      command: () => {
-        toast.current.show({
-          severity: "error",
-          summary: "Delete",
-          detail: "Data Deleted",
-        });
-      },
+      command: () => {},
     },
   ];
 
@@ -91,7 +87,7 @@ const Account = () => {
                   onClick={(e) => menu.current.toggle(e)}
                   className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow mr-4"
                 >
-                  Actions
+                  <i class="bi bi-list"></i> Menu
                 </button>
                 <Menu model={items} popup ref={menu} />
               </div>
@@ -116,6 +112,10 @@ const Account = () => {
               {data.getAccount.account_balance.toLocaleString()}
             </p>
             <p className="text-lg">
+              <span className="font-semibold">Currency code:</span>{" "}
+              {data.getAccount.currency_code}
+            </p>
+            <p className="text-lg">
               <span className="font-semibold">Created on:</span>{" "}
               {moment.unix(data.getAccount.created_at).format("YYYY-MM-DD")}
             </p>
@@ -125,9 +125,6 @@ const Account = () => {
             </p>
           </div>
           <hr className="my-4" />
-          <h1 className="text-2xl mb-4 font-light">
-            Account transaction history
-          </h1>
           <Transactions id={data.getAccount.id} />
         </>
       ) : (
@@ -141,6 +138,16 @@ const Account = () => {
       {/* notification */}
       <Toast ref={toast} />
       {/* notification */}
+
+      {/* update account */}
+      {data && (
+        <EditAccount
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
+          id={data.getAccount.id}
+        />
+      )}
+      {/* update account */}
     </div>
   );
 };

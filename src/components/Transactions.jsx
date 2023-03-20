@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import PageTitle from "../title";
+import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Column } from "primereact/column";
@@ -26,9 +26,9 @@ const GET_TRANSACTION = gql`
 `;
 
 const Transactions = ({ id }) => {
-  PageTitle(`Account: ${id}`);
 
   const toast = useRef(null);
+  const menu = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -71,11 +71,46 @@ const Transactions = ({ id }) => {
     showError(error);
   }
 
+  const items = [
+    {
+      label: "Add",
+      icon: "pi pi-pencil",
+      command: () => {},
+    },
+    {
+      label: "Update",
+      icon: "pi pi-refresh",
+      command: () => {},
+    },
+    {
+      label: "Delete",
+      icon: "pi pi-trash",
+      command: () => {},
+    },
+  ];
+
   return (
     <div>
       {data ? (
         <>
-          <DataTable value={myData} tableStyle={{ minWidth: "50rem" }} className="page-fonts">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-light">Account transaction history</h1>
+            <div>
+              <button
+                onClick={(e) => menu.current.toggle(e)}
+                className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
+              >
+                <i class="bi bi-list"></i> Menu
+              </button>
+              <Menu model={items} popup ref={menu} />
+            </div>
+          </div>
+          {/* <hr className="my-4" /> */}
+          <DataTable
+            value={myData}
+            tableStyle={{ minWidth: "50rem" }}
+            className="page-fonts"
+          >
             <Column
               sortable
               field="transaction_type"

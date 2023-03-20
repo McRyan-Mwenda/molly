@@ -76,10 +76,11 @@ const Navbar = () => {
       <div className="flex">
         {isLoggedIn ? (
           <>
-            <div className="flex justify-center flex-col items-center">
+            <div className="flex justify-center items-center">
+              <p className="mr-4 text-zinc-500">{username}</p>
               <Avatar
                 icon="pi pi-user"
-                className="cursor-pointer shadow border border-zinc-300"
+                className="shadow border border-zinc-300 cursor-pointer"
                 shape="circle"
                 label={username.charAt(0)}
                 onClick={(e) => menu.current.toggle(e)}

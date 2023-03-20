@@ -2,8 +2,7 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
-import { useDispatch, useSelector } from "react-redux";
-import { setNotification } from "../../reducers/notifications";
+import { useDispatch } from "react-redux";
 
 const UPDATE_ACCOUNT = gql`
   mutation (
@@ -28,9 +27,10 @@ const UPDATE_ACCOUNT = gql`
   }
 `;
 
-const GET_ALL_ACCOUNTS = gql`
-  query {
-    getAllAccounts {
+const GET_ACCOUNT = gql`
+  query ($id: ID!) {
+    getAccount(id: $id) {
+      id
       account_name
       account_type
       account_balance
@@ -41,25 +41,18 @@ const GET_ALL_ACCOUNTS = gql`
   }
 `;
 
-const EditAccount = ({ eaVisible, eaSetVisible }) => {
+const EditAccount = ({ isVisible, setIsVisible, id }) => {
   const dispatch = useDispatch();
-  const myAccounts = useSelector((state) => state.account.userAccounts);
 
   const [updateAccount, { data, loading, error }] = useMutation(
     UPDATE_ACCOUNT,
     {
-      refetchQueries: [{ query: GET_ALL_ACCOUNTS }],
+      refetchQueries: [{ query: GET_ACCOUNT, variables: { id: id } }],
     }
   );
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `Updated successful: ${data.updateAccount.account_name}`,
-        type: "success",
-      })
-    );
   }
 
   if (loading) {
@@ -68,20 +61,14 @@ const EditAccount = ({ eaVisible, eaSetVisible }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `${error.message}`,
-        type: "error",
-      })
-    );
   }
 
   return (
     <Dialog
       header="Edit an account"
-      visible={eaVisible}
+      visible={isVisible}
       style={{ width: "50vw" }}
-      onHide={() => eaSetVisible(false)}
+      onHide={() => setIsVisible(false)}
       className="page-fonts"
     >
       <form
@@ -90,7 +77,7 @@ const EditAccount = ({ eaVisible, eaSetVisible }) => {
 
           updateAccount({
             variables: {
-              id: e.target.account_id.value,
+              id: id,
               account_name: e.target.account_name.value,
               account_type: e.target.account_type.value,
               account_balance: parseFloat(e.target.account_balance.value),
@@ -99,31 +86,6 @@ const EditAccount = ({ eaVisible, eaSetVisible }) => {
           });
         }}
       >
-        <div className="mb-2">
-          <label htmlFor="account_id" id="account_id">
-            Account to modify
-          </label>
-          <select
-            name="account_id"
-            id="account_id"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          >
-            <option selected disabled className="bg-gray-50 text-gray-400">
-              Select from list
-            </option>
-            {myAccounts.map((this_account, index) => {
-              const list = (
-                <>
-                  <option value={this_account.id} key={index}>
-                    {this_account.name}
-                  </option>
-                </>
-              );
-
-              return list;
-            })}
-          </select>
-        </div>
         <div className="mb-2">
           <label htmlFor="account_name" id="account_name">
             Account name
