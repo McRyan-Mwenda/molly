@@ -1,5 +1,6 @@
 import moment from "moment";
 import { useRef } from "react";
+import { Menu } from "primereact/menu";
 import { Toast } from "primereact/toast";
 import Transactions from "./Transactions";
 import { useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ const Account = () => {
   const { id } = useParams();
 
   const toast = useRef(null);
+  const menu = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -53,20 +55,55 @@ const Account = () => {
     showError(error);
   }
 
+  const items = [
+    {
+      label: "Add",
+      icon: "pi pi-pencil",
+      command: () => {},
+    },
+    {
+      label: "Update",
+      icon: "pi pi-refresh",
+      command: () => {},
+    },
+    {
+      label: "Delete",
+      icon: "pi pi-trash",
+      command: () => {
+        toast.current.show({
+          severity: "error",
+          summary: "Delete",
+          detail: "Data Deleted",
+        });
+      },
+    },
+  ];
+
   return (
     <div className="page">
       {data ? (
         <>
           <div className="flex justify-between items-center">
             <h1 className="text-3xl">{data.getAccount.account_name}</h1>
-            <button
-              className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
-              onClick={() => {
-                window.history.back();
-              }}
-            >
-              <i className="bi bi-arrow-left-short"></i> Back
-            </button>
+            <div className="flex justify-between items-center">
+              <div>
+                <button
+                  onClick={(e) => menu.current.toggle(e)}
+                  className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow mr-4"
+                >
+                  Actions
+                </button>
+                <Menu model={items} popup ref={menu} />
+              </div>
+              <button
+                className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                <i className="bi bi-arrow-left-short"></i> Back
+              </button>
+            </div>
           </div>
           <div>
             <hr className="my-4" />
@@ -88,7 +125,9 @@ const Account = () => {
             </p>
           </div>
           <hr className="my-4" />
-          <h1 className="text-2xl mb-4 font-light">Account transaction history</h1>
+          <h1 className="text-2xl mb-4 font-light">
+            Account transaction history
+          </h1>
           <Transactions id={data.getAccount.id} />
         </>
       ) : (

@@ -75,7 +75,7 @@ const Transactions = ({ id }) => {
     <div>
       {data ? (
         <>
-          <DataTable value={myData} tableStyle={{ minWidth: "50rem" }}>
+          <DataTable value={myData} tableStyle={{ minWidth: "50rem" }} className="page-fonts">
             <Column
               sortable
               field="transaction_type"

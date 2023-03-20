@@ -1,9 +1,10 @@
+import { useRef } from "react";
+import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
-import { setNotification } from "../../reducers/notifications";
 
 const CREATE_ACCOUNT = gql`
   mutation (
@@ -29,18 +30,26 @@ const CREATE_ACCOUNT = gql`
 const GET_ALL_ACCOUNTS = gql`
   query {
     getAllAccounts {
+      id
       account_name
       account_type
-      account_balance
-      currency_code
-      created_at
-      updated_at
     }
   }
 `;
 
-const NewAccount = ({ naVisible, naSetVisible }) => {
+const NewAccount = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
+
+  const toast = useRef(null);
+
+  const showError = (error) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: `${error.message}`,
+      life: 3000,
+    });
+  };
 
   const [createAccount, { data, loading, error }] = useMutation(
     CREATE_ACCOUNT,
@@ -51,12 +60,6 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `Action successful: ${data.createAccount.account_name}`,
-        type: "success",
-      })
-    );
   }
 
   if (loading) {
@@ -65,20 +68,15 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      setNotification({
-        message: `${error.message}`,
-        type: "error",
-      })
-    );
+    showError(error);
   }
 
   return (
     <Dialog
       header="Add new account"
-      visible={naVisible}
+      visible={isVisible}
       style={{ width: "50vw" }}
-      onHide={() => naSetVisible(false)}
+      onHide={() => setIsVisible(false)}
       className="page-fonts"
     >
       <form
@@ -168,6 +166,10 @@ const NewAccount = ({ naVisible, naSetVisible }) => {
           />
         </div>
       </form>
+
+      {/* notification */}
+      <Toast ref={toast} />
+      {/* notification */}
     </Dialog>
   );
 };

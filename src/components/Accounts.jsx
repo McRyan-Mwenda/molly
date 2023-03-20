@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
+import NewAccount from "./dialogs/NewAccount";
 
 const GET_ALL_ACCOUNTS = gql`
   query {
@@ -16,6 +19,8 @@ const GET_ALL_ACCOUNTS = gql`
 
 const Accounts = () => {
   const dispatch = useDispatch();
+
+  const [isVisible, setIsVisible] = useState(false);
 
   const { loading, error, data } = useQuery(GET_ALL_ACCOUNTS);
 
@@ -82,10 +87,15 @@ const Accounts = () => {
         label="Add new account"
         security="primary"
         aria-label="Filter"
-        className="hover:shadow-md float-right"
+        className="hover:shadow-md"
         outlined
+        onClick={() => setIsVisible(true)}
       />
       {/* add button */}
+
+      {/* add account */}
+      <NewAccount isVisible={isVisible} setIsVisible={setIsVisible} />
+      {/* add account */}
     </div>
   );
 };
