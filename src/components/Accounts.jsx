@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Button } from "primereact/button";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 
@@ -74,6 +75,17 @@ const Accounts = () => {
           )}
         </>
       )}
+
+      {/* add button */}
+      <Button
+        icon="pi pi-plus"
+        label="Add new account"
+        security="primary"
+        aria-label="Filter"
+        className="hover:shadow-md float-right"
+        outlined
+      />
+      {/* add button */}
     </div>
   );
 };

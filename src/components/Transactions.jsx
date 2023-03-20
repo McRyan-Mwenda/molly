@@ -79,7 +79,7 @@ const Transactions = ({ id }) => {
             <Column
               sortable
               field="transaction_type"
-              header="Transaction type"
+              header="Transaction Type"
             ></Column>
             <Column
               sortable
@@ -94,15 +94,14 @@ const Transactions = ({ id }) => {
             <Column
               sortable
               field="currency_code"
-              header="Currency code"
+              header="Currency Code"
             ></Column>
-            <Column sortable field="description" header="Description"></Column>
             <Column
               sortable
               field="category_name"
-              header="QuantiCategory"
+              header="Transaction Category"
             ></Column>
-            <Column sortable field="created_at" header="Created on"></Column>
+            <Column sortable field="description" header="Description"></Column>
             <Column sortable field="updated_at" header="Updated on"></Column>
           </DataTable>
         </>

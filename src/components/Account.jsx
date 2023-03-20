@@ -76,23 +76,19 @@ const Account = () => {
             </p>
             <p className="text-lg">
               <span className="font-semibold">Account balance:</span>{" "}
-              {data.getAccount.account_balance}
+              {data.getAccount.account_balance.toLocaleString()}
             </p>
             <p className="text-lg">
               <span className="font-semibold">Created on:</span>{" "}
-              {moment
-                .unix(data.getAccount.created_at)
-                .format("YYYY-MM-DD HH:mm:ss")}
+              {moment.unix(data.getAccount.created_at).format("YYYY-MM-DD")}
             </p>
             <p className="text-lg">
               <span className="font-semibold">Updated on:</span>{" "}
-              {moment
-                .unix(data.getAccount.updated_at)
-                .format("YYYY-MM-DD HH:mm:ss")}
+              {moment.unix(data.getAccount.updated_at).format("YYYY-MM-DD")}
             </p>
           </div>
           <hr className="my-4" />
-          <h1 className="text-2xl mb-4 font-semibold">Account transaction history</h1>
+          <h1 className="text-2xl mb-4 font-light">Account transaction history</h1>
           <Transactions id={data.getAccount.id} />
         </>
       ) : (
