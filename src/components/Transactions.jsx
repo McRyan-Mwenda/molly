@@ -9,6 +9,7 @@ import { setIsLoading } from "../reducers/loading";
 import { InputSwitch } from "primereact/inputswitch";
 import NewTransaction from "./dialogs/NewTransaction";
 import EditTransaction from "./dialogs/EditTransaction";
+import DeleteTransaction from "./dialogs/DeleteTransaction";
 
 const GET_TRANSACTION = gql`
   query ($id: ID!) {
@@ -205,6 +206,12 @@ const Transactions = ({ id, currency }) => {
       {/* edit transaction */}
 
       {/* delete transaction */}
+      <DeleteTransaction
+        account_id={id}
+        selectedProduct={selectedProduct}
+        isDelete={isDelete}
+        setIsDelete={setIsDelete}
+      />
       {/* delete transaction */}
 
       {/* notification */}
