@@ -157,7 +157,7 @@ const Signup = () => {
               type="submit"
               label="Submit"
               severity="success"
-              className="w-full"
+              className="w-full page-fonts"
               loading={loading}
             />
           </div>

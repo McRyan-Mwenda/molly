@@ -7,8 +7,8 @@ import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
 
 const DELETE_TRANSACTION = gql`
-  mutation ($id: ID!) {
-    deleteTransaction(id: $id)
+  mutation ($id: ID!, $account_id: ID!) {
+    deleteTransaction(id: $id, account_id: $account_id)
   }
 `;
 
@@ -104,6 +104,7 @@ const DeleteTransaction = ({
           deleteTransaction({
             variables: {
               id: selectedProduct.id,
+              account_id: account_id,
             },
           });
           setIsDelete(false);
