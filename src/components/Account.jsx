@@ -101,7 +101,7 @@ const Account = () => {
                   onClick={(e) => menu.current.toggle(e)}
                   className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow mr-4"
                 >
-                  <i class="bi bi-list"></i> Menu
+                  <i className="bi bi-list"></i> Menu
                 </button>
                 <Menu model={items} popup ref={menu} />
               </div>

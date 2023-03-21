@@ -6,11 +6,14 @@ import { Column } from "primereact/column";
 import { useQuery, gql } from "@apollo/client";
 import { DataTable } from "primereact/datatable";
 import { setIsLoading } from "../reducers/loading";
+import { InputSwitch } from "primereact/inputswitch";
 import NewTransaction from "./dialogs/NewTransaction";
+import EditTransaction from "./dialogs/EditTransaction";
 
 const GET_TRANSACTION = gql`
   query ($id: ID!) {
     getTransactionsByAccount(id: $id) {
+      id
       transaction_type
       transaction_amount
       currency_code
@@ -34,6 +37,9 @@ const Transactions = ({ id, currency }) => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
 
+  const [rowClick, setRowClick] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   const dispatch = useDispatch();
 
   const showError = (error) => {
@@ -54,6 +60,7 @@ const Transactions = ({ id, currency }) => {
   if (data) {
     dispatch(setIsLoading({ status: false }));
     myData = data.getTransactionsByAccount.map((transaction) => ({
+      id: transaction.id,
       transaction_type: transaction.transaction_type,
       transaction_amount: transaction.transaction_amount,
       currency_code: transaction.currency_code,
@@ -99,22 +106,38 @@ const Transactions = ({ id, currency }) => {
         <>
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-light">Account transaction history</h1>
-            <div>
-              <button
-                onClick={(e) => menu.current.toggle(e)}
-                className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
-              >
-                <i class="bi bi-list"></i> Menu
-              </button>
-              <Menu model={items} popup ref={menu} />
+            <div className="flex justify-between items-center mb-4">
+              <div className="mr-4">
+                <button
+                  onClick={(e) => menu.current.toggle(e)}
+                  className="text-blue-500 hover:text-blue-800 border border-zinc-300 hover:border-zinc-400 px-2 rounded-md bg-slate-50 hover:bg-slate-100 shadow"
+                >
+                  <i className="bi bi-list"></i> Menu
+                </button>
+                <Menu model={items} popup ref={menu} />
+              </div>
+              <InputSwitch
+                inputId="input-rowclick"
+                className="mr-2"
+                checked={rowClick}
+                onChange={(e) => setRowClick(e.value)}
+              />
+              <label htmlFor="input-rowclick">Row Click</label>
             </div>
           </div>
-          {/* <hr className="my-4" /> */}
           <DataTable
             value={myData}
             tableStyle={{ minWidth: "50rem" }}
             className="page-fonts"
+            selectionMode={rowClick ? null : "radiobutton"}
+            selection={selectedProduct}
+            onSelectionChange={(e) => setSelectedProduct(e.value)}
+            dataKey="id"
           >
+            <Column
+              selectionMode="single"
+              headerStyle={{ width: "3rem" }}
+            ></Column>
             <Column
               sortable
               field="transaction_type"
@@ -162,6 +185,13 @@ const Transactions = ({ id, currency }) => {
       {/* new transaction */}
 
       {/* edit transaction */}
+      <EditTransaction
+        account_id={id}
+        currency={currency}
+        selectedProduct={selectedProduct}
+        isUpdate={isUpdate}
+        setIsUpdate={setIsUpdate}
+      />
       {/* edit transaction */}
 
       {/* delete transaction */}
