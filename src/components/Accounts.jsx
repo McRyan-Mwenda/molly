@@ -86,7 +86,7 @@ const Accounts = () => {
         label="Add new account"
         security="primary"
         aria-label="Filter"
-        className="hover:shadow-md"
+        className="hover:shadow-md page-fonts"
         outlined
         onClick={() => setIsVisible(true)}
       />

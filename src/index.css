@@ -17,7 +17,7 @@ html {
   padding: 0 !important;
   margin: 0 !important;
   scroll-behavior: smooth !important;
-  font-family: "Raleway", sans-serif !important;
+  font-family: 'Quicksand', sans-serif !important;
 }
 
 .page {
@@ -30,7 +30,7 @@ html {
 }
 
 .page-fonts {
-  font-family: "Raleway", sans-serif !important;
+  font-family: 'Quicksand', sans-serif !important;
 }
 
 html::-webkit-scrollbar {
@@ -55,7 +55,7 @@ html::-webkit-scrollbar-thumb:active {
 
 #footer,
 #navbar {
-  font-family: "Josefin Sans", sans-serif !important;
+  font-family: 'Quicksand', sans-serif !important;
 }
 
 #navbar {

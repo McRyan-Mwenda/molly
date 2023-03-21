@@ -105,7 +105,14 @@ const Transactions = ({ id, currency }) => {
       {data ? (
         <>
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-light">Account transaction history</h1>
+            <h1 className="text-2xl font-light">
+              Account transaction history{" "}
+              <span className="text-sm text-zinc-500 font-semibold underline">
+                <span className="text-zinc-600">NOTE:</span> Select a row to be
+                able to <span className="text-blue-500">update</span> or{" "}
+                <span className="text-red-500">delete</span>!
+              </span>
+            </h1>
             <div className="flex justify-between items-center mb-4">
               <div className="mr-4">
                 <button
@@ -133,6 +140,9 @@ const Transactions = ({ id, currency }) => {
             selection={selectedProduct}
             onSelectionChange={(e) => setSelectedProduct(e.value)}
             dataKey="id"
+            paginator
+            rows={5}
+            rowsPerPageOptions={[5, 10, 25, 50]}
           >
             <Column
               selectionMode="single"
