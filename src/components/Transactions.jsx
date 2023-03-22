@@ -106,15 +106,15 @@ const Transactions = ({ id, currency }) => {
       {data ? (
         <>
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-2xl font-light">
-              Account transaction history{" "}
-              <span className="text-sm text-zinc-500 font-semibold underline">
+            <h1 className="text-2xl font-light flex justify-between items-center">
+              <span>Transaction history</span>{" "}
+              <span className="text-sm text-zinc-500 font-semibold underline ml-8">
                 <span className="text-zinc-600">NOTE:</span> Select a row to be
                 able to <span className="text-blue-500">update</span> or{" "}
                 <span className="text-red-500">delete</span>!
               </span>
             </h1>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center">
               <div className="mr-4">
                 <button
                   onClick={(e) => menu.current.toggle(e)}

@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const CREATE_ACCOUNT = gql`
   mutation (
@@ -42,26 +44,21 @@ const GET_ALL_ACCOUNTS = gql`
 const NewAccount = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
 
-  const toast = useRef(null);
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
-
-  const [createAccount, { data, loading, error }] = useMutation(
+  const [createAccount, { data: createAccountData, loading, error }] = useMutation(
     CREATE_ACCOUNT,
     {
       refetchQueries: [{ query: GET_ALL_ACCOUNTS }],
     }
   );
 
-  if (data) {
+  if (createAccountData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Account created successfully",
+      })
+    );
   }
 
   if (loading) {
@@ -70,7 +67,9 @@ const NewAccount = ({ isVisible, setIsVisible }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -84,6 +83,8 @@ const NewAccount = ({ isVisible, setIsVisible }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          dispatch(removeOldNotification());
 
           createAccount({
             variables: {
@@ -181,10 +182,6 @@ const NewAccount = ({ isVisible, setIsVisible }) => {
           />
         </div>
       </form>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </Dialog>
   );
 };

@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const UPDATE_TRANSACTION = gql`
   mutation (
@@ -84,29 +86,22 @@ const EditTransaction = ({
 }) => {
   const dispatch = useDispatch();
 
-  const toast = useRef(null);
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
-
-  const [updateTransaction, { data, loading, error }] = useMutation(
-    UPDATE_TRANSACTION,
-    {
+  const [updateTransaction, { data: updateTransactionData, loading, error }] =
+    useMutation(UPDATE_TRANSACTION, {
       refetchQueries: [
         { query: GET_TRANSACTION, variables: { id: account_id } },
         { query: GET_ACCOUNT, variables: { id: account_id } },
       ],
-    }
-  );
+    });
 
-  if (data) {
+  if (updateTransactionData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Transaction updated successfully",
+      })
+    );
   }
 
   if (loading) {
@@ -115,7 +110,9 @@ const EditTransaction = ({
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -129,6 +126,8 @@ const EditTransaction = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          dispatch(removeOldNotification());
 
           updateTransaction({
             variables: {
@@ -232,10 +231,6 @@ const EditTransaction = ({
           />
         </div>
       </form>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </Dialog>
   );
 };

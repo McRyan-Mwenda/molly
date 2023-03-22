@@ -21,11 +21,11 @@ const Accounts = () => {
 
   const [isVisible, setIsVisible] = useState(false);
 
-  const { loading, error, data } = useQuery(GET_ALL_ACCOUNTS);
+  const { loading, error, data: accountsData } = useQuery(GET_ALL_ACCOUNTS);
 
-  if (data) {
+  if (accountsData) {
     dispatch(setIsLoading({ status: false }));
-    // console.log(data.getAllAccounts);
+    // console.log(accountsData.getAllAccounts);
   }
 
   if (loading) {
@@ -38,8 +38,8 @@ const Accounts = () => {
 
   return (
     <div>
-      {data ? (
-        data.getAllAccounts.map((account, index) => {
+      {accountsData ? (
+        accountsData.getAllAccounts.map((account, index) => {
           const list = (
             <>
               <Link to={`/app/dashboard/account/${account.id}`} key={index}>
@@ -64,9 +64,9 @@ const Accounts = () => {
           </div>
         </>
       )}
-      {data && (
+      {accountsData && (
         <>
-          {!data.getAllAccounts && (
+          {!accountsData.getAllAccounts && (
             <div className="text-center my-40">
               <h1 className="text-3xl">
                 Hmm... It seems you do not have any accounts 🤔

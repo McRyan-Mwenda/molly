@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../reducers/notifications";
 
 import PageTitle from "../title";
 
@@ -36,24 +38,19 @@ const CREATE_USER = gql`
 const Signup = () => {
   PageTitle("Signup");
 
-  const toast = useRef(null);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
 
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "User account created successfully",
+      })
+    );
     navigate("/app/signin");
   }
 
@@ -63,7 +60,9 @@ const Signup = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -73,6 +72,8 @@ const Signup = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+
+            dispatch(removeOldNotification());
 
             createUser({
               variables: {
@@ -174,10 +175,6 @@ const Signup = () => {
         .
       </p>
       <br />
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </div>
   );
 };

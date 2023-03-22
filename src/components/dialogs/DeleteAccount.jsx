@@ -1,11 +1,13 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const DELETE_ACCOUNT = gql`
   mutation ($id: ID!) {
@@ -24,28 +26,23 @@ const GET_ALL_ACCOUNTS = gql`
 `;
 
 const DeleteAccount = ({ isVisible, setIsVisible, id }) => {
-  const toast = useRef(null);
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
+  const [deleteAccount, { data: deleteAccountData, loading, error }] =
+    useMutation(DELETE_ACCOUNT, {
+      refetchQueries: [{ query: GET_ALL_ACCOUNTS }],
     });
-  };
 
-  const [deleteAccount, { data, loading, error }] = useMutation(
-    DELETE_ACCOUNT,
-    { refetchQueries: [{ query: GET_ALL_ACCOUNTS }] }
-  );
-
-  if (data) {
+  if (deleteAccountData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Account deleted successfully",
+      })
+    );
     navigate("/app/dashboard");
   }
 
@@ -55,7 +52,9 @@ const DeleteAccount = ({ isVisible, setIsVisible, id }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   const footerContent = (
@@ -71,13 +70,15 @@ const DeleteAccount = ({ isVisible, setIsVisible, id }) => {
         label="Delete"
         icon="pi pi-check"
         severity="danger"
-        onClick={() =>
+        onClick={() => {
+          dispatch(removeOldNotification());
+
           deleteAccount({
             variables: {
               id: id,
             },
-          })
-        }
+          });
+        }}
         autoFocus
       />
     </div>
@@ -97,10 +98,6 @@ const DeleteAccount = ({ isVisible, setIsVisible, id }) => {
           Are you sure you want to delete this account?
         </p>
       </Dialog>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </div>
   );
 };

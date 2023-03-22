@@ -1,4 +1,3 @@
-import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
 import { signIn } from "../reducers/auth";
 import { useDispatch } from "react-redux";
@@ -6,6 +5,10 @@ import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../reducers/notifications";
 
 import PageTitle from "../title";
 
@@ -20,21 +23,10 @@ const USER_AUTH = gql`
 const Signin = () => {
   PageTitle("Signin");
 
-  const toast = useRef(null);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [userName, setUserName] = useState("");
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
 
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
@@ -54,7 +46,9 @@ const Signin = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -64,6 +58,8 @@ const Signin = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+
+            dispatch(removeOldNotification());
 
             tokenAuth({
               variables: {
@@ -119,10 +115,6 @@ const Signin = () => {
         .
       </p>
       <br />
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </div>
   );
 };

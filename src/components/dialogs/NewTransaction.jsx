@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const NEW_TRANSACTION = gql`
   mutation (
@@ -76,29 +78,22 @@ const GET_ACCOUNT = gql`
 const NewTransaction = ({ id, currency, isNew, setIsNew }) => {
   const dispatch = useDispatch();
 
-  const toast = useRef(null);
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
-
-  const [createTransaction, { data, loading, error }] = useMutation(
-    NEW_TRANSACTION,
-    {
+  const [createTransaction, { data: createTransactionData, loading, error }] =
+    useMutation(NEW_TRANSACTION, {
       refetchQueries: [
         { query: GET_TRANSACTION, variables: { id: id } },
         { query: GET_ACCOUNT, variables: { id: id } },
       ],
-    }
-  );
+    });
 
-  if (data) {
+  if (createTransactionData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Transaction created successfully",
+      })
+    );
   }
 
   if (loading) {
@@ -107,7 +102,9 @@ const NewTransaction = ({ id, currency, isNew, setIsNew }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -121,6 +118,8 @@ const NewTransaction = ({ id, currency, isNew, setIsNew }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          dispatch(removeOldNotification());
 
           createTransaction({
             variables: {
@@ -223,10 +222,6 @@ const NewTransaction = ({ id, currency, isNew, setIsNew }) => {
           />
         </div>
       </form>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </Dialog>
   );
 };

@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const DELETE_TRANSACTION = gql`
   mutation ($id: ID!, $account_id: ID!) {
@@ -53,29 +55,22 @@ const DeleteTransaction = ({
 }) => {
   const dispatch = useDispatch();
 
-  const toast = useRef(null);
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
-
-  const [deleteTransaction, { data, loading, error }] = useMutation(
-    DELETE_TRANSACTION,
-    {
+  const [deleteTransaction, { data: deleteTransactionData, loading, error }] =
+    useMutation(DELETE_TRANSACTION, {
       refetchQueries: [
         { query: GET_TRANSACTION, variables: { id: account_id } },
         { query: GET_ACCOUNT, variables: { id: account_id } },
       ],
-    }
-  );
+    });
 
-  if (data) {
+  if (deleteTransactionData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Transaction deleted successfully",
+      })
+    );
   }
 
   if (loading) {
@@ -84,7 +79,9 @@ const DeleteTransaction = ({
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   const footerContent = (
@@ -101,12 +98,15 @@ const DeleteTransaction = ({
         icon="pi pi-check"
         severity="danger"
         onClick={() => {
+          dispatch(removeOldNotification());
+
           deleteTransaction({
             variables: {
               id: selectedProduct.id,
               account_id: account_id,
             },
           });
+
           setIsDelete(false);
         }}
         autoFocus
@@ -128,10 +128,6 @@ const DeleteTransaction = ({
           Are you sure you want to delete this transaction?
         </p>
       </Dialog>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </div>
   );
 };

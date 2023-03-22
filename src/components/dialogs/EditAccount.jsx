@@ -1,8 +1,12 @@
+import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
-import { useDispatch } from "react-redux";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const UPDATE_ACCOUNT = gql`
   mutation (
@@ -47,15 +51,19 @@ const GET_ACCOUNT = gql`
 const EditAccount = ({ isVisible, setIsVisible, id }) => {
   const dispatch = useDispatch();
 
-  const [updateAccount, { data, loading, error }] = useMutation(
-    UPDATE_ACCOUNT,
-    {
+  const [updateAccount, { data: updateAccountData, loading, error }] =
+    useMutation(UPDATE_ACCOUNT, {
       refetchQueries: [{ query: GET_ACCOUNT, variables: { id: id } }],
-    }
-  );
+    });
 
-  if (data) {
+  if (updateAccountData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Account updated successfully",
+      })
+    );
   }
 
   if (loading) {
@@ -64,6 +72,9 @@ const EditAccount = ({ isVisible, setIsVisible, id }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -77,6 +88,8 @@ const EditAccount = ({ isVisible, setIsVisible, id }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          dispatch(removeOldNotification());
 
           updateAccount({
             variables: {

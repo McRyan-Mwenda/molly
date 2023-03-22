@@ -1,11 +1,13 @@
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { signOut } from "../../reducers/auth";
 import { useMutation, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
+import {
+  createNewNotification,
+  removeOldNotification,
+} from "../../reducers/notifications";
 
 const UPDATE_USER = gql`
   mutation (
@@ -49,23 +51,21 @@ const GET_PROFILE = gql`
 const EditProfile = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
 
-  const toast = useRef(null);
+  const [updateUser, { data: updateUserData, loading, error }] = useMutation(
+    UPDATE_USER,
+    {
+      refetchQueries: [{ query: GET_PROFILE }],
+    }
+  );
 
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
-
-  const [updateUser, { data, loading, error }] = useMutation(UPDATE_USER, {
-    refetchQueries: [{ query: GET_PROFILE }],
-  });
-
-  if (data) {
+  if (updateUserData) {
     dispatch(setIsLoading({ status: false }));
+    dispatch(
+      createNewNotification({
+        type: "success",
+        message: "Profile updated successfully",
+      })
+    );
     dispatch(signOut());
   }
 
@@ -75,7 +75,9 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
+    dispatch(
+      createNewNotification({ type: "error", message: `${error.message}` })
+    );
   }
 
   return (
@@ -89,6 +91,8 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+
+          dispatch(removeOldNotification());
 
           updateUser({
             variables: {
@@ -162,10 +166,6 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
           to login again.
         </p>
       </form>
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </Dialog>
   );
 };
