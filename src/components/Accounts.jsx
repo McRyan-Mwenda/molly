@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
+import NewAccount from "./dialogs/NewAccount";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import NewAccount from "./dialogs/NewAccount";
 
 const GET_ALL_ACCOUNTS = gql`
   query {

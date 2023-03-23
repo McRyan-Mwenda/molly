@@ -9,6 +9,7 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
 import Contacts from "./pages/Contacts";
+import Budget from "./components/Budget";
 import Dashboard from "./pages/Dashboard";
 import Account from "./components/Account";
 import Profile from "./components/Profile";
@@ -93,6 +94,7 @@ const App = () => {
         <Route path="/app/signup" element={<Signup />} />
         <Route path="/app/dashboard" element={<Dashboard />} />
         <Route path="/app/dashboard/profile" element={<Profile />} />
+        <Route path="/app/dashboard/budget/:id" element={<Budget />} />
         <Route path="/app/dashboard/account/:id" element={<Account />} />
       </Routes>
       {/* routes */}
