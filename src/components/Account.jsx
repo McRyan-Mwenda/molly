@@ -9,6 +9,7 @@ import { setIsLoading } from "../reducers/loading";
 import DeleteAccount from "./dialogs/DeleteAccount";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Reports from "./Reports";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -135,6 +136,8 @@ const Account = () => {
             id={data.getAccount.id}
             currency={data.getAccount.currency_code}
           />
+          <hr className="my-4" />
+          <Reports id={data.getAccount.id} />
         </>
       ) : (
         <>

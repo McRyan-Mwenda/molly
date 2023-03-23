@@ -49,7 +49,7 @@ const Budgets = () => {
           const list = (
             <>
               <Link to={`/app/dashboard/budget/${budget.id}`} key={index}>
-                <div className="border rounded-md hover:shadow-md bg-gray-50 p-4 mb-4 text-lg">
+                <div className="border rounded-md shadow hover:shadow-md bg-gray-50 p-4 mb-4 text-lg">
                   <div className="flex justify-between items-center mb-2">
                     <p className="text-2xl">{budget.budget_name}</p>
                     <p
