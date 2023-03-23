@@ -136,7 +136,6 @@ const Account = () => {
             id={data.getAccount.id}
             currency={data.getAccount.currency_code}
           />
-          <hr className="my-4" />
           <Reports id={data.getAccount.id} />
         </>
       ) : (

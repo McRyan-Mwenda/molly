@@ -1,5 +1,4 @@
 import { Menu } from "primereact/menu";
-import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Column } from "primereact/column";
@@ -31,7 +30,6 @@ const GET_TRANSACTION = gql`
 `;
 
 const Transactions = ({ id, currency }) => {
-  const toast = useRef(null);
   const menu = useRef(null);
 
   const [isNew, setIsNew] = useState(false);
@@ -42,15 +40,6 @@ const Transactions = ({ id, currency }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const dispatch = useDispatch();
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
-  };
 
   const { loading, error, data } = useQuery(GET_TRANSACTION, {
     variables: { id: id },
@@ -80,7 +69,6 @@ const Transactions = ({ id, currency }) => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
   }
 
   const items = [
@@ -217,10 +205,6 @@ const Transactions = ({ id, currency }) => {
         setIsDelete={setIsDelete}
       />
       {/* delete transaction */}
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
     </div>
   );
 };
