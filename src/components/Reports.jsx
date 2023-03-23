@@ -247,13 +247,11 @@ const Reports = ({ id }) => {
           data: [payable.length, receivable.length],
           backgroundColor: [
             documentStyle.getPropertyValue("--blue-500"),
-            documentStyle.getPropertyValue("--yellow-500"),
-            // documentStyle.getPropertyValue("--green-500"),
+            documentStyle.getPropertyValue("--green-500"),
           ],
           hoverBackgroundColor: [
             documentStyle.getPropertyValue("--blue-400"),
-            documentStyle.getPropertyValue("--yellow-400"),
-            // documentStyle.getPropertyValue("--green-400"),
+            documentStyle.getPropertyValue("--green-400"),
           ],
         },
       ],
@@ -289,11 +287,11 @@ const Reports = ({ id }) => {
       >
         <Chart type="line" data={lineData} options={lineOptions} />
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-center mt-8">
         <div
           className="p-4 mx-1 flex items-center"
           style={{
-            width: "50%",
+            width: "40%",
           }}
         >
           <Chart
@@ -304,9 +302,9 @@ const Reports = ({ id }) => {
           />
         </div>
         <div
-          className="p-4 mx-1 flex items-center"
+          className="px-4 pb-4 pt-20 mx-1 flex items-center"
           style={{
-            width: "50%",
+            width: "36.25%",
           }}
         >
           <Chart
