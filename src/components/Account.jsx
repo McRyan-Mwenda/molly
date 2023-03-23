@@ -1,7 +1,6 @@
 import moment from "moment";
 import PageTitle from "../title";
 import { Menu } from "primereact/menu";
-import { Toast } from "primereact/toast";
 import Transactions from "./Transactions";
 import { useParams } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
@@ -31,7 +30,6 @@ const Account = () => {
 
   PageTitle(`Account | ID: ${id}`);
 
-  const toast = useRef(null);
   const menu = useRef(null);
 
   const [isVisible, setIsVisible] = useState(false);
@@ -44,15 +42,6 @@ const Account = () => {
     if (isLoggedIn == false) {
       navigate("/app/signin");
     }
-  };
-
-  const showError = (error) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error",
-      detail: `${error.message}`,
-      life: 3000,
-    });
   };
 
   const { loading, error, data } = useQuery(GET_ACCOUNT, {
@@ -69,7 +58,6 @@ const Account = () => {
 
   if (error) {
     dispatch(setIsLoading({ status: false }));
-    showError(error);
   }
 
   const items = [
@@ -155,10 +143,6 @@ const Account = () => {
           </div>
         </>
       )}
-
-      {/* notification */}
-      <Toast ref={toast} />
-      {/* notification */}
 
       {/* update account */}
       {data && (

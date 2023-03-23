@@ -104,7 +104,7 @@ const App = () => {
       {/* footer */}
 
       {/* notification */}
-      <Toast ref={toast} />
+      <Toast position="bottom-right" ref={toast} />
       {/* notification */}
     </div>
   );

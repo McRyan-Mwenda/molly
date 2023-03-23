@@ -43,7 +43,7 @@ const Budgets = () => {
     <div>
       {allBudgetsData ? (
         allBudgetsData.getAllBudgets.map((budget, index) => {
-          const bg = budget.budget_is_active ? "#7dd3fc" : "#fca5a5";
+          const bg = budget.budget_is_active ? "#6ee7b7" : "#fca5a5";
           const budgetStatus = budget.budget_is_active ? "active" : "inactive";
 
           const list = (
@@ -52,12 +52,12 @@ const Budgets = () => {
                 <div className="border rounded-md hover:shadow-md bg-gray-50 p-4 mb-4 text-lg">
                   <div className="flex justify-between items-center mb-2">
                     <p className="text-2xl">{budget.budget_name}</p>
-                    <button
+                    <p
                       className="px-4 rounded-md border font-semibold text-white"
                       style={{ backgroundColor: bg }}
                     >
                       {budgetStatus}
-                    </button>
+                    </p>
                   </div>
                   <hr className="mb-2" />
                   <p>
