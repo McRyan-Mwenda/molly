@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -44,12 +45,12 @@ const GET_ALL_ACCOUNTS = gql`
 const NewAccount = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
 
-  const [createAccount, { data: createAccountData, loading, error }] = useMutation(
-    CREATE_ACCOUNT,
-    {
+  const thisform = useRef(null);
+
+  const [createAccount, { data: createAccountData, loading, error }] =
+    useMutation(CREATE_ACCOUNT, {
       refetchQueries: [{ query: GET_ALL_ACCOUNTS }],
-    }
-  );
+    });
 
   if (createAccountData) {
     dispatch(setIsLoading({ status: false }));
@@ -81,6 +82,7 @@ const NewAccount = ({ isVisible, setIsVisible }) => {
       className="page-fonts"
     >
       <form
+        ref={thisform}
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -95,6 +97,8 @@ const NewAccount = ({ isVisible, setIsVisible }) => {
               currency_code: e.target.currency_code.value,
             },
           });
+
+          thisform.current.reset();
         }}
       >
         <div className="mb-2">

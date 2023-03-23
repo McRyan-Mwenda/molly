@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -86,6 +87,8 @@ const EditTransaction = ({
 }) => {
   const dispatch = useDispatch();
 
+  const thisform = useRef(null);
+
   const [updateTransaction, { data: updateTransactionData, loading, error }] =
     useMutation(UPDATE_TRANSACTION, {
       refetchQueries: [
@@ -124,6 +127,7 @@ const EditTransaction = ({
       className="page-fonts"
     >
       <form
+        ref={thisform}
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -141,6 +145,8 @@ const EditTransaction = ({
               category: e.target.category.value,
             },
           });
+
+          thisform.current.reset();
         }}
       >
         <div className="mb-2">

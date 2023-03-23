@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -51,6 +52,8 @@ const GET_ACCOUNT = gql`
 const EditAccount = ({ isVisible, setIsVisible, id }) => {
   const dispatch = useDispatch();
 
+  const thisform = useRef(null);
+
   const [updateAccount, { data: updateAccountData, loading, error }] =
     useMutation(UPDATE_ACCOUNT, {
       refetchQueries: [{ query: GET_ACCOUNT, variables: { id: id } }],
@@ -86,6 +89,7 @@ const EditAccount = ({ isVisible, setIsVisible, id }) => {
       className="page-fonts"
     >
       <form
+        ref={thisform}
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -101,6 +105,8 @@ const EditAccount = ({ isVisible, setIsVisible, id }) => {
               currency_code: e.target.currency_code.value,
             },
           });
+
+          thisform.current.reset();
         }}
       >
         <div className="mb-2">

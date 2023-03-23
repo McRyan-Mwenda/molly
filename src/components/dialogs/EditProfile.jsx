@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -51,6 +52,8 @@ const GET_PROFILE = gql`
 const EditProfile = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
 
+  const thisform = useRef(null);
+
   const [updateUser, { data: updateUserData, loading, error }] = useMutation(
     UPDATE_USER,
     {
@@ -89,6 +92,7 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
       className="page-fonts"
     >
       <form
+        ref={thisform}
         onSubmit={(e) => {
           e.preventDefault();
 
@@ -102,6 +106,8 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
               last_name: e.target.last_name.value,
             },
           });
+
+          thisform.current.reset();
         }}
       >
         <div className="mb-2">
