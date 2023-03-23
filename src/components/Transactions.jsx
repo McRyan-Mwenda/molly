@@ -174,8 +174,12 @@ const Transactions = ({ id, currency }) => {
               field="category_name"
               header="Transaction Category"
             ></Column>
-            <Column sortable field="description" header="Description"></Column>
-            <Column sortable field="updated_at" header="Updated on"></Column>
+            <Column
+              sortable
+              field="description"
+              header="Transaction Description"
+            ></Column>
+            <Column sortable field="updated_at" header="Last Updated"></Column>
           </DataTable>
         </>
       ) : (
