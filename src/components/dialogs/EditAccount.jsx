@@ -26,10 +26,7 @@ const UPDATE_ACCOUNT = gql`
       account_balance: $account_balance
       currency_code: $currency_code
     ) {
-      account_name
-      account_type
-      account_balance
-      currency_code
+      id
     }
   }
 `;

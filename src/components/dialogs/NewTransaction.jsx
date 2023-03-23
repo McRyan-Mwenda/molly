@@ -28,17 +28,7 @@ const NEW_TRANSACTION = gql`
       description: $description
       category: $category
     ) {
-      transaction_type
-      transaction_amount
-      currency_code
-      transaction_date
-      description
-      created_at
-      updated_at
-      category {
-        category_name
-        category_description
-      }
+      id
     }
   }
 `;

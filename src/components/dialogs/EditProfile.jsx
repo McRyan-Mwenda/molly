@@ -23,10 +23,7 @@ const UPDATE_USER = gql`
       first_name: $first_name
       last_name: $last_name
     ) {
-      username
-      email
-      first_name
-      last_name
+      id
     }
   }
 `;

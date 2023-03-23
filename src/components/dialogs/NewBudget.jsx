@@ -23,15 +23,6 @@ const CREATE_BUDGET = gql`
       category: $category
     ) {
       id
-      budget_name
-      budget_description
-      budget_is_active
-      budget_amount
-      category {
-        category_name
-      }
-      created_at
-      updated_at
     }
   }
 `;

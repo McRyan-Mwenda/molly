@@ -183,8 +183,8 @@ const Budget = () => {
       {/* delete budget */}
       {data && (
         <DeleteBudget
-          isVisible={isDelete}
-          setIsVisible={setIsDelete}
+          isDelete={isDelete}
+          setIsDelete={setIsDelete}
           id={data.getBudget.id}
         />
       )}
