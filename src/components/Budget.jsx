@@ -2,11 +2,13 @@ import moment from "moment";
 import PageTitle from "../title";
 import { Menu } from "primereact/menu";
 import { useParams } from "react-router-dom";
+import EditBudget from "./dialogs/EditBudget";
 import { useQuery, gql } from "@apollo/client";
+import DeleteBudget from "./dialogs/DeleteBudget";
+import UpdateStatus from "./dialogs/UpdateStatus";
 import { setIsLoading } from "../reducers/loading";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UpdateStatus from "./dialogs/UpdateStatus";
 
 const GET_BUDGET = gql`
   query ($id: ID!) {
@@ -168,25 +170,25 @@ const Budget = () => {
         </>
       )}
 
-      {/* update account */}
-      {/* {data && (
-        <EditAccount
+      {/* update budget */}
+      {data && (
+        <EditBudget
           isVisible={isVisible}
           setIsVisible={setIsVisible}
           id={data.getBudget.id}
         />
-      )} */}
-      {/* update account */}
+      )}
+      {/* update budget */}
 
-      {/* delete account */}
-      {/* {data && (
-        <DeleteAccount
+      {/* delete budget */}
+      {data && (
+        <DeleteBudget
           isVisible={isDelete}
           setIsVisible={setIsDelete}
           id={data.getBudget.id}
         />
-      )} */}
-      {/* delete account */}
+      )}
+      {/* delete budget */}
     </div>
   );
 };

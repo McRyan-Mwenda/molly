@@ -82,7 +82,7 @@ const EditAccount = ({ isVisible, setIsVisible, id }) => {
 
   return (
     <Dialog
-      header="Edit an account"
+      header="Edit account"
       visible={isVisible}
       style={{ width: "50vw" }}
       onHide={() => setIsVisible(false)}
