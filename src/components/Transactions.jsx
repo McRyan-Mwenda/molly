@@ -139,6 +139,11 @@ const Transactions = ({ id, currency }) => {
             ></Column>
             <Column
               sortable
+              field="id"
+              header="ID"
+            ></Column>
+            <Column
+              sortable
               field="transaction_type"
               header="Transaction Type"
             ></Column>
