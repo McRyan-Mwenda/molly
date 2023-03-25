@@ -40,6 +40,12 @@ const GET_BUDGET = gql`
       category {
         category_name
       }
+      account {
+        id
+        account_name
+        account_type
+        account_balance
+      }
       created_at
       updated_at
     }

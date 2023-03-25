@@ -1,5 +1,6 @@
 import moment from "moment";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +10,7 @@ const GET_PROFILE = gql`
     getProfile {
       tier
       account_limit
+      budget_limit
       pdf_gen
       created_at
       user {
@@ -23,6 +25,9 @@ const GET_PROFILE = gql`
 
 const Profile = () => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const { loading, error, data } = useQuery(GET_PROFILE);
@@ -95,12 +100,14 @@ const Profile = () => {
               {data.getProfile.account_limit}
             </p>
             <p>
-              <span className="font-semibold">Can generate pdf reports:</span>{" "}
-              {data.getProfile.pdf_gen ? <>True</> : <>False</>}
+              <span className="font-semibold">
+                Max budgets attached to profile:
+              </span>{" "}
+              {data.getProfile.budget_limit}
             </p>
             <p>
-              <span className="font-semibold">Can access AI predictions:</span>{" "}
-              {data.getProfile.ai_predictions ? <>True</> : <>False</>}
+              <span className="font-semibold">Can generate pdf reports:</span>{" "}
+              {data.getProfile.pdf_gen ? <>True</> : <>False</>}
             </p>
             <p>
               <span className="font-semibold">Created on:</span>{" "}

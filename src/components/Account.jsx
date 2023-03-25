@@ -1,15 +1,15 @@
 import moment from "moment";
+import Reports from "./Reports";
 import PageTitle from "../title";
 import { Menu } from "primereact/menu";
 import Transactions from "./Transactions";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import EditAccount from "./dialogs/EditAccount";
 import { setIsLoading } from "../reducers/loading";
 import DeleteAccount from "./dialogs/DeleteAccount";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Reports from "./Reports";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -30,6 +30,8 @@ const Account = () => {
   const { id } = useParams();
 
   PageTitle(`Account | ID: ${id}`);
+
+  const navigate = useNavigate();
 
   const menu = useRef(null);
 

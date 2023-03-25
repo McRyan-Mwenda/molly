@@ -1,7 +1,7 @@
 import moment from "moment";
 import PageTitle from "../title";
 import { Menu } from "primereact/menu";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import EditBudget from "./dialogs/EditBudget";
 import { useQuery, gql } from "@apollo/client";
 import DeleteBudget from "./dialogs/DeleteBudget";
@@ -9,6 +9,7 @@ import UpdateStatus from "./dialogs/UpdateStatus";
 import { setIsLoading } from "../reducers/loading";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Reports2 from "./Reports2";
 
 const GET_BUDGET = gql`
   query ($id: ID!) {
@@ -21,6 +22,12 @@ const GET_BUDGET = gql`
       category {
         category_name
       }
+      account {
+        id
+        account_name
+        account_type
+        account_balance
+      }
       created_at
       updated_at
     }
@@ -31,6 +38,8 @@ const Budget = () => {
   const { id } = useParams();
 
   PageTitle(`Budget | ID: ${id}`);
+
+  const navigate = useNavigate();
 
   const menu = useRef(null);
 
@@ -129,6 +138,19 @@ const Budget = () => {
           <div>
             <hr className="my-4" />
             <p className="text-lg">
+              <span className="font-semibold">Connected account:</span>{" "}
+              {data.getBudget.account.account_name}
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Account type:</span>{" "}
+              {data.getBudget.account.account_type}
+            </p>
+            <p className="text-lg">
+              <span className="font-semibold">Account balance:</span>{" "}
+              {data.getBudget.account.account_balance.toLocaleString()}
+            </p>
+            <hr className="my-4" />
+            <p className="text-lg">
               <span className="font-semibold">Budget amount:</span>{" "}
               {data.getBudget.budget_amount.toLocaleString()}
             </p>
@@ -161,6 +183,12 @@ const Budget = () => {
             />
           </div>
           <hr className="my-4" />
+
+          {/* budget reports */}
+          {data.getBudget.budget_is_active && (
+            <Reports2 budget_data={data.getBudget} />
+          )}
+          {/* budget reports */}
         </>
       ) : (
         <>

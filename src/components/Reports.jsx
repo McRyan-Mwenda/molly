@@ -1,8 +1,8 @@
+import { Chart } from "primereact/chart";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { Chart } from "primereact/chart";
 
 const GET_TRANSACTION = gql`
   query ($id: ID!) {

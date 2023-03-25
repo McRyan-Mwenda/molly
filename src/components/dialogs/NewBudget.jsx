@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -8,15 +8,18 @@ import {
   createNewNotification,
   removeOldNotification,
 } from "../../reducers/notifications";
+import GetAccounts from "./GetAccounts";
 
 const CREATE_BUDGET = gql`
   mutation (
+    $account_id: ID!
     $budget_name: String!
     $budget_description: String!
     $budget_amount: Float!
     $category: String!
   ) {
     createBudget(
+      account_id: $account_id
       budget_name: $budget_name
       budget_description: $budget_description
       budget_amount: $budget_amount
@@ -44,6 +47,8 @@ const NewBudget = ({ isVisible, setIsVisible }) => {
   const dispatch = useDispatch();
 
   const thisform = useRef(null);
+
+  const [accountData, setAccountData] = useState();
 
   const [createBudget, { data: createBudgetData, loading, error }] =
     useMutation(CREATE_BUDGET, {
@@ -88,6 +93,7 @@ const NewBudget = ({ isVisible, setIsVisible }) => {
 
           createBudget({
             variables: {
+              account_id: e.target.account_id.value,
               budget_name: e.target.budget_name.value,
               budget_amount: parseFloat(e.target.budget_amount.value),
               budget_description: e.target.description.value,
@@ -161,6 +167,32 @@ const NewBudget = ({ isVisible, setIsVisible }) => {
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           ></textarea>
         </div>
+        <div className="mb-2">
+          <label htmlFor="account_id" id="account_id  ">
+            Connect to account
+          </label>
+          <select
+            name="account_id"
+            id="account_id"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          >
+            <option selected disabled className="bg-gray-50 text-gray-400">
+              Select from list
+            </option>
+            {accountData &&
+              accountData.getAllAccounts.map((account, index) => {
+                const list = (
+                  <>
+                    <option key={index} value={account.id}>
+                      {account.account_name}
+                    </option>
+                  </>
+                );
+
+                return list;
+              })}
+          </select>
+        </div>
         <div className="mt-8">
           <Button
             label="Submit"
@@ -171,6 +203,8 @@ const NewBudget = ({ isVisible, setIsVisible }) => {
           />
         </div>
       </form>
+
+      <GetAccounts setAccountData={setAccountData} />
     </Dialog>
   );
 };
