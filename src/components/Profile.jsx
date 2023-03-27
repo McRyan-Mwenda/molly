@@ -34,6 +34,9 @@ const Profile = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isTwoFA = useSelector((state) => state.auth.twoFA);
+  const packageTier = useSelector((state) => state.auth.package);
+
+  const bg = packageTier === "Pro" ? "#34d399" : "#a1a1aa";
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDeactivate, setIsDeactivate] = useState(false);
@@ -97,30 +100,33 @@ const Profile = () => {
               {data.getProfile.user.last_name}
             </p>
             <br />
-            <p>
-              <span className="font-semibold">Profile package tier:</span>{" "}
-              {data.getProfile.tier}
-            </p>
-            <p>
-              <span className="font-semibold">
-                Max accounts attached to profile:
-              </span>{" "}
-              {data.getProfile.account_limit}
-            </p>
-            <p>
-              <span className="font-semibold">
-                Max budgets attached to profile:
-              </span>{" "}
-              {data.getProfile.budget_limit}
-            </p>
-            <p>
-              <span className="font-semibold">Can generate pdf reports:</span>{" "}
-              {data.getProfile.pdf_gen ? <>True</> : <>False</>}
-            </p>
-            <p>
-              <span className="font-semibold">Created on:</span>{" "}
-              {moment.unix(data.getProfile.created_at).format("YYYY-MM-DD")}
-            </p>
+            <div
+              className="py-2 px-4 rounded-md border border-zinc-400 text-white"
+              style={{
+                backgroundColor: bg,
+              }}
+            >
+              <p>
+                <span className="font-semibold">Profile tier:</span>{" "}
+                {data.getProfile.tier}
+              </p>
+              <p>
+                <span className="font-semibold">Max accounts:</span>{" "}
+                {data.getProfile.account_limit}
+              </p>
+              <p>
+                <span className="font-semibold">Max budgets:</span>{" "}
+                {data.getProfile.budget_limit}
+              </p>
+              <p>
+                <span className="font-semibold">Generate reports:</span>{" "}
+                {data.getProfile.pdf_gen ? <>True</> : <>False</>}
+              </p>
+              <p>
+                <span className="font-semibold">Created on:</span>{" "}
+                {moment.unix(data.getProfile.created_at).format("YYYY-MM-DD")}
+              </p>
+            </div>
           </div>
           <hr className="my-4" />
           <div className="border rounded-md shadow-md p-4 bg-gray-50 text-lg">

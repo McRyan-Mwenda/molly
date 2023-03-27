@@ -52,7 +52,10 @@ const TwoFA = ({ isVisible, setIsVisible }) => {
                 <li>
                   <i class="bi bi-arrow-right-short"></i>
                   We recommend:
-                  <a href="" className="mx-2 text-sky-600 hover:text-sky-900">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&pli=1"
+                    className="mx-2 text-sky-600 hover:text-sky-900"
+                  >
                     Google Authenticator
                   </a>
                 </li>

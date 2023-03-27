@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import Contacts from "./pages/Contacts";
 import Budget from "./components/Budget";
 import Dashboard from "./pages/Dashboard";
+import Billing from "./components/Billing";
 import Account from "./components/Account";
 import Profile from "./components/Profile";
 import Footer from "./components/nav/Footer";
@@ -94,6 +95,7 @@ const App = () => {
         <Route path="/app/login" element={<Login />} />
         <Route path="/app/signin" element={<Signin />} />
         <Route path="/app/signup" element={<Signup />} />
+        <Route path="/app/billing" element={<Billing />} />
         <Route path="/app/dashboard" element={<Dashboard />} />
         <Route path="/app/dashboard/profile" element={<Profile />} />
         <Route path="/app/dashboard/budget/:id" element={<Budget />} />
