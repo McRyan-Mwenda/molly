@@ -1,42 +1,32 @@
-import { signIn } from "../reducers/auth";
+import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import {
   createNewNotification,
   removeOldNotification,
 } from "../reducers/notifications";
 
-import PageTitle from "../title";
-
-const USER_AUTH = gql`
-  mutation ($username: String!, $password: String!) {
-    tokenAuth(username: $username, password: $password) {
-      token
-    }
+const VERIFY_OTP = gql`
+  mutation ($otp: String!) {
+    verifyOTP(otp: $otp)
   }
 `;
 
-const Signin = () => {
+import PageTitle from "../title";
+
+const Login = () => {
   PageTitle("Signin");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isTwoFA = useSelector((state) => state.auth.twoFA);
-
-  const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
+  const [verifyOTP, { data, loading, error }] = useMutation(VERIFY_OTP);
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      signIn({
-        token: data.tokenAuth.token,
-      })
-    );
-    isTwoFA ? navigate("/app/login") : navigate("/app/dashboard");
+    navigate("/app/dashboard");
   }
   if (loading) {
     dispatch(setIsLoading({ status: true }));
@@ -62,33 +52,21 @@ const Signin = () => {
 
             dispatch(removeOldNotification());
 
-            tokenAuth({
+            verifyOTP({
               variables: {
-                username: e.target.username.value,
-                password: e.target.password.value,
+                otp: e.target.otp_code.value,
               },
             });
           }}
         >
           <div className="mb-4">
-            <label htmlFor="email" className="text-gray-600">
-              Email
+            <label htmlFor="otp_code" className="text-gray-600">
+              Six digit OTP code
             </label>
             <input
-              type="email"
-              name="username"
-              id="email"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="text-gray-600">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
+              type="text"
+              name="otp_code"
+              id="otp_code"
               className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
@@ -118,4 +96,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Login;
