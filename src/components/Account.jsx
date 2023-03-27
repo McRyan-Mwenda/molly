@@ -116,10 +116,16 @@ const Account = () => {
               <span className="font-semibold">Account balance:</span>{" "}
               {data.getAccount.account_balance.toLocaleString()}
             </p>
-            <p className="text-lg">
-              <span className="font-semibold">Account number:</span>{" "}
-              {data.getAccount.account_number}
-            </p>
+            {data.getAccount.account_number === 0 ? (
+              <>
+                <p className="text-lg">
+                  <span className="font-semibold">Account number:</span>{" "}
+                  {data.getAccount.account_number}
+                </p>
+              </>
+            ) : (
+              <></>
+            )}
             <p className="text-lg">
               <span className="font-semibold">Currency code:</span>{" "}
               {data.getAccount.currency_code}

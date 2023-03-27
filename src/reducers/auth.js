@@ -3,30 +3,30 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authReducer = createSlice({
   name: "auth",
   initialState: {
-    token: sessionStorage.getItem("token") || "",
-    isLoggedIn: sessionStorage.getItem("token") ? true : false,
-    twoFA: sessionStorage.getItem("2FA") ? true : false,
+    token: localStorage.getItem("token") || "",
+    isLoggedIn: localStorage.getItem("token") ? true : false,
+    twoFA: localStorage.getItem("2FA") ? true : false,
   },
   reducers: {
     signIn: (state, action) => {
-      sessionStorage.setItem("token", action.payload.token);
+      localStorage.setItem("token", action.payload.token);
 
-      state.token = sessionStorage.getItem("token");
+      state.token = localStorage.getItem("token");
       state.isLoggedIn = true;
     },
     signOut: (state) => {
-      sessionStorage.removeItem("token");
+      localStorage.removeItem("token");
 
       state.token = "";
       state.isLoggedIn = false;
     },
     activateTwoFA: (state) => {
-      sessionStorage.setItem("2FA", true);
+      localStorage.setItem("2FA", true);
 
-      state.twoFA = sessionStorage.getItem("2FA");
+      state.twoFA = localStorage.getItem("2FA");
     },
     deactivateTwoFA: (state) => {
-      sessionStorage.removeItem("2FA");
+      localStorage.removeItem("2FA");
 
       state.twoFA = false;
     },
