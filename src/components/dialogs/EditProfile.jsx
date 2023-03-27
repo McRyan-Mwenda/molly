@@ -12,14 +12,14 @@ import {
 
 const UPDATE_USER = gql`
   mutation (
-    $username: String!
     $email: String!
+    $phone_number: String!
     $first_name: String!
     $last_name: String!
   ) {
     updateUser(
-      username: $username
       email: $email
+      phone_number: $phone_number
       first_name: $first_name
       last_name: $last_name
     ) {
@@ -38,7 +38,7 @@ const GET_PROFILE = gql`
       created_at
       user {
         email
-        username
+        phone_number
         first_name
         last_name
       }
@@ -97,8 +97,8 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
 
           updateUser({
             variables: {
-              username: e.target.username.value,
               email: e.target.email.value,
+              phone_number: e.target.phone_number.value,
               first_name: e.target.first_name.value,
               last_name: e.target.last_name.value,
             },
@@ -108,18 +108,6 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
         }}
       >
         <div className="mb-2">
-          <label htmlFor="username" id="username">
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="new username"
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </div>
-        <div className="mb-2">
           <label htmlFor="email" id="email">
             Email
           </label>
@@ -128,6 +116,18 @@ const EditProfile = ({ isVisible, setIsVisible }) => {
             name="email"
             id="email"
             placeholder="new email address"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phone_number" className="text-gray-600">
+            Phone Number
+          </label>
+          <input
+            type="text"
+            name="phone_number"
+            id="phone_number"
+            placeholder="e.g. +254712345678"
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>

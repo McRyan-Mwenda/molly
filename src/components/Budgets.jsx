@@ -98,7 +98,7 @@ const Budgets = () => {
       <Button
         icon="pi pi-plus"
         label="Add new budget"
-        security="primary"
+        severity="primary"
         aria-label="Filter"
         className="hover:shadow-md page-fonts"
         outlined

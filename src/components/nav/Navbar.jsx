@@ -1,10 +1,11 @@
 import { Menu } from "primereact/menu";
 import { useRef, useState } from "react";
+import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
 import { signOut } from "../../reducers/auth";
+import EditProfile from "../dialogs/EditProfile";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import EditProfile from "../dialogs/EditProfile";
 
 const Navbar = () => {
   const menu = useRef(null);
@@ -16,24 +17,23 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const username = useSelector((state) => state.auth.username);
+  const isTwoFA = useSelector((state) => state.auth.twoFA);
 
   const items = [
-    {
-      label: "Profile",
-      items: [
-        {
-          label: username,
-          icon: "pi pi-user",
-          disabled: true,
-        },
-      ],
-    },
     {
       label: "Options",
       items: [
         {
-          label: "View profile",
+          label: isTwoFA ? (
+            "Profile"
+          ) : (
+            <>
+              <p className="p-overlay-badge w-fit">
+                <span className="pr-4">Profile</span>{" "}
+                <Badge severity="danger" size="normal"></Badge>
+              </p>
+            </>
+          ),
           icon: "pi pi-info-circle",
           command: () => navigate("/app/dashboard/profile"),
         },
@@ -43,9 +43,13 @@ const Navbar = () => {
           command: () => setIsVisible(true),
         },
         {
+          label: "Upgrade",
+          icon: "pi pi-lock-open",
+          command: () => navigate("/app/dashboard/profile"),
+        },
+        {
           label: "Log out",
           icon: "pi pi-upload",
-          className: "bg-red-100 mb-2",
           command: () => dispatch(signOut()),
         },
       ],
@@ -87,12 +91,10 @@ const Navbar = () => {
         {isLoggedIn ? (
           <>
             <div className="flex justify-center items-center">
-              <p className="mr-4 text-zinc-500">{username}</p>
               <Avatar
                 icon="pi pi-user"
                 className="shadow border border-zinc-300 cursor-pointer"
                 shape="circle"
-                label={username.charAt(0)}
                 onClick={(e) => menu.current.toggle(e)}
               />
               <Menu model={items} popup ref={menu} className="page-fonts" />

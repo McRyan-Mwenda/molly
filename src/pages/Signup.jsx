@@ -12,25 +12,22 @@ import PageTitle from "../title";
 
 const CREATE_USER = gql`
   mutation (
-    $username: String!
     $email: String!
+    $phone_number: String!
     $first_name: String!
-    $last_name: String!
+    $last_name: String
     $password: String!
     $password2: String!
   ) {
     createUser(
-      username: $username
       email: $email
+      phone_number: $phone_number
       first_name: $first_name
       last_name: $last_name
       password: $password
       password2: $password2
     ) {
-      email
-      username
-      first_name
-      last_name
+      id
     }
   }
 `;
@@ -68,7 +65,10 @@ const Signup = () => {
   return (
     <div className="page">
       <h1 className="text-3xl text-center mt-4">Create new account</h1>
-      <div className="mx-auto rounded-md shadow py-8 px-16 my-8 w-2/5 border bg-sky-50">
+      <div
+        className="mx-auto py-8 px-12 my-8 rounded-md shadow-lg bg-slate-50"
+        style={{ width: "35%" }}
+      >
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -77,8 +77,8 @@ const Signup = () => {
 
             createUser({
               variables: {
-                username: e.target.username.value,
                 email: e.target.email.value,
+                phone_number: e.target.phone_number.value,
                 first_name: e.target.first_name.value,
                 last_name: e.target.last_name.value,
                 password: e.target.password.value,
@@ -88,36 +88,56 @@ const Signup = () => {
           }}
         >
           <div className="mb-4">
-            <label htmlFor="username" className="text-gray-600">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
-            />
+            <p className="text-gray-600 text-sm text-center">
+              Required fields are marked with{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
+            </p>
           </div>
           <div className="mb-4">
             <label htmlFor="email" className="text-gray-600">
-              Email
+              Email{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
             </label>
             <input
               type="email"
               name="email"
               id="email"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              required
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="phone_number" className="text-gray-600">
+              Phone Number{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
+            </label>
+            <input
+              type="text"
+              name="phone_number"
+              id="phone_number"
+              required
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mb-4">
             <label htmlFor="first_name" className="text-gray-600">
-              First name
+              First name{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
             </label>
             <input
               type="text"
               name="first_name"
               id="first_name"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              required
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mb-4">
@@ -128,29 +148,37 @@ const Signup = () => {
               type="text"
               name="last_name"
               id="last_name"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="text-gray-600">
-              Password
+              Password{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
             </label>
             <input
               type="password"
               name="password"
               id="password"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              required
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mb-4">
             <label htmlFor="password2" className="text-gray-600">
-              Confirm password
+              Confirm password{" "}
+              <sup>
+                <i className="bi bi-asterisk text-red-400"></i>
+              </sup>
             </label>
             <input
               type="password"
               name="password2"
               id="password2"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              required
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mt-8">

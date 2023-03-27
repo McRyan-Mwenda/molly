@@ -84,7 +84,7 @@ const Accounts = () => {
       <Button
         icon="pi pi-plus"
         label="Add new account"
-        security="primary"
+        severity="primary"
         aria-label="Filter"
         className="hover:shadow-md page-fonts"
         outlined

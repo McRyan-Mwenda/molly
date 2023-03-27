@@ -1,4 +1,3 @@
-import { useState, useRef } from "react";
 import { signIn } from "../reducers/auth";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
@@ -26,15 +25,12 @@ const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState("");
-
   const [tokenAuth, { data, loading, error }] = useMutation(USER_AUTH);
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
     dispatch(
       signIn({
-        username: userName,
         token: data.tokenAuth.token,
       })
     );
@@ -54,7 +50,10 @@ const Signin = () => {
   return (
     <div className="page">
       <h1 className="text-3xl text-center mt-4">Signin to your account</h1>
-      <div className="mx-auto rounded-md shadow py-8 px-16 my-8 w-2/5 border bg-sky-50">
+      <div
+        className="mx-auto py-8 px-12 my-8 rounded-md shadow-lg bg-slate-50"
+        style={{ width: "35%" }}
+      >
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -63,23 +62,21 @@ const Signin = () => {
 
             tokenAuth({
               variables: {
-                // username: e.target.username.value,
-                username: userName,
+                username: e.target.username.value,
                 password: e.target.password.value,
               },
             });
           }}
         >
           <div className="mb-4">
-            <label htmlFor="username" className="text-gray-600">
-              Username
+            <label htmlFor="email" className="text-gray-600">
+              Email
             </label>
             <input
-              type="text"
+              type="email"
               name="username"
-              id="username"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
-              onChange={(e) => setUserName(e.target.value)}
+              id="email"
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mb-4">
@@ -90,7 +87,7 @@ const Signin = () => {
               type="password"
               name="password"
               id="password"
-              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-sky-50"
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
             />
           </div>
           <div className="mt-8">
