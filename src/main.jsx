@@ -1,5 +1,4 @@
 import React from "react";
-import * as dotenv from "dotenv";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -18,8 +17,6 @@ import "./index.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-
-dotenv.config()
 
 const httpLink = createHttpLink({
   uri: "http://127.0.0.1:8000/graphql/",
