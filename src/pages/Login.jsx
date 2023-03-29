@@ -24,9 +24,22 @@ const Login = () => {
 
   const [verifyOTP, { data, loading, error }] = useMutation(VERIFY_OTP);
 
+  const codeAuth = (data) => {
+    if (data.verifyOTP.success === true) {
+      navigate("/app/dashboard");
+    } else if (data.verifyOTP.success === false) {
+      dispatch(
+        createNewNotification({
+          type: "error",
+          message: "Entered invalid OTP code",
+        })
+      );
+    }
+  };
+
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    navigate("/app/dashboard");
+    codeAuth(data);
   }
   if (loading) {
     dispatch(setIsLoading({ status: true }));

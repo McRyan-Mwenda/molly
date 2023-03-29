@@ -21,6 +21,7 @@ const ConfirmDeactivate = ({ isDeactivate, setIsDeactivate }) => {
         severity="danger"
         onClick={() => {
           dispatch(deactivateTwoFA());
+          setIsDeactivate(false);
         }}
         autoFocus
       />

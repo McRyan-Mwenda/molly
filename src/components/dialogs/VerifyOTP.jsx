@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useMutation, gql } from "@apollo/client";
-import { activateTwoFA } from "../../reducers/auth";
 import { Button } from "primereact/button";
 import { setIsLoading } from "../../reducers/loading";
+import { activateTwoFA, deactivateTwoFA } from "../../reducers/auth";
 import {
   createNewNotification,
   removeOldNotification,
@@ -19,15 +19,29 @@ const VerifyOTP = () => {
 
   const [verifyOTP, { data, loading, error }] = useMutation(VERIFY_OTP);
 
+  const codeAuth = (data) => {
+    if (data.verifyOTP.success === true) {
+      dispatch(
+        createNewNotification({
+          type: "success",
+          message: "Two Factor Authentication enabled",
+        })
+      );
+      dispatch(activateTwoFA());
+    } else if (data.verifyOTP.success === false) {
+      dispatch(
+        createNewNotification({
+          type: "error",
+          message: "Entered invalid OTP code",
+        })
+      );
+      dispatch(deactivateTwoFA());
+    }
+  };
+
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(
-      createNewNotification({
-        type: "success",
-        message: "Two Factor Authentication enabled",
-      })
-    );
-    dispatch(activateTwoFA());
+    codeAuth(data);
   }
 
   if (loading) {

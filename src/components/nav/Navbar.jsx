@@ -45,7 +45,7 @@ const Navbar = () => {
         {
           label: "Upgrade",
           icon: "pi pi-lock-open",
-          command: () => navigate("/app/dashboard/profile"),
+          command: () => navigate("/pricing"),
         },
         {
           label: "Log out",
