@@ -34,12 +34,21 @@ const Profile = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isTwoFA = useSelector((state) => state.auth.twoFA);
-  const packageTier = useSelector((state) => state.auth.package);
-
-  const bg = packageTier === "Pro" ? "#34d399" : "#a1a1aa";
+  const packageTier = useSelector((state) => state.package.package);
 
   const [isVisible, setIsVisible] = useState(false);
   const [isDeactivate, setIsDeactivate] = useState(false);
+  const [bg, setBg] = useState();
+
+  const checkBg = (packageTier) => {
+    if (packageTier === "Pro") {
+      return setBg("#34d399");
+    } else if (packageTier === "Standard") {
+      return setBg("#fb923c");
+    } else if (packageTier === "Free") {
+      return setBg("#a1a1aa");
+    }
+  };
 
   const { loading, error, data } = useQuery(GET_PROFILE);
 
@@ -64,7 +73,8 @@ const Profile = () => {
 
   useEffect(() => {
     checkAuth();
-  }, [isLoggedIn]);
+    checkBg(packageTier);
+  }, [isLoggedIn, packageTier]);
 
   return (
     <div className="page">

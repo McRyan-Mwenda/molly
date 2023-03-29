@@ -6,6 +6,11 @@ export const packageReducer = createSlice({
     package: localStorage.getItem("package") || "Free",
   },
   reducers: {
+    upgradeToStandard: (state) => {
+      localStorage.setItem("package", "Standard");
+
+      state.package = localStorage.getItem("package");
+    },
     upgradeToPro: (state) => {
       localStorage.setItem("package", "Pro");
 
