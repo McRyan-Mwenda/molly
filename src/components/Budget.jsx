@@ -1,6 +1,6 @@
 import moment from "moment";
-import PageTitle from "./title";
 import { Menu } from "primereact/menu";
+import PageTitle from "../assets/title";
 import Reports2 from "./reports/Reports2";
 import EditBudget from "./budgets/EditBudget";
 import { useQuery, gql } from "@apollo/client";

@@ -1,6 +1,5 @@
+import PageTitle from "../assets/title";
 import { useParams } from "react-router-dom";
-
-import PageTitle from "./title";
 
 const Billing = () => {
   PageTitle("Billing");

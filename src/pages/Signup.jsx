@@ -1,3 +1,4 @@
+import PageTitle from "../assets/title";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
@@ -7,8 +8,6 @@ import {
   createNewNotification,
   removeOldNotification,
 } from "../reducers/notifications";
-
-import PageTitle from "../title";
 
 const CREATE_USER = gql`
   mutation (

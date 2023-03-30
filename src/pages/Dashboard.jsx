@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { TabView, TabPanel } from "primereact/tabview";
-
-import PageTitle from "../title";
+import PageTitle from "../assets/title";
+import { useSelector } from "react-redux";
 import Budgets from "../components/Budgets";
 import Accounts from "../components/Accounts";
+import { useNavigate } from "react-router-dom";
+import { TabView, TabPanel } from "primereact/tabview";
 
 const Dashboard = () => {
   PageTitle("Dashboard");

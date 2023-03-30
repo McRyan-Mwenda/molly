@@ -1,4 +1,4 @@
-import PageTitle from "../title";
+import PageTitle from "../assets/title";
 
 const Home = () => {
   PageTitle("Home");

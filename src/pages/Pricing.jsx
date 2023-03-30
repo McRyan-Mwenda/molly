@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
+import PageTitle from "../assets/title";
+import data from "../assets/pricing.json";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import data from "../assets/pricing.json";
-
-import PageTitle from "../title";
 
 const Pricing = () => {
   PageTitle("Pricing");

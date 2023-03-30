@@ -1,3 +1,4 @@
+import PageTitle from "../assets/title";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
@@ -13,8 +14,6 @@ const VERIFY_OTP = gql`
     verifyOTP(otp: $otp)
   }
 `;
-
-import PageTitle from "../title";
 
 const Login = () => {
   PageTitle("Signin");

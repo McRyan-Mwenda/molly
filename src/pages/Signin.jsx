@@ -1,3 +1,4 @@
+import PageTitle from "../assets/title";
 import { signIn } from "../reducers/auth";
 import { Button } from "primereact/button";
 import { gql, useMutation } from "@apollo/client";
@@ -8,8 +9,6 @@ import {
   createNewNotification,
   removeOldNotification,
 } from "../reducers/notifications";
-
-import PageTitle from "../title";
 
 const USER_AUTH = gql`
   mutation ($username: String!, $password: String!) {

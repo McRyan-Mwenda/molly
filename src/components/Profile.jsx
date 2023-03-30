@@ -1,6 +1,6 @@
 import moment from "moment";
 import TwoFA from "./2fa/TwoFA";
-import PageTitle from "./title";
+import PageTitle from "../assets/title";
 import { Badge } from "primereact/badge";
 import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
