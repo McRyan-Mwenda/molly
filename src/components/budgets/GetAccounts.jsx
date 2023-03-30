@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useQuery, gql } from "@apollo/client";
 import { setIsLoading } from "../../reducers/loading";
 import { createNewNotification } from "../../reducers/notifications";
-import { useEffect } from "react";
 
 const GET_ALL_ACCOUNTS = gql`
   query {
@@ -21,7 +21,7 @@ const GetAccounts = ({ setAccountData }) => {
 
   if (getAccountsData) {
     dispatch(setIsLoading({ status: false }));
-    console.log(getAccountsData);
+    // console.log(getAccountsData);
   }
 
   if (loading) {

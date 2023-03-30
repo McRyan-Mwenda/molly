@@ -1,3 +1,4 @@
+import GetAccounts from "./GetAccounts";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dialog } from "primereact/dialog";
@@ -8,7 +9,6 @@ import {
   createNewNotification,
   removeOldNotification,
 } from "../../reducers/notifications";
-import GetAccounts from "./GetAccounts";
 
 const CREATE_BUDGET = gql`
   mutation (

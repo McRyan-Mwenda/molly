@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { Column } from "primereact/column";
 import { useQuery, gql } from "@apollo/client";
 import { DataTable } from "primereact/datatable";
-import { setIsLoading } from "../reducers/loading";
+import { setIsLoading } from "../../reducers/loading";
 import { InputSwitch } from "primereact/inputswitch";
-import NewTransaction from "./dialogs/NewTransaction";
-import EditTransaction from "./dialogs/EditTransaction";
-import DeleteTransaction from "./dialogs/DeleteTransaction";
+import NewTransaction from "./NewTransaction";
+import EditTransaction from "./EditTransaction";
+import DeleteTransaction from "./DeleteTransaction";
 
 const GET_TRANSACTION = gql`
   query ($id: ID!) {

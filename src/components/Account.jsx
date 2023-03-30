@@ -1,15 +1,15 @@
 import moment from "moment";
-import Reports from "./Reports";
-import PageTitle from "../title";
+import PageTitle from "./title";
 import { Menu } from "primereact/menu";
-import Transactions from "./Transactions";
-import { useParams, useNavigate } from "react-router-dom";
+import Reports from "./reports/Reports";
 import { useQuery, gql } from "@apollo/client";
-import EditAccount from "./dialogs/EditAccount";
+import EditAccount from "./accounts/EditAccount";
 import { setIsLoading } from "../reducers/loading";
-import DeleteAccount from "./dialogs/DeleteAccount";
 import { useRef, useState, useEffect } from "react";
+import DeleteAccount from "./accounts/DeleteAccount";
+import Transactions from "./transactions/Transactions";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
 const GET_ACCOUNT = gql`
   query ($id: ID!) {
@@ -29,7 +29,7 @@ const GET_ACCOUNT = gql`
 const Account = () => {
   const { id } = useParams();
 
-  PageTitle(`Account | ID: ${id}`);
+  PageTitle(`Account: ${id}`);
 
   const navigate = useNavigate();
 

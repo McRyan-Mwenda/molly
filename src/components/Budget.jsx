@@ -1,15 +1,15 @@
 import moment from "moment";
-import PageTitle from "../title";
+import PageTitle from "./title";
 import { Menu } from "primereact/menu";
-import { useParams, useNavigate } from "react-router-dom";
-import EditBudget from "./dialogs/EditBudget";
+import Reports2 from "./reports/Reports2";
+import EditBudget from "./budgets/EditBudget";
 import { useQuery, gql } from "@apollo/client";
-import DeleteBudget from "./dialogs/DeleteBudget";
-import UpdateStatus from "./dialogs/UpdateStatus";
+import DeleteBudget from "./budgets/DeleteBudget";
+import UpdateStatus from "./budgets/UpdateStatus";
 import { setIsLoading } from "../reducers/loading";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Reports2 from "./Reports2";
+import { useParams, useNavigate } from "react-router-dom";
 
 const GET_BUDGET = gql`
   query ($id: ID!) {
@@ -37,7 +37,7 @@ const GET_BUDGET = gql`
 const Budget = () => {
   const { id } = useParams();
 
-  PageTitle(`Budget | ID: ${id}`);
+  PageTitle(`Budget: ${id}`);
 
   const navigate = useNavigate();
 

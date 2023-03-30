@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
-import NewBudget from "./dialogs/NewBudget";
+import NewBudget from "./budgets/NewBudget";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 

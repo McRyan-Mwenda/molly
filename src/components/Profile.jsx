@@ -1,5 +1,6 @@
 import moment from "moment";
-import TwoFA from "./dialogs/TwoFA";
+import TwoFA from "./2fa/TwoFA";
+import PageTitle from "./title";
 import { Badge } from "primereact/badge";
 import { Button } from "primereact/button";
 import { useEffect, useState } from "react";
@@ -7,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
 import { useDispatch, useSelector } from "react-redux";
-import ConfirmDeactivate from "./dialogs/ConfirmDeactivate";
+import ConfirmDeactivate from "./2fa/ConfirmDeactivate";
 
 const GET_PROFILE = gql`
   query {
@@ -28,6 +29,8 @@ const GET_PROFILE = gql`
 `;
 
 const Profile = () => {
+  PageTitle("Profile");
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

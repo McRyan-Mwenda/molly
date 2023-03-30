@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
 import { signOut } from "../../reducers/auth";
-import EditProfile from "../dialogs/EditProfile";
+import EditProfile from "../profile/EditProfile";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
