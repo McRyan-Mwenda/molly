@@ -5,6 +5,7 @@ import Budgets from "../components/Budgets";
 import Accounts from "../components/Accounts";
 import { useNavigate } from "react-router-dom";
 import { TabView, TabPanel } from "primereact/tabview";
+import PackageReducer from "../components/dashboard/PackageReducer";
 
 const Dashboard = () => {
   PageTitle("Dashboard");
@@ -35,6 +36,10 @@ const Dashboard = () => {
           </TabPanel>
         </TabView>
       </div>
+
+      {/* set package reducer */}
+      <PackageReducer />
+      {/* set package reducer */}
     </div>
   );
 };

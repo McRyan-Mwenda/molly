@@ -18,6 +18,7 @@ const Navbar = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isTwoFA = useSelector((state) => state.auth.twoFA);
+  const userType = useSelector((state) => state.package);
 
   const items = [
     {
@@ -56,6 +57,38 @@ const Navbar = () => {
     },
   ];
 
+  const linkControl = (userType) => {
+    if (userType.package === "Free") {
+      // do nothing
+    } else if (userType.package === "Standard" && !userType.is_employee) {
+      return (
+        <Link
+          className="mx-2 text-sky-600 hover:text-sky-900"
+          to="/app/dashboard"
+        >
+          Team
+        </Link>
+      );
+    } else if (userType.package === "Pro" && !userType.is_employee) {
+      return (
+        <>
+          <Link
+            className="mx-2 text-sky-600 hover:text-sky-900"
+            to="/app/dashboard"
+          >
+            Team
+          </Link>
+          <Link
+            className="mx-2 text-sky-600 hover:text-sky-900"
+            to="/app/dashboard"
+          >
+            AI Assistant
+          </Link>
+        </>
+      );
+    }
+  };
+
   return (
     <div
       className="flex justify-between items-center p-4 bg-slate-100"
@@ -82,6 +115,7 @@ const Navbar = () => {
             >
               Dashboard
             </Link>
+            {linkControl(userType)}
           </>
         ) : (
           <></>

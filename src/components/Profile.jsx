@@ -30,6 +30,8 @@ const GET_PROFILE = gql`
         no_of_budgets
         targets
         no_of_targets
+        teams
+        no_of_teams
         pdf_reports
         ai_assistant
       }
@@ -138,6 +140,8 @@ const Profile = () => {
                     <th>No of budgets</th>
                     <th>Targets</th>
                     <th>No of targets</th>
+                    <th>Teams</th>
+                    <th>No of members</th>
                     <th>Generate Reports</th>
                     <th>AI assistant</th>
                   </tr>
@@ -151,6 +155,8 @@ const Profile = () => {
                     <td>{data.getProfile.package.no_of_budgets}</td>
                     <td>{data.getProfile.package.targets ? "✔️" : "❌"}</td>
                     <td>{data.getProfile.package.no_of_targets}</td>
+                    <td>{data.getProfile.package.teams ? "✔️" : "❌"}</td>
+                    <td>{data.getProfile.package.no_of_teams}</td>
                     <td>{data.getProfile.package.pdf_reports ? "✔️" : "❌"}</td>
                     <td>
                       {data.getProfile.package.ai_assistant ? "✔️" : "❌"}

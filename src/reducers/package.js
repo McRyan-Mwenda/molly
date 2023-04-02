@@ -4,6 +4,7 @@ export const packageReducer = createSlice({
   name: "package",
   initialState: {
     package: localStorage.getItem("package") || "Free",
+    is_employee: localStorage.getItem("is_employee") || true,
   },
   reducers: {
     upgradeToStandard: (state) => {
@@ -21,8 +22,24 @@ export const packageReducer = createSlice({
 
       state.package = "Free";
     },
+    makeEmployee: (state) => {
+      localStorage.setItem("is_employee", true);
+
+      state.is_employee = localStorage.getItem("is_employee");
+    },
+    makeNotEmployee: (state) => {
+      localStorage.removeItem("is_employee");
+
+      state.is_employee = false;
+    },
   },
 });
 
-export const { upgradeToPro, downgradeToFree } = packageReducer.actions;
+export const {
+  upgradeToPro,
+  upgradeToStandard,
+  downgradeToFree,
+  makeEmployee,
+  makeNotEmployee,
+} = packageReducer.actions;
 export default packageReducer.reducer;
