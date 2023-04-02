@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import Teams from "./pages/Teams";
+import Teams from "./pages/Workspace";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
@@ -96,7 +96,7 @@ const App = () => {
         <Route path="/app/login" element={<Login />} />
         <Route path="/app/signin" element={<Signin />} />
         <Route path="/app/signup" element={<Signup />} />
-        <Route path="/app/teams" element={<Teams />} />
+        <Route path="/app/workspace" element={<Teams />} />
         <Route path="/app/dashboard" element={<Dashboard />} />
         <Route path="/app/billing/:slug" element={<Billing />} />
         <Route path="/app/dashboard/profile" element={<Profile />} />

@@ -64,9 +64,9 @@ const Navbar = () => {
       return (
         <Link
           className="mx-2 text-sky-600 hover:text-sky-900"
-          to="/app/dashboard"
+          to="/app/workspace"
         >
-          Team
+          Workspace
         </Link>
       );
     } else if (userType.package === "Pro" && !userType.is_employee) {
@@ -74,13 +74,13 @@ const Navbar = () => {
         <>
           <Link
             className="mx-2 text-sky-600 hover:text-sky-900"
-            to="/app/dashboard"
+            to="/app/workspace"
           >
-            Team
+            Workspace
           </Link>
           <Link
             className="mx-2 text-sky-600 hover:text-sky-900"
-            to="/app/dashboard"
+            to="/app/assistant"
           >
             AI Assistant
           </Link>
