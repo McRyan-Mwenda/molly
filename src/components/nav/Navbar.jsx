@@ -28,7 +28,7 @@ const Navbar = () => {
             "Profile"
           ) : (
             <>
-              <p className="p-overlay-badge w-fit">
+              <p className="flex items-center w-fit">
                 <span className="pr-4">Profile</span>{" "}
                 <Badge severity="danger" size="normal"></Badge>
               </p>

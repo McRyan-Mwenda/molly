@@ -13,16 +13,25 @@ import ConfirmDeactivate from "./2fa/ConfirmDeactivate";
 const GET_PROFILE = gql`
   query {
     getProfile {
-      tier
-      account_limit
-      budget_limit
-      pdf_gen
+      workspace_uid
+      is_employee
       created_at
       user {
         email
         phone_number
         first_name
         last_name
+      }
+      package {
+        name
+        accounts
+        no_of_accounts
+        budgets
+        no_of_budgets
+        targets
+        no_of_targets
+        pdf_reports
+        ai_assistant
       }
     }
   }
@@ -119,26 +128,36 @@ const Profile = () => {
                 backgroundColor: bg,
               }}
             >
-              <p>
-                <span className="font-semibold">Profile tier:</span>{" "}
-                {data.getProfile.tier}
-              </p>
-              <p>
-                <span className="font-semibold">Max accounts:</span>{" "}
-                {data.getProfile.account_limit}
-              </p>
-              <p>
-                <span className="font-semibold">Max budgets:</span>{" "}
-                {data.getProfile.budget_limit}
-              </p>
-              <p>
-                <span className="font-semibold">Generate reports:</span>{" "}
-                {data.getProfile.pdf_gen ? <>True</> : <>False</>}
-              </p>
-              <p>
-                <span className="font-semibold">Created on:</span>{" "}
-                {moment.unix(data.getProfile.created_at).format("YYYY-MM-DD")}
-              </p>
+              <table class="table-auto w-full">
+                <thead className="text-center border-b-2 border-white">
+                  <tr>
+                    <th>Tier</th>
+                    <th>Accounts</th>
+                    <th>No of accounts</th>
+                    <th>Budgets</th>
+                    <th>No of budgets</th>
+                    <th>Targets</th>
+                    <th>No of targets</th>
+                    <th>Generate Reports</th>
+                    <th>AI assistant</th>
+                  </tr>
+                </thead>
+                <tbody className="text-center">
+                  <tr>
+                    <td>{data.getProfile.package.name}</td>
+                    <td>{data.getProfile.package.accounts ? "✔️" : "❌"}</td>
+                    <td>{data.getProfile.package.no_of_accounts}</td>
+                    <td>{data.getProfile.package.budgets ? "✔️" : "❌"}</td>
+                    <td>{data.getProfile.package.no_of_budgets}</td>
+                    <td>{data.getProfile.package.targets ? "✔️" : "❌"}</td>
+                    <td>{data.getProfile.package.no_of_targets}</td>
+                    <td>{data.getProfile.package.pdf_reports ? "✔️" : "❌"}</td>
+                    <td>
+                      {data.getProfile.package.ai_assistant ? "✔️" : "❌"}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
           <hr className="my-4" />

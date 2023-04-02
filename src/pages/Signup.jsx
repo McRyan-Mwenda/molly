@@ -15,6 +15,7 @@ const CREATE_USER = gql`
     $phone_number: String!
     $first_name: String!
     $last_name: String
+    $workspace_name: String!
     $password: String!
     $password2: String!
   ) {
@@ -23,6 +24,7 @@ const CREATE_USER = gql`
       phone_number: $phone_number
       first_name: $first_name
       last_name: $last_name
+      workspace_name: $workspace_name
       password: $password
       password2: $password2
     ) {
@@ -80,26 +82,17 @@ const Signup = () => {
                 phone_number: e.target.phone_number.value,
                 first_name: e.target.first_name.value,
                 last_name: e.target.last_name.value,
+                workspace_name: e.target.workspace_name.value,
                 password: e.target.password.value,
                 password2: e.target.password2.value,
               },
             });
           }}
         >
-          <div className="mb-4">
-            <p className="text-gray-600 text-sm text-center">
-              Required fields are marked with{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
-            </p>
-          </div>
+          <div className="mb-4"></div>
           <div className="mb-4">
             <label htmlFor="email" className="text-gray-600">
-              Email{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
+              Email
             </label>
             <input
               type="email"
@@ -111,10 +104,7 @@ const Signup = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="phone_number" className="text-gray-600">
-              Phone Number{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
+              Phone Number
             </label>
             <input
               type="text"
@@ -126,10 +116,7 @@ const Signup = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="first_name" className="text-gray-600">
-              First name{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
+              First name
             </label>
             <input
               type="text"
@@ -151,11 +138,19 @@ const Signup = () => {
             />
           </div>
           <div className="mb-4">
+            <label htmlFor="workspace_name" className="text-gray-600">
+              Workspace Name
+            </label>
+            <input
+              type="text"
+              name="workspace_name"
+              id="workspace_name"
+              className="block w-full px-2 border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 bg-slate-50"
+            />
+          </div>
+          <div className="mb-4">
             <label htmlFor="password" className="text-gray-600">
-              Password{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
+              Password
             </label>
             <input
               type="password"
@@ -167,10 +162,7 @@ const Signup = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="password2" className="text-gray-600">
-              Confirm password{" "}
-              <sup>
-                <i className="bi bi-asterisk text-red-400"></i>
-              </sup>
+              Confirm password
             </label>
             <input
               type="password"
