@@ -23,7 +23,7 @@ const GET_TRANSACTION = gql`
   }
 `;
 
-const Reports2 = ({ budget_data }) => {
+const Reports3 = ({ target_data }) => {
   const dispatch = useDispatch();
 
   const [lineData, setLineData] = useState({});
@@ -34,7 +34,7 @@ const Reports2 = ({ budget_data }) => {
     error,
     data: reportData,
   } = useQuery(GET_TRANSACTION, {
-    variables: { id: budget_data.account.id },
+    variables: { id: target_data.account.id },
   });
 
   if (reportData) {
@@ -50,12 +50,12 @@ const Reports2 = ({ budget_data }) => {
     dispatch(setIsLoading({ status: false }));
   }
 
-  const getStats = (reportData, budget_data) => {
+  const getStats = (reportData, target_data) => {
     const payable = reportData.getTransactionsByAccount.filter(
-      (record) => record.transaction_type === "payable"
+      (record) => record.transaction_type === "receivable"
     );
 
-    const budgetAmount = budget_data.budget_amount;
+    const targetAmount = target_data.target_amount;
 
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
@@ -68,24 +68,24 @@ const Reports2 = ({ budget_data }) => {
       labels: payable.map((record) => `ID: ${record.id}`),
       datasets: [
         {
-          label: "Payable Transactions Trend",
+          label: "Receivable Transactions Trend",
           fill: true,
-          borderColor: documentStyle.getPropertyValue("--orange-500"),
+          borderColor: documentStyle.getPropertyValue("--green-500"),
           tension: 0.4,
           yAxisID: "y",
-          backgroundColor: "rgba(251, 146, 60,0.2)",
+          backgroundColor: "rgba(74, 222, 128,0.2)",
           data: payable.map((record) =>
             parseFloat(record.transaction_amount.replace(",", ""))
           ),
         },
         {
-          label: "Active Budget",
+          label: "Active Target",
           fill: true,
           borderColor: documentStyle.getPropertyValue("--gray-500"),
           tension: 0.4,
           yAxisID: "y1",
           backgroundColor: "rgba(107, 114, 128,0.2)",
-          data: payable.map(() => budgetAmount),
+          data: payable.map(() => targetAmount),
         },
       ],
     };
@@ -141,7 +141,7 @@ const Reports2 = ({ budget_data }) => {
   };
 
   useEffect(() => {
-    reportData && getStats(reportData, budget_data);
+    reportData && getStats(reportData, target_data);
   }, [reportData]);
 
   return (
@@ -165,4 +165,4 @@ const Reports2 = ({ budget_data }) => {
   );
 };
 
-export default Reports2;
+export default Reports3;

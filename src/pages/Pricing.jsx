@@ -104,6 +104,7 @@ const Pricing = () => {
         <Column field="teams" header="Teams"></Column>
         <Column field="can_generate_report" header="PDF report"></Column>
         <Column field="AI_assistant" header="AI assistant"></Column>
+        <Column field="ads" header="Has Ads"></Column>
       </DataTable>
     </div>
   );

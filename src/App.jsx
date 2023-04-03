@@ -6,11 +6,12 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
-import Teams from "./pages/Workspace";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
+import Teams from "./pages/Workspace";
 import Contacts from "./pages/Contacts";
+import Target from "./components/Target";
 import Budget from "./components/Budget";
 import Dashboard from "./pages/Dashboard";
 import Billing from "./components/Billing";
@@ -101,6 +102,7 @@ const App = () => {
         <Route path="/app/billing/:slug" element={<Billing />} />
         <Route path="/app/dashboard/profile" element={<Profile />} />
         <Route path="/app/dashboard/budget/:id" element={<Budget />} />
+        <Route path="/app/dashboard/target/:id" element={<Target />} />
         <Route path="/app/dashboard/account/:id" element={<Account />} />
       </Routes>
       {/* routes */}
