@@ -10,6 +10,7 @@ const GET_MEMBER = gql`
       user {
         id
         email
+        phone_number
         first_name
         last_name
       }
@@ -45,7 +46,7 @@ const GetMember = () => {
           const list = (
             <>
               <div
-                className="border rounded-md shadow hover:shadow-md p-4 bg-gray-50 mb-4"
+                className="border rounded-md shadow p-4 mb-4"
                 key={index}
               >
                 <div className="flex items-center justify-between">
@@ -63,10 +64,16 @@ const GetMember = () => {
                   </button>
                 </div>
                 <hr className="mb-2" />
-                <p>
-                  <span className="font-semibold">Username:</span>{" "}
-                  {member.user.email}
-                </p>
+                <div className="flex justify-between items-center">
+                  <p>
+                    <span className="font-semibold">Username:</span>{" "}
+                    {member.user.email}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Phone:</span>{" "}
+                    {member.user.phone_number}
+                  </p>
+                </div>
               </div>
             </>
           );

@@ -35,6 +35,7 @@ const GET_MEMBER = gql`
       user {
         id
         email
+        phone_number
         first_name
         last_name
       }
