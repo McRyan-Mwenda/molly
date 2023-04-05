@@ -1,4 +1,3 @@
-import moment from "moment";
 import TwoFA from "./2fa/TwoFA";
 import PageTitle from "../assets/title";
 import { Badge } from "primereact/badge";
@@ -7,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
+import { downgradeToFree } from "../reducers/package";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDeactivate from "./2fa/ConfirmDeactivate";
 
@@ -133,7 +133,7 @@ const Profile = () => {
               <table class="table-auto w-full">
                 <thead className="text-center border-b-2 border-white">
                   <tr>
-                    <th>Tier</th>
+                    <th>Plan</th>
                     <th>Accounts</th>
                     <th>No of accounts</th>
                     <th>Budgets</th>
@@ -164,6 +164,15 @@ const Profile = () => {
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div className="my-4">
+              <Button
+                type="submit"
+                label="Cancel current plan & revert to 'Free' plan."
+                severity="primary"
+                className="page-fonts absolute hover:shadow-md"
+                onClick={() => dispatch(downgradeToFree())}
+              />
             </div>
           </div>
           <hr className="my-4" />

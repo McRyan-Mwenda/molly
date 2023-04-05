@@ -46,7 +46,7 @@ const Pricing = () => {
             Best for small to mid size enterprises finance management
           </p>
           <p className="mb-2 text-lg text-center font-semibold">
-            $5 / month only
+            $10 / month only
           </p>
           <Link to="/app/billing/standard">
             <Button
