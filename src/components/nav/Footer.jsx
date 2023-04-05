@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="px-4 py-8 bg-slate-200" id="footer">
       <div className="flex justify-between items-center">
-        <p>&copy; 2023 FinanceFluid 💵</p>
+        <p>&copy; 2023 FinanceFluent 💵</p>
         <div className="flex items-center">
           <i class="bi bi-dot"></i>
           <Link

@@ -56,11 +56,11 @@ const Profile = () => {
 
   const checkBg = (packageTier) => {
     if (packageTier === "Pro") {
-      return setBg("#34d399");
+      return setBg("rgb(52, 211, 153, 0.5)");
     } else if (packageTier === "Standard") {
-      return setBg("#fb923c");
+      return setBg("rgb(251, 146, 60, 0.5)");
     } else if (packageTier === "Free") {
-      return setBg("#a1a1aa");
+      return setBg("rgb(161, 161, 170, 0.5)");
     }
   };
 
@@ -123,56 +123,29 @@ const Profile = () => {
               <span className="font-semibold">Last name:</span>{" "}
               {data.getProfile.user.last_name}
             </p>
-            <br />
+            <hr className="my-2" />
             <div
-              className="py-2 px-4 rounded-md border border-zinc-400 text-white"
+              className="py-2 px-4 rounded-md border border-zinc-200 text-white"
               style={{
                 backgroundColor: bg,
               }}
             >
-              <table class="table-auto w-full">
-                <thead className="text-center border-b-2 border-white">
-                  <tr>
-                    <th>Plan</th>
-                    <th>Accounts</th>
-                    <th>No of accounts</th>
-                    <th>Budgets</th>
-                    <th>No of budgets</th>
-                    <th>Targets</th>
-                    <th>No of targets</th>
-                    <th>Teams</th>
-                    <th>No of members</th>
-                    <th>Generate Reports</th>
-                    <th>AI assistant</th>
-                  </tr>
-                </thead>
-                <tbody className="text-center">
-                  <tr>
-                    <td>{data.getProfile.package.name}</td>
-                    <td>{data.getProfile.package.accounts ? "✔️" : "❌"}</td>
-                    <td>{data.getProfile.package.no_of_accounts}</td>
-                    <td>{data.getProfile.package.budgets ? "✔️" : "❌"}</td>
-                    <td>{data.getProfile.package.no_of_budgets}</td>
-                    <td>{data.getProfile.package.targets ? "✔️" : "❌"}</td>
-                    <td>{data.getProfile.package.no_of_targets}</td>
-                    <td>{data.getProfile.package.teams ? "✔️" : "❌"}</td>
-                    <td>{data.getProfile.package.no_of_teams}</td>
-                    <td>{data.getProfile.package.pdf_reports ? "✔️" : "❌"}</td>
-                    <td>
-                      {data.getProfile.package.ai_assistant ? "✔️" : "❌"}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="my-4">
-              <Button
-                type="submit"
-                label="Cancel current plan & revert to 'Free' plan."
-                severity="primary"
-                className="page-fonts absolute hover:shadow-md"
-                onClick={() => dispatch(downgradeToFree())}
-              />
+              <div className="flex justify-between items-center">
+                <h1 className="text-3xl">
+                  Current plan:{" "}
+                  <span className="font-semibold">
+                    {data.getProfile.package.name}
+                  </span>
+                </h1>
+                <Button
+                  type="submit"
+                  label="Cancel current plan & revert to 'Free' plan."
+                  severity="danger"
+                  outlined
+                  className="page-fonts absolute hover:shadow-md"
+                  onClick={() => dispatch(downgradeToFree())}
+                />
+              </div>
             </div>
           </div>
           <hr className="my-4" />

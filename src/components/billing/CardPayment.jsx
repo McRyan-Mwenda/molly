@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { upgradeToStandard } from "../../reducers/package";
 
-const CardPaymentStandard = ({ slug }) => {
+const CardPayment = ({ slug }) => {
   const dispatch = useDispatch();
 
   return (
@@ -91,4 +91,4 @@ const CardPaymentStandard = ({ slug }) => {
   );
 };
 
-export default CardPaymentStandard;
+export default CardPayment;

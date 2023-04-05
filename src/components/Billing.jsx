@@ -1,10 +1,9 @@
 import PageTitle from "../assets/title";
 import { useParams } from "react-router-dom";
-import CardPaymentPro from "./billing/CardPaymentPro";
-import MpesaPaymentPro from "./billing/MpesaPaymentPro";
+import CardPayment from "./billing/CardPayment";
+import MpesaPayment from "./billing/MpesaPayment";
+import BillingHistory from "./billing/BillingHistory";
 import { Accordion, AccordionTab } from "primereact/accordion";
-import CardPaymentStandard from "./billing/CardPaymentStandard";
-import MpesaPaymentStandard from "./billing/MpesaPaymentStandard";
 
 const Billing = () => {
   PageTitle("Billing");
@@ -32,29 +31,14 @@ const Billing = () => {
             width: "800px",
           }}
         >
-          {slug === "standard" ? (
-            <>
-              <Accordion activeIndex={0}>
-                <AccordionTab header="Pay via card">
-                  <CardPaymentStandard slug={slug} />
-                </AccordionTab>
-                <AccordionTab header="Pay via mpesa">
-                  <MpesaPaymentStandard slug={slug} />
-                </AccordionTab>
-              </Accordion>
-            </>
-          ) : (
-            <>
-              <Accordion activeIndex={0}>
-                <AccordionTab header="Pay via card">
-                  <CardPaymentPro slug={slug} />
-                </AccordionTab>
-                <AccordionTab header="Pay via mpesa">
-                  <MpesaPaymentPro slug={slug} />
-                </AccordionTab>
-              </Accordion>
-            </>
-          )}
+          <Accordion activeIndex={0} className="page-fonts">
+            <AccordionTab header="Pay via card">
+              <CardPayment slug={slug} />
+            </AccordionTab>
+            <AccordionTab header="Pay via mpesa">
+              <MpesaPayment slug={slug} />
+            </AccordionTab>
+          </Accordion>
         </div>
         <div className="p-4 border border-zinc-200 rounded-md shadow text-lg">
           <p className="mb-2 font-bold">Billing Summary</p>
@@ -129,6 +113,9 @@ const Billing = () => {
                     <i class="bi bi-arrow-right-short"></i> Team management
                   </li>
                   <li>
+                    <i class="bi bi-arrow-right-short"></i> Generate reports
+                  </li>
+                  <li>
                     <i class="bi bi-arrow-right-short"></i> AI assistance &
                     analysis
                   </li>
@@ -139,9 +126,31 @@ const Billing = () => {
                 </ul>
               </>
             )}
+            <hr className="my-4" />
+            <span
+              style={{
+                display: "block",
+                textAlign: "center",
+                margin: "0 auto",
+                width: "fit-content",
+              }}
+            >
+              <a href="https://intasend.com/security" target="_blank">
+                <img
+                  src="https://intasend-prod-static.s3.amazonaws.com/img/trust-badges/intasend-trust-badge-with-mpesa-hr-light.png"
+                  width="375px"
+                  alt="IntaSend Secure Payments (PCI-DSS Compliant)"
+                />
+              </a>
+            </span>
           </div>
         </div>
       </div>
+      <hr className="my-4" />
+      <h1 className="text-2xl">Payment history</h1>
+      <hr className="my-4" />
+      <BillingHistory />
+      <hr className="my-4" />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { upgradeToStandard } from "../../reducers/package";
 
-const MpesaPaymentStandard = ({ slug }) => {
+const MpesaPayment = ({ slug }) => {
   const dispatch = useDispatch();
 
   return (
@@ -51,4 +51,4 @@ const MpesaPaymentStandard = ({ slug }) => {
   );
 };
 
-export default MpesaPaymentStandard;
+export default MpesaPayment;
