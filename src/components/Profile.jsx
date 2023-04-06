@@ -6,14 +6,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { setIsLoading } from "../reducers/loading";
-import { downgradeToFree } from "../reducers/package";
+import BillingHistory from "./billing/BillingHistory";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmDeactivate from "./2fa/ConfirmDeactivate";
+import CancelPlan from "./billing/CancelPlan";
 
 const GET_PROFILE = gql`
   query {
     getProfile {
       workspace_uid
+      is_paid_user
       is_employee
       created_at
       user {
@@ -137,14 +139,15 @@ const Profile = () => {
                     {data.getProfile.package.name}
                   </span>
                 </h1>
-                <Button
-                  type="submit"
-                  label="Cancel current plan & revert to 'Free' plan."
-                  severity="danger"
-                  outlined
-                  className="page-fonts absolute hover:shadow-md"
-                  onClick={() => dispatch(downgradeToFree())}
-                />
+                <div className="flex items-center">
+                  {data.getProfile.is_paid_user && <BillingHistory />}
+                  {packageTier !== "Free" && (
+                    <>
+                      <span className="mx-2"></span>
+                      <CancelPlan />
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

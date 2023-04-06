@@ -2,7 +2,6 @@ import PageTitle from "../assets/title";
 import { useParams } from "react-router-dom";
 import CardPayment from "./billing/CardPayment";
 import MpesaPayment from "./billing/MpesaPayment";
-import BillingHistory from "./billing/BillingHistory";
 import { Accordion, AccordionTab } from "primereact/accordion";
 
 const Billing = () => {
@@ -24,11 +23,11 @@ const Billing = () => {
         </button>
       </div>
       <hr className="my-4" />
-      <div className="flex justify-evenly">
+      <div className="flex justify-between">
         <div
-          className="p-4 border border-zinc-200 rounded-md shadow"
+          className="p-4 border border-zinc-200 rounded-md shadow h-fit"
           style={{
-            width: "800px",
+            width: "60%",
           }}
         >
           <Accordion activeIndex={0} className="page-fonts">
@@ -40,12 +39,17 @@ const Billing = () => {
             </AccordionTab>
           </Accordion>
         </div>
-        <div className="p-4 border border-zinc-200 rounded-md shadow text-lg">
+        <div
+          className="p-4 border border-zinc-200 rounded-md shadow text-lg mx-2"
+          style={{
+            width: "40%",
+          }}
+        >
           <p className="mb-2 font-bold">Billing Summary</p>
           <table
             class="table-auto"
             style={{
-              width: "400px",
+              width: "100%",
             }}
           >
             <thead className="border-b border-zinc-400">
@@ -83,10 +87,16 @@ const Billing = () => {
                     <i class="bi bi-arrow-right-short"></i> No ads
                   </li>
                   <li>
+                    <i class="bi bi-arrow-right-short"></i> Budget setting
+                  </li>
+                  <li>
                     <i class="bi bi-arrow-right-short"></i> Target setting
                   </li>
                   <li>
                     <i class="bi bi-arrow-right-short"></i> Multiple accounts
+                  </li>
+                  <li>
+                    <i class="bi bi-arrow-right-short"></i> Data analysis
                   </li>
                   <li>
                     <i class="bi bi-arrow-right-short"></i> Team management
@@ -104,13 +114,16 @@ const Billing = () => {
                     <i class="bi bi-arrow-right-short"></i> No ads
                   </li>
                   <li>
+                    <i class="bi bi-arrow-right-short"></i> Budget setting
+                  </li>
+                  <li>
                     <i class="bi bi-arrow-right-short"></i> Target setting
                   </li>
                   <li>
                     <i class="bi bi-arrow-right-short"></i> Multiple accounts
                   </li>
                   <li>
-                    <i class="bi bi-arrow-right-short"></i> Team management
+                    <i class="bi bi-arrow-right-short"></i> Data analysis
                   </li>
                   <li>
                     <i class="bi bi-arrow-right-short"></i> Generate reports
@@ -144,12 +157,9 @@ const Billing = () => {
               </a>
             </span>
           </div>
+          <hr className="my-4" />
         </div>
       </div>
-      <hr className="my-4" />
-      <h1 className="text-2xl">Payment history</h1>
-      <hr className="my-4" />
-      <BillingHistory />
       <hr className="my-4" />
     </div>
   );
