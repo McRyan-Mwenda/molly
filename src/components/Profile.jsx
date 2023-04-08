@@ -15,6 +15,7 @@ const GET_PROFILE = gql`
   query {
     getProfile {
       workspace_uid
+      payment_method
       is_paid_user
       is_employee
       created_at
@@ -140,11 +141,17 @@ const Profile = () => {
                   </span>
                 </h1>
                 <div className="flex items-center">
-                  {data.getProfile.is_paid_user && <BillingHistory />}
+                  {data.getProfile.is_paid_user && (
+                    <BillingHistory
+                      payment_method={data.getProfile.payment_method}
+                    />
+                  )}
                   {packageTier !== "Free" && (
                     <>
                       <span className="mx-2"></span>
-                      <CancelPlan />
+                      <CancelPlan
+                        payment_method={data.getProfile.payment_method}
+                      />
                     </>
                   )}
                 </div>
