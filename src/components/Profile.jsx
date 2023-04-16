@@ -21,7 +21,6 @@ const GET_PROFILE = gql`
       created_at
       user {
         email
-        phone_number
         first_name
         last_name
       }
@@ -113,10 +112,6 @@ const Profile = () => {
             <p>
               <span className="font-semibold">Email:</span>{" "}
               {data.getProfile.user.email}
-            </p>
-            <p>
-              <span className="font-semibold">Phone:</span>{" "}
-              {data.getProfile.user.phone_number}
             </p>
             <p>
               <span className="font-semibold">First name:</span>{" "}
