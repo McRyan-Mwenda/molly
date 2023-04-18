@@ -52,7 +52,7 @@ const BillingHistory = ({ payment_method }) => {
         onClick={() => {
           dispatch(removeOldNotification());
           
-          requestBilling({ variables: { payment_method: payment_method } });
+          // requestBilling({ variables: { payment_method: payment_method } });
         }}
       />
     </div>

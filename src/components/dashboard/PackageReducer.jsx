@@ -14,11 +14,12 @@ const GET_PROFILE = gql`
   query {
     getProfile {
       workspace_uid
+      payment_method
+      is_paid_user
       is_employee
       created_at
       user {
         email
-        phone_number
         first_name
         last_name
       }

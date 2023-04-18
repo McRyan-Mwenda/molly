@@ -26,7 +26,6 @@ const GET_PROFILE = gql`
       created_at
       user {
         email
-        phone_number
         first_name
         last_name
       }
@@ -58,7 +57,6 @@ const CancelPlan = ({ payment_method }) => {
 
   if (data) {
     dispatch(setIsLoading({ status: false }));
-    dispatch(downgradeToFree());
     dispatch(
       createNewNotification({
         type: "success",
@@ -95,11 +93,13 @@ const CancelPlan = ({ payment_method }) => {
         onClick={() => {
           dispatch(removeOldNotification());
 
-          cancelPlan({
-            variables: {
-              payment_method: payment_method,
-            },
-          });
+          dispatch(downgradeToFree());
+
+          // cancelPlan({
+          //   variables: {
+          //     payment_method: payment_method,
+          //   },
+          // });
         }}
         autoFocus
       />

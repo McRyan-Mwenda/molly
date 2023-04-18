@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { Button } from "primereact/button";
 import { useMutation, gql } from "@apollo/client";
-import { upgradeToStandard, upgradeToPro } from "../../reducers/package";
 import { setIsLoading } from "../../reducers/loading";
 import {
   createNewNotification,
   removeOldNotification,
 } from "../../reducers/notifications";
+import BillingInfo from "./BillingInfo";
 
 const MAKE_PAYMENT = gql`
   mutation ($plan: String!) {
@@ -26,7 +26,6 @@ const GET_PROFILE = gql`
       created_at
       user {
         email
-        phone_number
         first_name
         last_name
       }
@@ -63,9 +62,6 @@ const MakePayment = ({ slug }) => {
         message: "Make payment to begin processing",
       })
     );
-    slug === "standard"
-      ? dispatch(upgradeToStandard())
-      : dispatch(upgradeToPro());
   }
 
   if (loading) {
@@ -97,6 +93,9 @@ const MakePayment = ({ slug }) => {
       ) : (
         <>
           <form
+            style={{
+              minHeight: "450px",
+            }}
             onSubmit={(e) => {
               e.preventDefault();
 
@@ -109,76 +108,18 @@ const MakePayment = ({ slug }) => {
               });
             }}
           >
-            <div className="mb-2">
-              <label htmlFor="cardholder_name" id="cardholder_name">
-                Cardholder name
-              </label>
-              <input
-                type="text"
-                name="cardholder_name"
-                id="cardholder_name"
-                placeholder="e.g. John Doe"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="card_number" id="card_number">
-                Card number
-              </label>
-              <input
-                type="text"
-                name="card_number"
-                id="card_number"
-                placeholder="e.g. 987564378365"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="expiration_year" id="expiration_year">
-                Expiration year
-              </label>
-              <input
-                type="number"
-                name="expiration_year"
-                id="expiration_year"
-                min="1900"
-                max="2099"
-                placeholder="e.g. 2024"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="expiration_month" id="expiration_month">
-                Expiration month
-              </label>
-              <input
-                type="number"
-                name="expiration_month"
-                id="expiration_month"
-                min="01"
-                max="12"
-                placeholder="e.g. 02"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            <div className="mb-2">
-              <label htmlFor="cvc" id="cvc">
-                CVC
-              </label>
-              <input
-                type="number"
-                name="cvc"
-                id="cvc"
-                placeholder="e.g. 100"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
+            <BillingInfo />
             <div className="mt-4">
               <Button
                 type="submit"
-                label="Submit"
+                label={`Subscribe to ${
+                  slug === "standard" ? "Standard" : "Pro"
+                } plan`}
                 severity="success"
                 className="w-full page-fonts absolute hover:shadow-md"
+                style={{
+                  marginTop: "10.5rem",
+                }}
                 outlined
                 loading={loading}
               />

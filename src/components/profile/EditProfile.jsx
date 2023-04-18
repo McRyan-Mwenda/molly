@@ -31,16 +31,28 @@ const UPDATE_USER = gql`
 const GET_PROFILE = gql`
   query {
     getProfile {
-      tier
-      account_limit
-      pdf_gen
-      ai_predictions
+      workspace_uid
+      payment_method
+      is_paid_user
+      is_employee
       created_at
       user {
         email
-        phone_number
         first_name
         last_name
+      }
+      package {
+        name
+        accounts
+        no_of_accounts
+        budgets
+        no_of_budgets
+        targets
+        no_of_targets
+        teams
+        no_of_teams
+        pdf_reports
+        ai_assistant
       }
     }
   }
