@@ -13,13 +13,10 @@ import {
 import App from "./App";
 import store from "./store";
 
-import "./index.css";
-import "primeicons/primeicons.css";
-import "primereact/resources/primereact.min.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "./css/index.css";
 
 const httpLink = createHttpLink({
-  uri: "http://127.0.0.1:8000/graphql/",
+  uri: "https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clgvzsum914gl01ui89zpgcpp/master",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,7 +24,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `JWT ${token}` : "",
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
