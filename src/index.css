@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Quicksand&family=Raleway&family=Ubuntu&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: rgb(179, 177, 177) !important;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136) !important;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 100, 100) !important;
+}
+
+html::-webkit-scrollbar-thumb:active {
+  background: rgb(68, 68, 68) !important;
+}
+
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  scroll-behavior: smooth !important;
+  font-family: "Ubuntu", sans-serif !important;
+}
+
+.font_josefin {
+  font-family: "Josefin Sans", sans-serif !important;
+}
+
+.font_raleway {
+  font-family: "Raleway", sans-serif !important;
+}
+
+.font_quicksand {
+  font-family: "Quicksand", sans-serif !important;
+}
+
+.font_ubuntu {
+  font-family: "Ubuntu", sans-serif !important;
+}
+
+.App {
+  min-height: 92vh !important;
+}
+
+nav {
+  width: 100%;
+  z-index: 99;
+  margin: 0;
+}
+
+.logo {
+  font-family: "Josefin Sans", sans-serif !important;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.nav-link {
+  font-family: "Josefin Sans", sans-serif !important;
+  font-size: large;
+  margin: 0 0.75rem;
+}
+
+.nav-link:hover {
+  color: #10b981;
+}
+
+.nav-menu {
+  background-color: white;
+  height: 100%;
+  padding: 1rem 2rem;
+  border-radius: 5rem;
+}
+
+.app-button {
+  background-color: #10b981;
+  border-radius: 5rem;
+  padding: 0.25rem 0.75rem;
+  color: #f8fafc;
+}
+
+.app-button:hover {
+  background-color: #34d399;
+  color: white;
+}
+
+.nav-link,
+.app-button {
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}

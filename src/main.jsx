@@ -13,7 +13,7 @@ import {
 import App from "./App";
 import store from "./store";
 
-import "./css/index.css";
+import "./index.css";
 
 const httpLink = createHttpLink({
   uri: "https://api-eu-central-1-shared-euc1-02.hygraph.com/v2/clgvzsum914gl01ui89zpgcpp/master",
