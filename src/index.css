@@ -11,8 +11,10 @@
 
 a,
 .menu-link,
-.social a {
+.social a,
+.slider-arrow {
   transition: 200ms linear;
+  cursor: pointer !important;
 }
 
 html::-webkit-scrollbar {
@@ -42,7 +44,8 @@ body {
   background-color: white;
 }
 
-iframe {
+iframe,
+.iframe-container {
   border-radius: 0.75rem;
 }
 
