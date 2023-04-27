@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
 import {
@@ -11,7 +10,6 @@ import {
 } from "@apollo/client";
 
 import App from "./App";
-import store from "./store";
 
 import "./index.css";
 
@@ -37,11 +35,9 @@ const client = new ApolloClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>
 );
