@@ -3,7 +3,7 @@ import apple from "./img/applestore.webp";
 
 const Footer = () => {
   return (
-    <div className="bg-gradient-to-t from-emerald-50 to-white mt-12 pt-2">
+    <div className="bg-gradient-to-t from-emerald-50 to-white mt-20 pt-2">
       <div className="flex justify-between mx-36 pb-16">
         <div className="mt-2">
           <h4 className="text-xl font-semibold mb-2">Download Our App</h4>

@@ -9,7 +9,7 @@ const Pricing = () => {
         Choose Your Plan
       </h3>
       <div className="flex justify-between items-center mx-36 mb-20">
-        <div className="border border-gray-300 rounded-md shadow-md p-4 flex flex-col items-center">
+        <div className="rounded-md shadow-md p-4 flex flex-col items-center">
           <div className="text-center rounded-md bg-gradient-to-b from-emerald-50 to-white w-full p-4">
             <p className="font-bold text-lg mb-2">Free</p>
             <span
@@ -59,7 +59,7 @@ const Pricing = () => {
           </div>
         </div>
         <div className="mx-4"></div>
-        <div className="border border-gray-300 rounded-md shadow-md p-4 flex flex-col items-center">
+        <div className="rounded-md shadow-md p-4 flex flex-col items-center">
           <div className="text-center rounded-md bg-gradient-to-b from-emerald-50 to-white w-full p-4">
             <p className="font-bold text-lg mb-2">Standard</p>
             <span
@@ -109,7 +109,7 @@ const Pricing = () => {
           </div>
         </div>
         <div className="mx-4"></div>
-        <div className="border border-gray-300 rounded-md shadow-md p-4 flex flex-col items-center">
+        <div className="rounded-md shadow-md p-4 flex flex-col items-center">
           <div className="text-center rounded-md bg-gradient-to-b from-emerald-50 to-white w-full p-4">
             <p className="font-bold text-lg mb-2">Pro</p>
             <span
