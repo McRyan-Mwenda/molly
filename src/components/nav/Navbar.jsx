@@ -10,7 +10,7 @@ const Navbar = () => {
             Solutions <i className="bi bi-caret-down-fill"></i>
           </p>
           <div
-            className="dropdown-content pt-4 px-2 bg-gradient-to-t from-emerald-50 to-white"
+            className="dropdown-content pt-4 px-2 bg-gradient-to-t from-emerald-50 to-white shadow-sm"
             style={{
               minWidth: "170px",
             }}
@@ -28,7 +28,7 @@ const Navbar = () => {
             Resources <i className="bi bi-caret-down-fill"></i>
           </p>
           <div
-            className="dropdown-content pt-4 px-2 bg-gradient-to-t from-emerald-50 to-white"
+            className="dropdown-content pt-4 px-2 bg-gradient-to-t from-emerald-50 to-white shadow-sm"
             style={{
               minWidth: "170px",
             }}
