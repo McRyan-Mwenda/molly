@@ -1,33 +1,33 @@
-import { Routes, Route } from "react-router-dom";
+import styles from "./style";
+import { About, Business, CardDeal, Clients, CTA, Footer, Navbar, Stats, Testimonials, Hero } from "./components";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Pricing from "./pages/Pricing";
-import Contacts from "./pages/Contacts";
-import Footer from "./components/nav/Footer";
-import Navbar from "./components/nav/Navbar";
-
-const App = () => {
-  return (
-    <div className="App">
-      {/* navbar */}
-      <Navbar />
-      {/* navbar */}
-
-      {/* routes */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/contacts" element={<Contacts />} />
-      </Routes>
-      {/* routes */}
-
-      {/* footer */}
-      <Footer />
-      {/* footer */}
+const App = () => (
+  <div className="bg-primary w-full overflow-hidden">
+    <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.boxWidth}`}>
+        <Navbar />
+      </div>
     </div>
-  );
-};
+
+    <div className={`bg-primary ${styles.flexStart}`}>
+      <div className={`${styles.boxWidth}`}>
+        <Hero />
+      </div>
+    </div>
+    
+    <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={`${styles.boxWidth}`}>
+        <Stats />
+        <Business />
+        <About />
+        <CardDeal />
+        <Testimonials />
+        <Clients />
+        <CTA />
+        <Footer />
+      </div>
+    </div>
+  </div>
+);
 
 export default App;
