@@ -1,9 +1,20 @@
 import React from 'react'
-import { apple, about, google } from '../assets'
+import { apple, about, google, what } from '../assets'
 import styles, { layout } from '../style'
 
 const About = () => (
+  <div>
+    <div className='flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2'>
+            <img src={what} alt='discount' className='w-[32px] h-[32px]'/>
+            <p className={`${styles.paragraph} ml-2`}>
+              <span className='text-white'>Learn</span> more about {" "}
+              <span className='text-white'>Us</span> here.
+            </p>          
+          </div>
     <section id='about' className={layout.sectionReverse}>
+    
+    
+
       <div className={layout.sectionImgReverse}>
         {/* the image */}
         <img src={about} alt='about' className='w-[70%] h-[90%] relative z-[5]'/>
@@ -27,6 +38,7 @@ const About = () => (
         </div>
       </div>
     </section>
+  </div>
   )
 
 

@@ -14,8 +14,30 @@ export const navLinks = [
     title: "About",
   },
   {
+    id: "resources",
+    title: "Resources",
+    subLinks: [
+      {
+        id: "upcoming-events",
+        title: "",
+      },
+      {
+        id: "blog",
+        title: "Blog",
+      },
+      {
+        id: "faqs",
+        title: "FAQs",
+      },
+    ]
+  },
+  {
     id: "clients",
     title: "Clients",
+  },
+  {
+    id: "contacts",
+    title: "Contacts",
   },
 ];
 

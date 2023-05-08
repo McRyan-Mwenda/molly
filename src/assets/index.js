@@ -20,10 +20,12 @@ import instagram from "./instagram.svg";
 import linkedin from "./linkedin.svg";
 import twitter from "./twitter.svg";
 import about from "./abt.png"
+import what from "./what.png"
 
 export {
   bill,
   about,
+  what,
   card,
   logo2,
   logo3,
