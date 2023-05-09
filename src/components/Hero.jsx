@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../style'
 import { discount, robot, Robo, Robo2 } from '../assets'
 import GoToApp from './GoToApp'
+import {SectionWrapper} from "../hoc";
 
 const Hero = () => (
     <div>
@@ -50,4 +51,4 @@ const Hero = () => (
   )
 
 
-export default Hero
+  export default SectionWrapper(Hero, "hero")

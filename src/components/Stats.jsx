@@ -1,6 +1,7 @@
 import React from 'react'
 import { stats } from '../constants'
 import styles from '../style'
+import {SectionWrapper} from "../hoc";
 
 const Stats = () => (
     <section className={`${styles.flexCenter} flex- flex-warp sm:mb-20 mb-6`}>
@@ -14,4 +15,4 @@ const Stats = () => (
   )
 
 
-export default Stats
+  export default SectionWrapper(Stats, "Stats")
