@@ -8,7 +8,7 @@ const Testimonials = () => (
   <section id='clients' className={`${styles.paddingY} ${styles.flexCenter} flex-col relative`}>
 
     {/* green gradient */}
-    <div className='absolute z-[0] w-[60%] h-[60%] -right-[50%] rounded-full green__gradient'></div>
+    <div className='absolute z-[0] w-[60%] h-[100%] -right-[50%] rounded-full green__gradient'></div>
     
     {/* words */}
 

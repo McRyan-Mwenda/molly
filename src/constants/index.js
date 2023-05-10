@@ -177,15 +177,15 @@ export const footerLinks = [
         link: "https://www.hoobank.com/how-it-works/",
       },
       {
-        name: "Create",
+        name: "Create Account",
         link: "https://www.hoobank.com/create/",
       },
       {
-        name: "Explore",
-        link: "https://www.hoobank.com/explore/",
+        name: "Terms & Services",
+        link: "https://www.hoobank.com/terms-and-services/",
       },
       {
-        name: "Terms & Services",
+        name: "FAQs",
         link: "https://www.hoobank.com/terms-and-services/",
       },
     ],
