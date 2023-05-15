@@ -7,11 +7,11 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className='w-full flex py-6 justify-between items-center navbar fixed bg-black'>
+    <nav className='w-[90%] flex py-6 justify-between items-center navbar fixed z-[5] bg-black-gradient-2 rounded-[20px] box-shadow'>
       <img src={logo2} alt='finance fluent' className='w-[124px] h-[32px]'/>
 
       {/* nav for desktop devices */}
-      <ul className='list-none sm:flex hidden justify-end items-center flex-1 fixed ml-[1200px]'>
+      <ul className='list-none sm:flex hidden justify-end items-center flex-3 fixed ml-[1100px]'>
         {navLinks.map((nav, index) => (
           <li
             key={nav.id}

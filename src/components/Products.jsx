@@ -1,11 +1,12 @@
-import { features } from "../constants";
+import { products } from "../constants";
 import styles, { layout } from "../style";
-import Button from "./Button";
+import Button from "./Book_Button";
+import { SectionWrapper } from "../hoc";
 
-const FeatureCard = ({ icon, title, content, index }) => (
+const ProductCard = ({ icon, title, content, index }) => (
   <div
     className={`flex flex-row p-6 rounded-[20px] ${
-      index !== features.length - 1 ? "mb-6" : "mb-0"
+      index !== products.length - 1 ? "mb-6" : "mb-0"
     } feature-card`}
   >
     <div
@@ -24,9 +25,11 @@ const FeatureCard = ({ icon, title, content, index }) => (
   </div>
 );
 
-const Business = () => (
-  <section id="features" className={layout.section}>
+const Products = () => (
+  <section id="products" className={layout.section}>
     <div className={layout.sectionInfo}>
+      <div className="absolute z-[3] -left-1/2 top-0 w-[50%] h-[50%] rounded-full white__gradient" />
+      <div className="absolute z-[0] -left-1/2 bottom-0 w-[50%] h-[50%] rounded-full pink__gradient" />
       <h2 className={styles.heading2}>
         You do the business, <br className="sm:block hidden" /> we’ll handle
         your statements.
@@ -34,18 +37,21 @@ const Business = () => (
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
         With the click of a button, you can keep track of your finances and your
         business expenditure, keeping track of your debts, budgets and so much
-        more.
+        more. Check out some of the <strong>products</strong> and{" "}
+        <strong>solutions</strong> we offer at <strong>Finance Fluent.</strong>{" "}
+        Click on the button below and book a demo with our support team.
+        
       </p>
 
       <Button styles={`mt-10`} />
     </div>
 
     <div className={`${layout.sectionImg} flex-col`}>
-      {features.map((feature, index) => (
-        <FeatureCard key={feature.id} {...feature} index={index} />
+      {products.map((product, index) => (
+        <ProductCard key={product.id} {...product} index={index} />
       ))}
     </div>
   </section>
 );
 
-export default Business;
+export default SectionWrapper(Products, "products");
