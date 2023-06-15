@@ -1,51 +1,38 @@
-import styles from "./style";
-import {
-  About,
-  Products,
-  Clients,
-  CTA,
-  Footer,
-  Navbar,
-  Contact,
-  Stats,
-  Testimonials,
-  Hero,
-  Resources,
-  StarsCanvas,
-} from "./components";
-import { BrowserRouter } from "react-router-dom";
+import React, {useEffect} from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from '../src/components/Navbar'
+import Home from '../src/pages/home/Home'
+import About from '../src/pages/about/About'
+import Services from '../src/pages/services/Services'
+import Team from '../src/pages/team/Team'
+import Plans from '../src/pages/plans/Plans'
+import Blog from '../src/pages/blog/Blog'
+import Contact from '../src/pages/contact/Contact'
+import NotFound from '../src/pages/notFound/NotFound'
+import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
+import GoToTop from './components/GoToTop'
 
-const App = () => (
-  <BrowserRouter>
-    <div className="bg-primary w-full overflow-hidden">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar />
-        </div>
-      </div>
+const App = () => {
 
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Hero />
-        </div>
-      </div>
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path='about' element={<About />} />
+        <Route path='services' element={<Services />} />
+        <Route path='team' element={<Team />} />
+        <Route path='plans' element={<Plans />} />
+        <Route path='blog' element={<Blog />} />
+        <Route path='contact' element={<Contact />} />
+        <Route path='*' element={<NotFound/>} />
+      </Routes>
+      <GoToTop />
+      <Footer />
+    </BrowserRouter>
+  )
+}
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Stats />
-          <Products />
-          <About />
-          <Resources />
-          <Testimonials />
-          <Clients />
-          <CTA />
-          <Contact />
-          <StarsCanvas />
-          <Footer />
-        </div>
-      </div>
-    </div>
-  </BrowserRouter>
-);
-
-export default App;
+export default App

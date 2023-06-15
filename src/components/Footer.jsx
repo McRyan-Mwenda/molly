@@ -1,75 +1,64 @@
-import React from "react";
-import styles from "../style";
-import { logo2 } from "../assets";
-import { footerLinks, socialMedia } from "../constants";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Logo from "../assets/logo.png"
+import { FaLinkedin } from 'react-icons/fa'
+import { FaFacebookF } from 'react-icons/fa'
+import { AiOutlineTwitter } from 'react-icons/ai'
+import { AiFillInstagram } from 'react-icons/ai'
 
-const Footer = () => (
-  <section className={`${styles.flexCenter} ${styles.paddingY} flex-col`}>
-    <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
-      <div className="flex flex-col flex-1 justify-start mr-10">
-        <img
-          src={logo2}
-          alt="finance-fluent"
-          className="w-[266px] h-[72px] object-contain"
-        />
-        <p className={`${styles.paragraph} mt-4 max-w-[310px] text-justify`}>
-          A digital bank to manage your finances from one platform on the go.
-        </p>
-      </div>
+const Footer = () => {
+  return (
+    <footer>
+        <div className="container footer__container">
+            <article>
+                <Link to="/" className='logo'>
+                    <img src={Logo} alt='Footer Logo'/>
+                </Link>
+                <p>
+                    The Next Generation of Financial Accountability
+                </p>
+                <div className="footer__socials">
+                    <a href='https://linkedin.com' target="_blank" rel='noreferrer noopener'>
+                        <FaLinkedin />
+                    </a>
+                    <a href='https://facebook.com' target="_blank" rel='noreferrer noopener'>
+                        <FaFacebookF />
+                    </a>
+                    <a href='https://instagram.com' target="_blank" rel='noreferrer noopener'>
+                        <AiFillInstagram />
+                    </a>
+                    <a href='https://twitter.com' target="_blank" rel='noreferrer noopener'>
+                        <AiOutlineTwitter />
+                    </a>
+                </div>
+            </article>
+            <article>
+                <h4>Permalinks</h4>
+                <Link to="/about">About</Link>
+                <Link to="/services">Services</Link>
+                <Link to="/plans">Plans</Link>
+                <Link to="/team">Team</Link>
+                <Link to="/contact">Contact</Link>
+            </article>
+            <article>
+                <h4>Insights</h4>
+                <Link to="/blog">Blog</Link>
+                <Link to="/s">Case Studies</Link>
+                <Link to="/s">Events</Link>
+                <Link to="/communities">Communities</Link>
+                <Link to="/FAQs">FAQs</Link>
+            </article>
+            <article>
+                <h4>Get in Touch</h4>
+                <Link to="/contact">Contact</Link>
+                <Link to="/support">Support</Link>
+            </article>
+        </div>
+        <div className="footer__copyright">
+            <small>2023 Finance Fluent &copy; All Rights Reserved</small>
+        </div>
+    </footer>
+  )
+}
 
-      <div className="flex-[1.5] w-full flex flex-row justify-between flex-wrap md:mt-0 mt-10">
-        {footerLinks.map((footerLink) => (
-          <div
-            key={footerLink.key}
-            className="flex flex-col ss:my-0 my-4 min-w-[150px]"
-          >
-            <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-white">
-              {footerLink.title}
-            </h4>
-            <ul className="mt-4 list-none">
-              {footerLink.links.map((link, index) => (
-                <li
-                  key={link.name}
-                  className={`font-poppins font-normal text-[16px] leading-[24px] text-dimWhite hover:text-secondary cursor-pointer ${
-                    index !== footerLink.links.length - 1 ? "mb-4" : "mb-0"
-                  }`}
-                >
-                  {link.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* Links at the bottom of the footer */}
-    <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3f3e45]">
-      <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white">
-        2023 Finance Fluent. All Rights Reserved.
-      </p>
-      <div className="flex flex-row mt-6 md:mt-0">
-        {socialMedia.map((social, index) => (
-          <a
-            key={social.id}
-            href={social.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer"
-          >
-            <img
-              key={social.id}
-              src={social.icon}
-              alt={social.id}
-              className={`w-[21px] h-[21px] object-contain cursor-pointer ${
-                index !== socialMedia.length - 1 ? "mr-6" : "mr-0"
-              }`}
-            />
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-export default Footer;
+export default Footer

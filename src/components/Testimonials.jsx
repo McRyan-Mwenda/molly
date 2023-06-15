@@ -1,34 +1,56 @@
-import React from 'react'
-import { feedback } from '../constants'
-import styles from '../style'
-import FeedbackCard from './FeedbackCard'
-import {SectionWrapper} from "../hoc";
+import React, {useState} from 'react'
+import SectionHead from './SectionHead'
+import {ImQuotesLeft} from 'react-icons/im'
+import Card from '../UI/Card'
+import {IoIosArrowDropleftCircle, IoIosArrowDroprightCircle} from 'react-icons/io'
+import { testimonials } from '../constants/data'
 
-const Testimonials = () => (
-  <section id='clients' className={`${styles.paddingY} ${styles.flexCenter} flex-col relative`}>
+const Testimonials = () => {
+    const [index, setIndex] = useState(0);
+    const {name, quote, job, avatar} = testimonials[index];
 
-    {/* green gradient */}
-    <div className='absolute z-[0] w-[60%] h-[100%] -right-[50%] rounded-full green__gradient'></div>
-    
-    {/* words */}
+    const prevTestimonialHandler = () => {
+        setIndex(prev => prev - 1);
 
-    <div className='w-full flex justify-between items-center md:flex-row flex-col sm:mb-16 mb-6 relative z-[1]'>
-      <h1 className={styles.heading2}>What people are <br className='sm:block hidden'/> saying about us.</h1>
-      <div className='w-full md:mt-0 mt-6'>
-        <p className={`${styles.paragraph} text-left max-w-[450px]`}>
-          A product to manage your finances from anywhere on the planet with the touch of a button.
-        </p>
+        if(index <= 0) {
+            setIndex(testimonials.length - 1);
+        }
+    }
 
-      </div>
-    </div>
+    const nextTestimonialHandler = () => {
+        setIndex(prev => prev + 1);
 
-    <div className='flex flex-wrap sm:justify-start justify-center w-full feedback-container relative z-[1]'>
-      {feedback.map((card) => (
-        <FeedbackCard key={card.id} {...card} />
-      ))}
-    </div>
-    
-  </section>
+        if(index >= testimonials.length - 1) {
+            setIndex(0);
+        }
+    }
+
+  return (
+    <section className="testimonials">
+        <div className="container testimonials__container">
+            <SectionHead icon={<ImQuotesLeft />} title="Testimonials" className='testimonials__head'/>
+            <Card className="testimonial">
+                <div className="testimonial__avatar">
+                    <img src={avatar} alt={name}/>
+                </div>
+                <p className='testimonial__quote'>
+                    {`"${quote}"`}
+                </p>
+                <h5>{name}</h5>
+                <small className='testimonial__title'>{job}</small>
+            </Card>
+            <div className='testimonials__btn-container'>
+                <button className="testimonials__btn" onClick={prevTestimonialHandler}>
+                    <IoIosArrowDropleftCircle />
+                </button>
+                <button className="testimonials__btn" onClick={nextTestimonialHandler}>
+                    <IoIosArrowDroprightCircle />
+                </button>
+            </div>
+            
+        </div>
+    </section>
   )
+}
 
-  export default SectionWrapper(Testimonials, "testimonials")
+export default Testimonials
