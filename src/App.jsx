@@ -4,7 +4,7 @@ import Navbar from '../src/components/Navbar'
 import Home from '../src/pages/home/Home'
 import About from '../src/pages/about/About'
 import Services from '../src/pages/services/Services'
-import Team from '../src/pages/team/Team'
+import Teams from '../src/pages/teams/Teams'
 import Plans from '../src/pages/plans/Plans'
 import Blog from '../src/pages/blog/Blog'
 import Contact from '../src/pages/contact/Contact'
@@ -23,7 +23,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path='about' element={<About />} />
         <Route path='services' element={<Services />} />
-        <Route path='team' element={<Team />} />
+        <Route path='team' element={<Teams />} />
         <Route path='plans' element={<Plans />} />
         <Route path='blog' element={<Blog />} />
         <Route path='contact' element={<Contact />} />

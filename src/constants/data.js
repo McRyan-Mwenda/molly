@@ -13,7 +13,10 @@ import Credit from "../assets/Credit.png";
 import testimonials1 from "../assets/testimonials1.jpg"
 import testimonials2 from "../assets/testimonials2.jpg"
 import testimonials3 from "../assets/testimonials3.jpg"
+import loisa from '../assets/loisa.jpeg'
+import mwenda from '../assets/mwenda.png'
 
+// NAV LINKS
 export const links = [
     {
         name: "Home",
@@ -45,12 +48,7 @@ export const links = [
     }
 ]
 
-
-
-
-
-
-
+// FEATURES
 export const features = [
     {
       id: "feature-1",
@@ -132,13 +130,7 @@ export const features = [
     
   ];
 
-
-
-
-
-
-
-
+// VALUES
 export const values = [
     {
         id: 1,
@@ -178,14 +170,7 @@ export const values = [
     }
 ]
 
-
-
-
-
-
-
-
-
+// FAQs
 export const faqs = [
     {
         id: 1,
@@ -219,13 +204,7 @@ export const faqs = [
     }
 ]
 
-
-
-
-
-
-
-
+// TESTIMONIALS
 export const testimonials = [
     {
         id: 1,
@@ -264,19 +243,13 @@ export const testimonials = [
     }
 ]
 
-
-
-
-
-
-
+// PRICING PLANS
 export const plans = [
     {
         id: 1,
         name: 'Free Package',
         desc: 'This package is perfect for users with only one account',
-        price1: 0.00,
-        price2: 0.00,
+        price: 0.00,
         features: [
             {feature: 'First Feature', available: true},
             {feature: 'Second Feature', available: true},
@@ -297,8 +270,7 @@ export const plans = [
         id: 2,
         name: 'Standard Package',
         desc: 'This is the perfect package for users with many products and services',
-        price1: 12.00,
-        price2: 1673.40,
+        price: 10.00,
         features: [
             {feature: 'First Feature', available: true},
             {feature: 'Second Feature', available: true},
@@ -319,8 +291,7 @@ export const plans = [
         id: 3,
         name: 'Platinum Package',
         desc: 'This package is perfect for big businesses and companies',
-        price1: 69.99,
-        price2: 9760.11,
+        price: 20.00,
         features: [
             {feature: 'First Feature', available: true},
             {feature: 'Second Feature', available: true},
@@ -339,31 +310,24 @@ export const plans = [
     }
 ]
 
+// TEAM
+const Team1 = loisa
+const Team2 = mwenda
 
-
-
-
-
-
-
-
-// const Team1 = require('./assets/')
-// const Team2 = require('./assets/')
-
-// export const trainers = [
-//     {
-//         id: 1,
-//         image: Team1,
-//         name: 'Loisa Kitakaya',
-//         job: 'Full Stack Developer',
-//         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
-//     },
-//     {
-//         id: 2,
-//         image: Team2,
-//         name: 'MacRyan Mwenda',
-//         job: 'Software Developer',
-//         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
-//     },
+export const team = [
+    {
+        id: 1,
+        image: Team1,
+        name: 'Loisa Kitakaya',
+        job: 'Full Stack Developer',
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
+    {
+        id: 2,
+        image: Team2,
+        name: 'MacRyan Mwenda',
+        job: 'Software Developer',
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
     
-// ]
+]

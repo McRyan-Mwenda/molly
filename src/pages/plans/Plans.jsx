@@ -9,17 +9,17 @@ const Plans = ({}) => {
   return (
     <>
       <Header title="Subscription Plans" image={HeaderImage}>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod inventore ducimus provident, voluptatum magnam neque.
+        Membership is not about owning something, it's about being a part of something bigger than yourself.
       </Header>
 
       <section className="plans">
         <div className="container plans__container">
           {
-            plans.map(({id, name, desc, price1, price2, features}) => {
+            plans.map(({id, name, desc, price, features}) => {
               return <Card key={id} className='plan'>
                 <h3>{name}</h3>
                 <small>{desc}</small>
-                <h1>{`$${price1} | Ksh${price2}`}</h1><h2>/mo</h2>
+                <h1>{`$${price}`}</h1><h2>/mo</h2>
                 <h4>Features</h4>
                 {
                   features.map(({feature, available}, index) => {

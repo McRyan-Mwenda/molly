@@ -10,9 +10,7 @@ const About = () => {
   return (
     <>
       <Header title="About Us" image={HeaderImage}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-        deleniti velit quam assumenda totam architecto vero commodi provident
-        tempore quia!
+        Any fool can write code that computers understand. We write code that humans can understand. <br /><br /> <i>Martin Fowler</i>
       </Header>
 
       <section className="about__story">

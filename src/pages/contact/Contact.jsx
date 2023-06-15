@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <>
       <Header title="Get in Touch" image={HeaderImage}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Id suscipit fugiat consequuntur, velit aliquam, dolorem eum praesentium reiciendis veritatis officiis nulla enim molestiae cum magnam aliquid voluptates ad laudantium laborum.
+        Warning: Contacting us may result in uncontrollable fits of laughter. Proceed with a sense of humor!
       </Header>
       <section className="contact">
         <div className="container contact__container">
