@@ -10,11 +10,11 @@
 }
 
 .team__img {
-    border-radius: 0.2rem;
+    border-radius: 0 3rem 0 3rem;
     overflow: hidden;
 }
 
-.trainer p{
+.team p{
     margin-top: 0.5rem;
 
 }

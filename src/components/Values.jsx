@@ -1,7 +1,7 @@
 import React from 'react'
 import Values_Image from '../assets/Values_image.jpg'
 import SectionHead from './SectionHead'
-import Star from '../assets/Star.png'
+import {GiFlexibleStar} from 'react-icons/gi'
 import {values} from '../constants/data'
 import Card from '../UI/Card'
 
@@ -15,7 +15,7 @@ const Values = () => {
                 </div>
             </div>
             <div className="values__right">
-                <SectionHead icon={Star} title='Values' />
+                <SectionHead icon={<GiFlexibleStar />} title='Values' />
                 <p>
                     At finance fluent, we have values that set us apart from other financial tools.
                 </p>

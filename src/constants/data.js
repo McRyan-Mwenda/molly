@@ -13,7 +13,7 @@ import Credit from "../assets/Credit.png";
 import testimonials1 from "../assets/testimonials1.jpg"
 import testimonials2 from "../assets/testimonials2.jpg"
 import testimonials3 from "../assets/testimonials3.jpg"
-import loisa from '../assets/loisa.jpeg'
+import loisa from '../assets/loisa.png'
 import mwenda from '../assets/mwenda.png'
 
 // NAV LINKS
